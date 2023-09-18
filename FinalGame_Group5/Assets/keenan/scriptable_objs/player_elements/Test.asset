@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73b71fd7e94d73f4cb21ca90f310536f, type: 3}
   m_Name: Test
   m_EditorClassIdentifier: 
-  helmetUnlocked: 0
+  helmetUnlocked: 1
   helmetLevel: 0
   flashEnabled: 0
-  armourLevel: 0
+  armourLevel: 3
   pouchCount: 6
   primary: 0
   primaryName: 
@@ -23,10 +23,10 @@ MonoBehaviour:
   secondaryName: 
   melee: 0
   meleeName: 
-  pantsLevel: 0
-  legPouchCount: 1
+  pantsLevel: 3
+  legPouchCount: 3
   primaryAmmo: 0
   secondaryAmmo: 0
   lightCount: 1
-  assaultCount: 0
+  assaultCount: 1
   sniperCount: 0
