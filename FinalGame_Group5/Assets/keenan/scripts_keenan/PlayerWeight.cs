@@ -12,7 +12,7 @@ public class PlayerWeight : ScriptableObject
         heavyweight
     }
     [Header("Weight Class:")]
-    public WeightClasses WeightClass;
+    public WeightClasses currentClass;
 
     [Header("Body Mass:")]
     [Range(45, 125)]

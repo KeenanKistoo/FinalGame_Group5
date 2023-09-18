@@ -165,6 +165,7 @@ GameObject:
   - component: {fileID: 134247947}
   - component: {fileID: 134247946}
   - component: {fileID: 134247948}
+  - component: {fileID: 134247949}
   m_Layer: 0
   m_Name: FirstPersonPlayer
   m_TagString: Untagged
@@ -231,12 +232,27 @@ MonoBehaviour:
   controller: {fileID: 134247946}
   speed: 12
   jumpHeight: 1
+  normSpeed: 12
   gravity: -29.43
   groundCheck: {fileID: 18444556}
   groundDistance: 0.4
   groundMask:
     serializedVersion: 2
     m_Bits: 64
+--- !u!114 &134247949
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 134247945}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd053536aaa9070428120510ea0a653e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerWeight: {fileID: 11400000, guid: 6951658405c6e0b438d5140afc272111, type: 2}
+  playerMovement: {fileID: 0}
 --- !u!1 &938997192
 GameObject:
   m_ObjectHideFlags: 0
@@ -571,7 +587,7 @@ Transform:
   m_GameObject: {fileID: 1239428758}
   serializedVersion: 2
   m_LocalRotation: {x: 0.40821788, y: -0.23456968, z: 0.10938163, w: 0.8754261}
-  m_LocalPosition: {x: 0, y: 3, z: 0}
+  m_LocalPosition: {x: 7.12, y: 15.63, z: -5.67}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

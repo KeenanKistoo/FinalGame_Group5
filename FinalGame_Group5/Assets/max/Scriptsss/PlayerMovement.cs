@@ -9,6 +9,9 @@ public class PlayerMovement : MonoBehaviour
     public float speed = 12f;
     public float jumpHeight = 3f;
 
+    //Keenan Added this:
+    public float normSpeed = 12f;
+
     Vector3 velocity;
 
     public float gravity = -9.81f;
