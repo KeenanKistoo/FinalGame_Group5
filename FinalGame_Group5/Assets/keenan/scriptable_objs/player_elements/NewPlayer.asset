@@ -13,4 +13,5 @@ MonoBehaviour:
   m_Name: NewPlayer
   m_EditorClassIdentifier: 
   WeightClass: 0
-  bodyMass: 0
+  bodyMass: 45
+  exWeight: 0

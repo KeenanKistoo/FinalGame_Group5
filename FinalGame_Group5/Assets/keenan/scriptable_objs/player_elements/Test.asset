@@ -13,3 +13,20 @@ MonoBehaviour:
   m_Name: Test
   m_EditorClassIdentifier: 
   helmetUnlocked: 0
+  helmetLevel: 0
+  flashEnabled: 0
+  armourLevel: 0
+  pouchCount: 6
+  primary: 0
+  primaryName: 
+  secondary: 0
+  secondaryName: 
+  melee: 0
+  meleeName: 
+  pantsLevel: 0
+  legPouchCount: 1
+  primaryAmmo: 0
+  secondaryAmmo: 0
+  lightCount: 1
+  assaultCount: 0
+  sniperCount: 0

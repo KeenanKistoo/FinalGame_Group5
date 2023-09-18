@@ -15,7 +15,7 @@ public class PlayerProfile : ScriptableObject
     public float health;
 
     [Header("Player Mass:")]
-    [Range(50, 85)]
+    [Range(45, 125)]
     public int mass;
 
 }
