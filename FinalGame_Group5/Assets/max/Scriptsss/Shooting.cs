@@ -98,8 +98,12 @@ public class Shooting : MonoBehaviour
         //Instantiate muzzle flash
         if (muzzleFlash != null)
         {
-            Instantiate(muzzleFlash, attackpoint.position, Quaternion.identity);
+            GameObject muzzleFlashh = Instantiate(muzzleFlash, attackpoint.position, Quaternion.identity);
+            Destroy(muzzleFlashh, 0.1f);
         }
+
+        Destroy(currentBullet, 0.5f);
+        
 
 
         bulletsLeft--;
