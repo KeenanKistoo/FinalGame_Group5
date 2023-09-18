@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "NewPlayer.asset", menuName = "Player/PlayerProfile", order = 0)]
+[CreateAssetMenu(fileName = "NewPlayerProfile.asset", menuName = "Player/PlayerProfile", order = 0)]
 public class PlayerProfile : ScriptableObject
 {
     [Header("Player Main Details:")]
@@ -13,6 +13,10 @@ public class PlayerProfile : ScriptableObject
     public float maxHealth;
     [Range(0f, 10f)]
     public float health;
+
+    [Header("Player Mass:")]
+    [Range(50, 85)]
+    public int mass;
 
 }
 
