@@ -1583,7 +1583,7 @@ MonoBehaviour:
   fpsCam: {fileID: 1565912892}
   attackpoint: {fileID: 1742708846}
   allowInvoke: 1
-  muzzleFlash: {fileID: 0}
+  muzzleFlash: {fileID: 100006, guid: 234e5aa95353f0643b0181dc3872cda9, type: 3}
   ammunitionDisplay: {fileID: 0}
 --- !u!1 &933411311135448370
 GameObject:

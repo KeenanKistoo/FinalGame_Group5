@@ -96,11 +96,11 @@ public class Shooting : MonoBehaviour
         currentBullet.GetComponent<Rigidbody>().AddForce(directionWithSpread.normalized * shootForce, ForceMode.Impulse);
 
         //Instantiate muzzle flash
-        if (muzzleFlash != null)
-        {
-            GameObject muzzleFlashh = Instantiate(muzzleFlash, attackpoint.position, Quaternion.identity);
-            Destroy(muzzleFlashh, 0.1f);
-        }
+        
+            GameObject muzzleFlashes = Instantiate(muzzleFlash, attackpoint.position,Quaternion.identity);
+            muzzleFlashes.transform.parent = attackpoint.transform;
+            Destroy(muzzleFlashes, 0.2f);
+        
 
         Destroy(currentBullet, 0.5f);
         
