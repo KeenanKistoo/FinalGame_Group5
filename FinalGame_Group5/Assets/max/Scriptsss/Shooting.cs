@@ -25,6 +25,9 @@ public class Shooting : MonoBehaviour
     public GameObject muzzleFlash;
     public TextMeshProUGUI ammunitionDisplay;
 
+    //Animations
+    public Animator animator;
+
     private void Awake()
     {
         bulletsLeft = magazineSize;
@@ -68,6 +71,8 @@ public class Shooting : MonoBehaviour
 
     private void Shoot()
     {
+        animator.SetBool("Shooting", true);
+        animator.Play("Shoot", -1, 0f);
         readyToShoot = false;
         
 
@@ -99,6 +104,7 @@ public class Shooting : MonoBehaviour
         
             GameObject muzzleFlashes = Instantiate(muzzleFlash, attackpoint.position,Quaternion.identity);
             muzzleFlashes.transform.parent = attackpoint.transform;
+            muzzleFlashes.transform.forward = directionWithoutSpread.normalized;
             Destroy(muzzleFlashes, 0.2f);
         
 
@@ -114,6 +120,7 @@ public class Shooting : MonoBehaviour
         {
             Invoke("ResetShot", timeBetweenShooting);
             allowInvoke = false;
+            
         }
     }
 
@@ -121,12 +128,14 @@ public class Shooting : MonoBehaviour
     {
         readyToShoot = true;
         allowInvoke = true;
+        animator.SetBool("Shooting", false);
     }
 
     private void Reload()
     {
         reloading = true;
         Invoke("ReloadFinished", reloadTime);
+
     }
 
     private void ReloadFinished()
