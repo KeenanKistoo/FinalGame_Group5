@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 6455809420887957921}
   - component: {fileID: 1896208426786728495}
   - component: {fileID: -4577256433940641251}
-  m_Layer: 7
+  m_Layer: 8
   m_Name: Enemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -57,7 +57,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   retreatRange: 10
-  attackRange: 20
+  attackRange: 40
   stopDistance: 1.6
   hideTime: 3
   shootingTimer: 0
@@ -162,7 +162,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2132010529195228172}
-  m_Layer: 7
+  m_Layer: 8
   m_Name: Spawnpoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -193,7 +193,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2548887542372405801}
-  m_Layer: 7
+  m_Layer: 8
   m_Name: GFX
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -228,7 +228,7 @@ GameObject:
   - component: {fileID: 1165504581125532947}
   - component: {fileID: 3397413706975170059}
   - component: {fileID: 2245094595503125429}
-  m_Layer: 7
+  m_Layer: 8
   m_Name: Capsule
   m_TagString: Untagged
   m_Icon: {fileID: 0}

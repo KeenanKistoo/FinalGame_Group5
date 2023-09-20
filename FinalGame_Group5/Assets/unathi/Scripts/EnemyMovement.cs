@@ -117,6 +117,7 @@ public class EnemyMovement : MonoBehaviour
         {
             FindNearestTarget();
             agent.SetDestination(nearestHidingSpot.position);
+            nearestHidingSpot.gameObject.GetComponent<NodeScript>().active = false;
         }
     }
 
