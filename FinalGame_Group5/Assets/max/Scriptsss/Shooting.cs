@@ -25,6 +25,9 @@ public class Shooting : MonoBehaviour
     public GameObject muzzleFlash;
     public TextMeshProUGUI ammunitionDisplay;
 
+    //Animations
+    public Animator animator;
+
     private void Awake()
     {
         bulletsLeft = magazineSize;
@@ -50,12 +53,16 @@ public class Shooting : MonoBehaviour
         //reloading
         if (Input.GetKeyDown(KeyCode.R) && bulletsLeft < magazineSize && !reloading)
         {
+            animator.SetBool("Reloading", true);
             Reload();
+            
         }
         //reload automatically when bulletsLeft is 0
         if (readyToShoot && shooting && !reloading && bulletsLeft <= 0)
         {
+            animator.SetBool("Reloading", true);
             Reload();
+            
         }
 
         if (readyToShoot && shooting && !reloading && bulletsLeft > 0)
@@ -68,6 +75,8 @@ public class Shooting : MonoBehaviour
 
     private void Shoot()
     {
+        animator.SetBool("Shooting", true);
+        animator.Play("Shoot", -1, 0f);
         readyToShoot = false;
         
 
@@ -99,6 +108,7 @@ public class Shooting : MonoBehaviour
         
             GameObject muzzleFlashes = Instantiate(muzzleFlash, attackpoint.position,Quaternion.identity);
             muzzleFlashes.transform.parent = attackpoint.transform;
+            muzzleFlashes.transform.forward = directionWithoutSpread.normalized;
             Destroy(muzzleFlashes, 0.2f);
         
 
@@ -114,6 +124,7 @@ public class Shooting : MonoBehaviour
         {
             Invoke("ResetShot", timeBetweenShooting);
             allowInvoke = false;
+            
         }
     }
 
@@ -121,16 +132,22 @@ public class Shooting : MonoBehaviour
     {
         readyToShoot = true;
         allowInvoke = true;
+        animator.SetBool("Shooting", false);
     }
 
     private void Reload()
     {
+        readyToShoot = false;
+        animator.SetBool("Reloading", true);
         reloading = true;
         Invoke("ReloadFinished", reloadTime);
+
     }
 
     private void ReloadFinished()
     {
+        readyToShoot = true;
+        animator.SetBool("Reloading", false);
         bulletsLeft = magazineSize;
         reloading = false;
     }
