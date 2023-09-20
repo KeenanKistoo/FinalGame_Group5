@@ -27,6 +27,7 @@ public class Shooting : MonoBehaviour
 
     //Animations
     public Animator animator;
+    public PlayerMovement playerMovement;
 
     private void Awake()
     {
@@ -42,6 +43,15 @@ public class Shooting : MonoBehaviour
         if (ammunitionDisplay != null)
         {
             ammunitionDisplay.SetText(bulletsLeft / bulletsperTap + " / " + magazineSize / bulletsperTap);
+        }
+
+        if (playerMovement.x == 1f || playerMovement.x == -1f || playerMovement.z == 1f || playerMovement.z == -1f)
+        {
+            animator.SetBool("isWalking", true);
+        }
+        else
+        {
+            animator.SetBool("isWalking", false);
         }
     }
 

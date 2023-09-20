@@ -22,6 +22,9 @@ public class PlayerMovement : MonoBehaviour
 
     bool isGrounded;
 
+    public float x;
+    public float z;
+
     // Update is called once per frame
     void Update()
     {
@@ -33,8 +36,8 @@ public class PlayerMovement : MonoBehaviour
             velocity.y = -2f;
         }
 
-        float x = Input.GetAxisRaw("Horizontal");
-        float z = Input.GetAxisRaw("Vertical");
+        x = Input.GetAxisRaw("Horizontal");
+        z = Input.GetAxisRaw("Vertical");
 
         Vector3 move = (transform.right * x + transform.forward * z).normalized;
 
