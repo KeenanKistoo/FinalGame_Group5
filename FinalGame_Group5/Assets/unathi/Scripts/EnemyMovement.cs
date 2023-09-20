@@ -5,7 +5,6 @@ using UnityEngine.AI;
 
 public class EnemyMovement : MonoBehaviour
 {
-    public Transform[] hidingSpots;
     public Transform player;
     public Transform spawnPoint;
     public NavMeshAgent agent;
@@ -24,8 +23,11 @@ public class EnemyMovement : MonoBehaviour
 
     public GameObject bulletPrefab;
 
+    LevelManager levelManager;
+
     private void Start()
     {
+        levelManager = GameObject.Find("LevelManager").GetComponent<LevelManager>();
         player = GameObject.Find("Player").transform;
         agent = GetComponent<NavMeshAgent>();
 
@@ -122,7 +124,7 @@ public class EnemyMovement : MonoBehaviour
     {
         float nearestDistance = Mathf.Infinity;
 
-        foreach (Transform target in hidingSpots)
+        foreach (Transform target in levelManager.hidingSpots)
         {
             float distance = Vector3.Distance(transform.position, target.position);
 
@@ -150,7 +152,7 @@ public class EnemyMovement : MonoBehaviour
         Transform furthestSpot = null;
         float furthestDistance = 0f;
 
-        foreach (Transform hidingSpot in hidingSpots)
+        foreach (Transform hidingSpot in levelManager.hidingSpots)
         {
             float distance = Vector3.Distance(transform.position, hidingSpot.position);
 

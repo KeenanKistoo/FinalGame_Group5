@@ -13,9 +13,10 @@ GameObject:
   - component: {fileID: 888794920369439993}
   - component: {fileID: 6455809420887957921}
   - component: {fileID: 1896208426786728495}
+  - component: {fileID: -4577256433940641251}
   m_Layer: 7
   m_Name: Enemy
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -49,14 +50,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2aaddf2f06c915d40b2e3ddec5ecff2b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hidingSpots:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
   player: {fileID: 0}
   spawnPoint: {fileID: 2132010529195228172}
   agent: {fileID: 6455809420887957921}
@@ -137,6 +130,29 @@ MonoBehaviour:
   maxHP: 0
   currentHP: 0
   damage: 0
+--- !u!136 &-4577256433940641251
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 117004213155658188}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Height: 1
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1664844973309465103
 GameObject:
   m_ObjectHideFlags: 0

@@ -37,4 +37,9 @@ public class Unit : MonoBehaviour
             }
         }
     }
+
+    void Die()
+    {
+        // What happens when the player dies
+    }
 }

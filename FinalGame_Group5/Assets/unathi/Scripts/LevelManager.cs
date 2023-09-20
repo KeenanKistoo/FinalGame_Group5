@@ -4,10 +4,12 @@ using UnityEngine;
 
 public class LevelManager : MonoBehaviour
 {
+    public List<Transform> hidingSpots;
+
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
-        
+        hidingSpots = new List<Transform>();
     }
 
     // Update is called once per frame
