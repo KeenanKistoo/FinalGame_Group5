@@ -53,12 +53,16 @@ public class Shooting : MonoBehaviour
         //reloading
         if (Input.GetKeyDown(KeyCode.R) && bulletsLeft < magazineSize && !reloading)
         {
+            animator.SetBool("Reloading", true);
             Reload();
+            
         }
         //reload automatically when bulletsLeft is 0
         if (readyToShoot && shooting && !reloading && bulletsLeft <= 0)
         {
+            animator.SetBool("Reloading", true);
             Reload();
+            
         }
 
         if (readyToShoot && shooting && !reloading && bulletsLeft > 0)
@@ -133,6 +137,8 @@ public class Shooting : MonoBehaviour
 
     private void Reload()
     {
+        readyToShoot = false;
+        animator.SetBool("Reloading", true);
         reloading = true;
         Invoke("ReloadFinished", reloadTime);
 
@@ -140,6 +146,8 @@ public class Shooting : MonoBehaviour
 
     private void ReloadFinished()
     {
+        readyToShoot = true;
+        animator.SetBool("Reloading", false);
         bulletsLeft = magazineSize;
         reloading = false;
     }
