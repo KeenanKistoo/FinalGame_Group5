@@ -31,8 +31,13 @@ public class Unit : MonoBehaviour
         if (currentHP <= 0)
         {
             if (!gameObject.CompareTag("Player"))
+            {
                 levelManager.SpawnEnemy();
                 Destroy(gameObject);
+                EnemyMovement enemy = GetComponent<EnemyMovement>();
+                enemy.nearestHidingSpot.gameObject.GetComponent<NodeScript>().active = true;
+            }
+               
 
             if (gameObject.CompareTag("Player"))
             {

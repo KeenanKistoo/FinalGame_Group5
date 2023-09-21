@@ -19,7 +19,12 @@ public class EnemyMovement : MonoBehaviour
     [SerializeField] private bool isShooting = false;
     [SerializeField] private bool retreating = false;
     [SerializeField] private bool hidden = false;
-    [SerializeField] private Transform nearestHidingSpot;
+
+    [SerializeField] private float minShootTime = 3f; // Minimum shoot time
+    [SerializeField] private float maxShootTime = 10f; // Maximum shoot time
+
+
+    public Transform nearestHidingSpot;
 
     public GameObject bulletPrefab;
 
@@ -44,14 +49,16 @@ public class EnemyMovement : MonoBehaviour
 
         if (playerInAttackRange)
         {
-            if (hidden && shootingTimer==0)
+            if (hidden && shootingTimer == 0)
             {
-                shootingTimer = 0;
+                // Randomize the shoot time within the specified range
+                shootingTimer = Random.Range(minShootTime, maxShootTime);
                 isShooting = true;
             }
         }
 
-            if (isShooting)
+
+        if (isShooting)
             {
                 shootingTimer += Time.deltaTime;
 
