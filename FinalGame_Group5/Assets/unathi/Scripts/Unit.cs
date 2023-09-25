@@ -10,6 +10,8 @@ public class Unit : MonoBehaviour
 
     LevelManager levelManager;
 
+    public GameObject targetParticle;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -30,7 +32,7 @@ public class Unit : MonoBehaviour
 
         if (currentHP <= 0)
         {
-            if (!gameObject.CompareTag("Player"))
+            if (gameObject.CompareTag("Enemy"))
             {
                 levelManager.SpawnEnemy();
                 Destroy(gameObject);
@@ -43,11 +45,25 @@ public class Unit : MonoBehaviour
             {
                 //StartCoroutine(Die());
             }
+
+            if (gameObject.CompareTag("Target"))
+            {
+                StartCoroutine(TargetDestroy());
+            }
         }
     }
 
     void Die()
     {
         // What happens when the player dies
+    }
+
+    IEnumerator TargetDestroy()
+    {
+        GameObject particle = Instantiate(targetParticle, gameObject.transform.position, Quaternion.identity);
+
+        yield return new WaitForSeconds(1);
+
+        Destroy(particle);
     }
 }

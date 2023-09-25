@@ -30,6 +30,8 @@ public class EnemyMovement : MonoBehaviour
 
     LevelManager levelManager;
 
+    Animator anim;
+
     private void Start()
     {
         levelManager = GameObject.Find("LevelManager").GetComponent<LevelManager>();
@@ -38,6 +40,11 @@ public class EnemyMovement : MonoBehaviour
 
         Hide();
         isShooting = false;
+    }
+
+    private void Awake()
+    {
+        anim = GetComponentInChildren<Animator>();
     }
 
     private void Update()
@@ -55,7 +62,7 @@ public class EnemyMovement : MonoBehaviour
                 shootingTimer = Random.Range(minShootTime, maxShootTime);
                 isShooting = true;
             }
-        }
+        } 
 
 
         if (isShooting)
@@ -79,14 +86,17 @@ public class EnemyMovement : MonoBehaviour
        
 
         float distanceToSpot = Vector3.Distance(transform.position, nearestHidingSpot.position);
+        Debug.Log(distanceToSpot);
 
         // Checks if enemy should hide or not
         if (distanceToSpot <= stopDistance && !isShooting || shootingTimer > 6f && shootingTimer <= 6f + hideTime)
         {
             hidden = true;
+            anim.SetBool("isHiding", true);
         } else
         {
             hidden = false;
+            anim.SetBool("isHiding", false);
         }
 
         //Checks if enemy is hidden
@@ -96,6 +106,17 @@ public class EnemyMovement : MonoBehaviour
         } else
         {
             transform.localScale = new Vector3(1, 1f, 1);
+        }
+
+        anim.SetBool("isShooting", isShooting);
+
+        if (distanceToSpot > stopDistance)
+        {
+            anim.SetBool("isRunning", true);
+        }
+        else
+        {
+            anim.SetBool("isRunning", false);
         }
     }
 
