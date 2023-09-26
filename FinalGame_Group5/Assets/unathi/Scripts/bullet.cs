@@ -18,9 +18,11 @@ public class bullet : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Enemy"))
+        if (other.CompareTag("Enemy") || other.CompareTag("Target"))
         {
-            other.GetComponent<Unit>().TakeDamage(5);
+            Unit unit = other.GetComponent<Unit>();
+            unit.TakeDamage(5);
+            Destroy(gameObject);
         }
     }
 }

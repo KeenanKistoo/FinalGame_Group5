@@ -6,40 +6,43 @@ using UnityEngine.AI;
 public class EnemyMovement : MonoBehaviour
 {
     public Transform player;
-    public Transform spawnPoint;
-    public NavMeshAgent agent;
-    public LayerMask whatIsPlayer;
-
-    public float retreatRange;
-    public float attackRange;
-    public float stopDistance = 1f;
-    public float hideTime = 3f; // Adjust the time the enemy hides
-
-    [SerializeField] private float shootingTimer = 0f;
-    [SerializeField] private bool isShooting = false;
-    [SerializeField] private bool retreating = false;
-    [SerializeField] private bool hidden = false;
-
-    [SerializeField] private float minShootTime = 3f; // Minimum shoot time
-    [SerializeField] private float maxShootTime = 10f; // Maximum shoot time
-
-
-    public Transform nearestHidingSpot;
-
     public GameObject bulletPrefab;
-
+    public Transform spawnPoint;
+    public Transform nearestHidingSpot;
+    
+    public LayerMask whatIsPlayer;
+    public LayerMask whatIsGround;
+    public bool hidden = false;
+    public bool isShooting = false;
+    public bool retreating = false;
     LevelManager levelManager;
-
+    NavMeshAgent agent;
     Animator anim;
+
+    //Hiding
+    public Vector3 hideSpot;
+    bool hidePointSet;
+    public float stopDistance = 1f;
+
+    //Attacking
+    public float timeBetweenAttacks;
+    bool alreadyAttacked;
+
+    //States
+    public float attackRange = 30f;
+    public float retreatRange = 10f;
+    public bool playerInAttackRange;
+    public bool playerInRetreatRange;
+
+    // Use constants for clarity
+    private const float ShootingDuration = 6f;
 
     private void Start()
     {
-        levelManager = GameObject.Find("LevelManager").GetComponent<LevelManager>();
         player = GameObject.Find("Player").transform;
+        levelManager = GameObject.Find("LevelManager").GetComponent<LevelManager>();
         agent = GetComponent<NavMeshAgent>();
-
         Hide();
-        isShooting = false;
     }
 
     private void Awake()
@@ -49,99 +52,55 @@ public class EnemyMovement : MonoBehaviour
 
     private void Update()
     {
-        bool playerInRetreatRange = Physics.CheckSphere(transform.position, retreatRange, whatIsPlayer);
-        bool playerInAttackRange = Physics.CheckSphere(transform.position, attackRange, whatIsPlayer);
+        playerInRetreatRange = Physics.CheckSphere(transform.position, retreatRange, whatIsPlayer);
+        playerInAttackRange = Physics.CheckSphere(transform.position, attackRange, whatIsPlayer);
 
-        Debug.Log(playerInAttackRange);
+        float distanceToTarget = Vector3.Distance(gameObject.transform.position, nearestHidingSpot.position);
 
-        if (playerInAttackRange)
+        if(distanceToTarget <= stopDistance)
         {
-            if (hidden && shootingTimer == 0)
-            {
-                // Randomize the shoot time within the specified range
-                shootingTimer = Random.Range(minShootTime, maxShootTime);
-                isShooting = true;
-            }
-        } 
-
-
-        if (isShooting)
-            {
-                shootingTimer += Time.deltaTime;
-
-                if (shootingTimer <= 6f)
-                {
-                Shoot();
-                }
-                else if (shootingTimer > 6f && shootingTimer <= 6f + hideTime)
-                {
-                    Hide();
-            }
-                else
-                {
-                    shootingTimer = 0f;
-                    isShooting = false;
-                }
-            }
-       
-
-        float distanceToSpot = Vector3.Distance(transform.position, nearestHidingSpot.position);
-        Debug.Log(distanceToSpot);
-
-        // Checks if enemy should hide or not
-        if (distanceToSpot <= stopDistance && !isShooting || shootingTimer > 6f && shootingTimer <= 6f + hideTime)
-        {
-            hidden = true;
-            anim.SetBool("isHiding", true);
-        } else
-        {
-            hidden = false;
-            anim.SetBool("isHiding", false);
+            hidePointSet = true;
         }
 
-        //Checks if enemy is hidden
-       if (hidden)
+        if (!playerInAttackRange && !playerInRetreatRange)
         {
-            transform.localScale = new Vector3(1, 0.5f, 1);
-        } else
-        {
-            transform.localScale = new Vector3(1, 1f, 1);
+            Hide();
         }
 
-        anim.SetBool("isShooting", isShooting);
-
-        if (distanceToSpot > stopDistance)
+        if (playerInAttackRange && !playerInRetreatRange)
         {
-            anim.SetBool("isRunning", true);
+            Shoot();
         }
-        else
+
+        if (playerInRetreatRange)
         {
-            anim.SetBool("isRunning", false);
+            Retreat();
         }
     }
 
     private void Shoot()
     {
-        // Check if the player is in attack range (just to be safe)
-        if (Physics.CheckSphere(transform.position, attackRange, whatIsPlayer))
+        transform.LookAt(player.position);
+
+        if (!alreadyAttacked)
         {
-            // Rotate to face the player
-            transform.LookAt(player.position);
-
-            // Instantiate a bullet prefab and set its position and rotation
             GameObject bullet = Instantiate(bulletPrefab, spawnPoint.position, spawnPoint.rotation);
-
-            // Access the Bullet script attached to the bullet GameObject
             EnemyBullet bulletScript = bullet.GetComponent<EnemyBullet>();
-
-            // Destroy the bullet after a certain time (in case it doesn't hit anything)
             Destroy(bullet, bulletScript.lifespan);
+
+            alreadyAttacked = true;
+            Invoke(nameof(ResetAttack), timeBetweenAttacks);
         }
+    }
+
+    private void ResetAttack()
+    {
+        alreadyAttacked = false;
     }
 
     private void Hide()
     {
-        if (!hidden)
+        if (!hidden && !hidePointSet)
         {
             FindNearestTarget();
             agent.SetDestination(nearestHidingSpot.position);
@@ -152,17 +111,17 @@ public class EnemyMovement : MonoBehaviour
     private void FindNearestTarget()
     {
         float nearestDistance = Mathf.Infinity;
-
         foreach (Transform target in levelManager.hidingSpots)
         {
             float distance = Vector3.Distance(transform.position, target.position);
-
             if (distance < nearestDistance)
             {
                 nearestDistance = distance;
                 nearestHidingSpot = target;
+                Debug.Log(nearestHidingSpot);
             }
         }
+        hidePointSet = true;
     }
 
     void Retreat()
@@ -173,8 +132,8 @@ public class EnemyMovement : MonoBehaviour
             agent.SetDestination(furthestSpot.position);
             retreating = true;
         }
-       
     }
+
 
     private Transform GetFurthestHidingSpot()
     {

@@ -25,7 +25,9 @@ public class Unit : MonoBehaviour
     }
     public void TakeDamage(int dmg)
     {
-        if (gameObject.CompareTag("Player"))
+        Debug.Log(gameObject.name);
+
+        if (gameObject.CompareTag("Player") || gameObject.CompareTag("Enemy") || gameObject.CompareTag("Target"))
         {
             currentHP -= dmg;
         }
@@ -48,7 +50,7 @@ public class Unit : MonoBehaviour
 
             if (gameObject.CompareTag("Target"))
             {
-                StartCoroutine(TargetDestroy());
+                TargetDestroy();
             }
         }
     }
@@ -58,12 +60,10 @@ public class Unit : MonoBehaviour
         // What happens when the player dies
     }
 
-    IEnumerator TargetDestroy()
+    void TargetDestroy()
     {
         GameObject particle = Instantiate(targetParticle, gameObject.transform.position, Quaternion.identity);
 
-        yield return new WaitForSeconds(1);
-
-        Destroy(particle);
+        Destroy(gameObject);
     }
 }
