@@ -9,6 +9,8 @@ public class PlayerWeightController : MonoBehaviour
     [Tooltip("Drag the player obj here.")]
     public PlayerWeight playerWeight;
 
+    
+
     [Header("Player Movement:")]
     [SerializeField]
     private PlayerMovement playerMovement;
@@ -17,7 +19,6 @@ public class PlayerWeightController : MonoBehaviour
     private void Start()
     {
         playerMovement = this.gameObject.GetComponent<PlayerMovement>();
-
         //ChangeWeightClass("lightweight");
     }
 
