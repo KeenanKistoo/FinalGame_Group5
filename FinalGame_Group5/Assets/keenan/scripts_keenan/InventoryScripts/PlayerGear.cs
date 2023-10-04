@@ -15,11 +15,13 @@ public class PlayerGear : MonoBehaviour
 
     [Header("Armour")]
     public int armourLevel;
+    public int indexA;
     public List<string> gearNameA;
     public List<GameObject> gearArmourGO;
     
     [Header("Leg")]
     public int legLevel;
+    public int indexL;
     public List<string> gearNameL;
     public List<GameObject> gearLegGO;
 

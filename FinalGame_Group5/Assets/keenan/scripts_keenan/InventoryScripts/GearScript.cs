@@ -18,6 +18,7 @@ public class GearScript : MonoBehaviour
     public gearComponent currComponent;
     public List<string> gearNames;
     public List<GameObject> gearGO;
+    public int index;
 
     [Header("Gear Obj:")]
     public GameObject gearObj;
@@ -35,8 +36,9 @@ public class GearScript : MonoBehaviour
             if(_gear.currWeight >= gearWeight.weight)
             {
                 _gear.currWeight -= gearWeight.weight;
-                gearNames[0] = gearWeight.name;
-                gearGO[0] = gearWeight.prefab;
+                gearNames[index] = gearWeight.gearName;
+                gearGO[index] = gearWeight.prefab;
+                index++;
             }
         }
     }
@@ -54,11 +56,13 @@ public class GearScript : MonoBehaviour
             {
                 gearNames = _gear.gearNameA;
                 gearGO = _gear.gearArmourGO;
+                index = _gear.indexA;
             }
             else if (currComponent == gearComponent.leg)
             {
                 gearNames = _gear.gearNameL;
                 gearGO = _gear.gearLegGO;
+                index = _gear.indexL;
             }
         }
     }
