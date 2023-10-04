@@ -48,6 +48,7 @@ public class Shooting : MonoBehaviour
         if (playerMovement.x == 1f || playerMovement.x == -1f || playerMovement.z == 1f || playerMovement.z == -1f)
         {
             animator.SetBool("isWalking", true);
+            Debug.Log(playerMovement.x);
         }
         else
         {
