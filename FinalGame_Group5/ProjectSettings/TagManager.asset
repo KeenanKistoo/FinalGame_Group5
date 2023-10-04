@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - ArmourSlot
+  - inventory
   layers:
   - Default
   - TransparentFX
