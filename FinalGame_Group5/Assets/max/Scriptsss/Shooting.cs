@@ -28,6 +28,7 @@ public class Shooting : MonoBehaviour
     //Animations
     public Animator animator;
     public PlayerMovement playerMovement;
+    public bool isADS = false;
 
     private void Awake()
     {
@@ -82,12 +83,32 @@ public class Shooting : MonoBehaviour
 
             Shoot();
         }
+
+        if(Input.GetKey(KeyCode.Mouse1) && !reloading)
+        {
+            animator.SetBool("ADS", true);
+            isADS = true;
+        }
+        else
+        {
+            animator.SetBool("ADS", false);
+            isADS = false;
+        }
     }
 
     private void Shoot()
     {
-        animator.SetBool("Shooting", true);
-        animator.Play("Shoot", -1, 0f);
+        if (!isADS)
+        {
+            animator.SetBool("Shooting", true);
+            animator.Play("Shoot", -1, 0f);
+
+        } else if (isADS)
+        {
+            animator.SetBool("ADSShooting", true);
+            animator.Play("ADSShoot", -1, 0f);
+        }
+        
         readyToShoot = false;
         
 
@@ -144,6 +165,7 @@ public class Shooting : MonoBehaviour
         readyToShoot = true;
         allowInvoke = true;
         animator.SetBool("Shooting", false);
+        animator.SetBool("ADSShooting", false);
     }
 
     private void Reload()
