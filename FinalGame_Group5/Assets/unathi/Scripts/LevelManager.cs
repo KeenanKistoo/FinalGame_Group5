@@ -2,15 +2,28 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+public enum State
+{
+    Neutral,
+    Battle,
+    Training
+}
+
 public class LevelManager : MonoBehaviour
 {
     public List<Transform> hidingSpots;
+
+    public GameObject hidingSpotsParent;
+    public GameObject targets;
 
     public Transform[] spawnPoints;
 
     public GameObject enemyPrefab;
 
-    int spawnIndex = 0; 
+    int spawnIndex = 0;
+
+    public State state;
 
     // Start is called before the first frame update
     private void Start()
@@ -26,7 +39,13 @@ public class LevelManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        switch (state)
+        {
+            case State.Neutral:
+                hidingSpotsParent.SetActive(false);
+                targets.SetActive(false);
+                break;
+        }
     }
 
     IEnumerator SpawnEnemies()
@@ -55,5 +74,15 @@ public class LevelManager : MonoBehaviour
 
         // Move to the next spawn point
         spawnIndex++;
+    }
+
+    public void StartTraining()
+    {
+
+    }
+
+    public void StartBattle()
+    {
+
     }
 }

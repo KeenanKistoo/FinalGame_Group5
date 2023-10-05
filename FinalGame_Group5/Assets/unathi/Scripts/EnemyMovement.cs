@@ -28,6 +28,9 @@ public class EnemyMovement : MonoBehaviour
     public float timeBetweenAttacks;
     bool alreadyAttacked;
 
+    float minAngle;
+    float maxAngle;
+
     //States
     public float attackRange = 30f;
     public float retreatRange = 10f;
@@ -84,11 +87,21 @@ public class EnemyMovement : MonoBehaviour
 
         if (!alreadyAttacked)
         {
-            GameObject bullet = Instantiate(bulletPrefab, spawnPoint.position, spawnPoint.rotation);
+            // Create a spread angle (in degrees)
+            float spreadAngle = Random.Range(-1.5f, 1.5f);
+
+            // Apply the spread to the bullet's rotation
+            Quaternion spreadRotation = Quaternion.Euler(0f, spreadAngle, 0f);
+
+            // Calculate the rotated direction
+            Vector3 bulletDirection = spreadRotation * transform.forward;
+
+            GameObject bullet = Instantiate(bulletPrefab, spawnPoint.position, Quaternion.LookRotation(bulletDirection));
             EnemyBullet bulletScript = bullet.GetComponent<EnemyBullet>();
             Destroy(bullet, bulletScript.lifespan);
 
             alreadyAttacked = true;
+            timeBetweenAttacks = Random.Range(0 f, 0.5f);
             Invoke(nameof(ResetAttack), timeBetweenAttacks);
         }
     }

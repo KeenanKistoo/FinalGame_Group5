@@ -8,6 +8,8 @@ public class Unit : MonoBehaviour
     public int currentHP;
     public int damage;
 
+    public int bulletsFired = 0;
+
     LevelManager levelManager;
 
     public GameObject targetParticle;
@@ -21,15 +23,16 @@ public class Unit : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        
     }
     public void TakeDamage(int dmg)
     {
         Debug.Log(gameObject.name);
 
-        if (gameObject.CompareTag("Player") || gameObject.CompareTag("Enemy") || gameObject.CompareTag("Target"))
+        if (gameObject.CompareTag("Player") || gameObject.CompareTag("Enemy") || gameObject.CompareTag("Target") || bulletsFired >= 4)
         {
             currentHP -= dmg;
+            bulletsFired = 0;
         }
 
         if (currentHP <= 0)
@@ -53,6 +56,10 @@ public class Unit : MonoBehaviour
                 TargetDestroy();
             }
         }
+
+
+        if (bulletsFired < 4)
+            bulletsFired++;
     }
 
     void Die()
