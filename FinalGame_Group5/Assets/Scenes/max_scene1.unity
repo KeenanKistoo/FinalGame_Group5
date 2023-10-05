@@ -230,9 +230,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controller: {fileID: 134247946}
-  speed: 12
+  speed: 6
   jumpHeight: 1
-  normSpeed: 12
+  normSpeed: 6
   gravity: -29.43
   groundCheck: {fileID: 18444556}
   groundDistance: 0.4
@@ -241,6 +241,7 @@ MonoBehaviour:
     m_Bits: 64
   x: 0
   z: 0
+  isSprinting: 0
 --- !u!114 &134247949
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -49,11 +49,19 @@ public class Shooting : MonoBehaviour
         if (playerMovement.x == 1f || playerMovement.x == -1f || playerMovement.z == 1f || playerMovement.z == -1f)
         {
             animator.SetBool("isWalking", true);
-            Debug.Log(playerMovement.x);
+            
         }
         else
         {
             animator.SetBool("isWalking", false);
+        }
+
+        if (playerMovement.isSprinting == true)
+        {
+            animator.SetBool("sprinting", true);
+        } else if (playerMovement.isSprinting == false)
+        {
+            animator.SetBool("sprinting", false);
         }
     }
 
@@ -63,7 +71,7 @@ public class Shooting : MonoBehaviour
         else shooting = Input.GetKeyDown(KeyCode.Mouse0);
 
         //reloading
-        if (Input.GetKeyDown(KeyCode.R) && bulletsLeft < magazineSize && !reloading)
+        if (Input.GetKeyDown(KeyCode.R) && bulletsLeft < magazineSize && !reloading && playerMovement.isSprinting == false)
         {
             animator.SetBool("Reloading", true);
             Reload();
