@@ -6,6 +6,8 @@ TagManager:
   tags:
   - ArmourSlot
   - inventory
+  - primary
+  - secondary
   layers:
   - Default
   - TransparentFX
