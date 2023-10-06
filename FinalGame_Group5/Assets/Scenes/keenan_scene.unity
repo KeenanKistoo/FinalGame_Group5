@@ -1687,7 +1687,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &722284879
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2901,6 +2901,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1253772061}
+  - component: {fileID: 1253772062}
   m_Layer: 0
   m_Name: weapon
   m_TagString: Untagged
@@ -2923,6 +2924,22 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1253772062
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1253772060}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b12aa8e8eea51f47bdc160b0bc35211, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponName: M4A1
+  weight: 3
+  clip: 30
+  ammoType: assault
 --- !u!1001 &1310351885
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4907,6 +4924,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: weapon_purchase_btn
       objectReference: {fileID: 0}
+    - target: {fileID: 3147208988506191123, guid: 792900fe5d4e31241b95a4ba9377f45f, type: 3}
+      propertyPath: weapon
+      value: 
+      objectReference: {fileID: 1253772060}
     - target: {fileID: 3147208988506191123, guid: 792900fe5d4e31241b95a4ba9377f45f, type: 3}
       propertyPath: primaryImg
       value: 

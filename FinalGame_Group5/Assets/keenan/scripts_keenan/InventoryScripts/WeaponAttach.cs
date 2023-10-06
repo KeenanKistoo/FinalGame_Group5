@@ -26,12 +26,15 @@ public class WeaponAttach : MonoBehaviour
 
     [Header("Weapon Prefabs:")]
     public GameObject weapon;
+    [SerializeField]
+    public WeaponInfo _weaponInfo;
     
     private void Start()
     {
         _playerGear = GameObject.FindGameObjectWithTag("inventory").GetComponent<PlayerGear>();
         _primary = GameObject.FindGameObjectWithTag("primary");
         _secondary = GameObject.FindGameObjectWithTag("secondary");
+        _weaponInfo = weapon.GetComponent<WeaponInfo>();
         StartCoroutine(WeightCheck());
     }
 
@@ -48,11 +51,15 @@ public class WeaponAttach : MonoBehaviour
             primaryImg.sprite = weaponImg;
             primaryImg.color = Color.white;
             weapon.transform.SetParent(_primary.transform, false);
+            _playerGear.currWeight -= _weaponInfo.weight;
+            StartCoroutine(WeightCheck());
         }else if(_primary.transform.childCount > 0 && _secondary.transform.childCount == 0)
         {
             secondaryImg.sprite = weaponImg;
             secondaryImg.color = Color.white;
             weapon.transform.SetParent(_secondary.transform, false);
+            _playerGear.currWeight -= _weaponInfo.weight;
+            StartCoroutine(WeightCheck());
         }
 
     }
