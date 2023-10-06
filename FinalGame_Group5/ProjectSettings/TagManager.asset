@@ -8,6 +8,10 @@ TagManager:
   - inventory
   - primary
   - secondary
+  - helmet
+  - armour
+  - leg
+  - storage
   layers:
   - Default
   - TransparentFX

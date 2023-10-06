@@ -37,7 +37,7 @@ public class GearScript : MonoBehaviour
             {
                 _gear.currWeight -= gearWeight.weight;
                 gearNames[index] = gearWeight.gearName;
-                gearGO[index] = gearWeight.prefab;
+                //gearGO[index] = gearWeight.prefab;
                 index++;
             }
         }

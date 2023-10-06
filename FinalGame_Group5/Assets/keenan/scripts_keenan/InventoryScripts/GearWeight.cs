@@ -6,5 +6,4 @@ public class GearWeight : MonoBehaviour
 {
     public string gearName;
     public int weight;
-    public GameObject prefab;
 }
