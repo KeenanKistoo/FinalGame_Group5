@@ -101,7 +101,7 @@ public class EnemyMovement : MonoBehaviour
             Destroy(bullet, bulletScript.lifespan);
 
             alreadyAttacked = true;
-            timeBetweenAttacks = Random.Range(0 f, 0.5f);
+            timeBetweenAttacks = Random.Range(0f, 0.5f);
             Invoke(nameof(ResetAttack), timeBetweenAttacks);
         }
     }

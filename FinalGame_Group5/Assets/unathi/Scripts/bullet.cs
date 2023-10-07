@@ -4,10 +4,12 @@ using UnityEngine;
 
 public class bullet : MonoBehaviour
 {
+    LevelManager level;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        level = GameObject.Find("LevelManager").GetComponent<LevelManager>();
     }
 
     // Update is called once per frame
@@ -23,6 +25,11 @@ public class bullet : MonoBehaviour
             Unit unit = other.GetComponent<Unit>();
             unit.TakeDamage(5);
             Destroy(gameObject);
+        }
+
+        if (other.CompareTag("Training"))
+        {
+            level.StartTraining();
         }
     }
 }

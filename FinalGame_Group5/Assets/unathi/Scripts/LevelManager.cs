@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 
 public enum State
@@ -25,10 +27,17 @@ public class LevelManager : MonoBehaviour
 
     public State state;
 
+    public int enemyCount = 0;
+
+    public Text question;
+    public GameObject questionText;
+
+    public GameObject buttons;
+
     // Start is called before the first frame update
     private void Start()
     {
-        StartCoroutine(SpawnEnemies());
+        state = State.Neutral;
     }
 
     void Awake()
@@ -44,6 +53,13 @@ public class LevelManager : MonoBehaviour
             case State.Neutral:
                 hidingSpotsParent.SetActive(false);
                 targets.SetActive(false);
+                break;
+            case State.Training:
+                targets.SetActive(true);
+                hidingSpotsParent.SetActive(false);
+                break;
+            case State.Battle:
+                hidingSpotsParent.SetActive(true);
                 break;
         }
     }
@@ -78,11 +94,48 @@ public class LevelManager : MonoBehaviour
 
     public void StartTraining()
     {
-
+        questionText.SetActive(true);
+        question.text = "START TRAINING?";
     }
 
     public void StartBattle()
     {
+        questionText.SetActive(true);
+        question.text = "START TRAINING?";
+    }
+
+    public void Yes()
+    {
+
+    }
+
+    public void No()
+    {
+        questionText.SetActive(false);
+    }
+
+    IEnumerator Countdown()
+    {
+        question.text = "Starting in: 5";
+
+        yield return new WaitForSeconds(1);
+
+        question.text = "Starting in: 4";
+
+        yield return new WaitForSeconds(1);
+
+        question.text = "Starting in: 3";
+
+        yield return new WaitForSeconds(1);
+
+        question.text = "Starting in: 2";
+
+        yield return new WaitForSeconds(1);
+
+        question.text = "Starting in: 1";
+
+        yield return new WaitForSeconds(1);
+
 
     }
 }

@@ -39,10 +39,16 @@ public class Unit : MonoBehaviour
         {
             if (gameObject.CompareTag("Enemy"))
             {
-                levelManager.SpawnEnemy();
+                if (levelManager.enemyCount < 10)
+                {
+                    levelManager.SpawnEnemy();
+                    levelManager.enemyCount++;
+                }
+                
                 Destroy(gameObject);
                 EnemyMovement enemy = GetComponent<EnemyMovement>();
                 enemy.nearestHidingSpot.gameObject.GetComponent<NodeScript>().active = true;
+                
             }
                
 
