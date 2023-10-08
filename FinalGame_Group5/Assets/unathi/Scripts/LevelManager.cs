@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
 
 
 public enum State
@@ -18,8 +17,14 @@ public class LevelManager : MonoBehaviour
 
     public GameObject hidingSpotsParent;
     public GameObject targets;
+    public GameObject walls;
+
+    public GameObject blackscreen;
+    public GameObject levelCanvas;
 
     public Transform[] spawnPoints;
+    public Transform player;
+    public Vector3 trainingSpawn;
 
     public GameObject enemyPrefab;
 
@@ -34,9 +39,13 @@ public class LevelManager : MonoBehaviour
 
     public GameObject buttons;
 
+    bool training = false;
+    bool battle = false;
+
     // Start is called before the first frame update
     private void Start()
     {
+        trainingSpawn = new Vector3(71, 1.69f, 46f);
         state = State.Neutral;
     }
 
@@ -53,13 +62,17 @@ public class LevelManager : MonoBehaviour
             case State.Neutral:
                 hidingSpotsParent.SetActive(false);
                 targets.SetActive(false);
+                levelCanvas.SetActive(true);
                 break;
             case State.Training:
                 targets.SetActive(true);
                 hidingSpotsParent.SetActive(false);
+                levelCanvas.SetActive(false);
                 break;
             case State.Battle:
                 hidingSpotsParent.SetActive(true);
+                walls.SetActive(true);
+                levelCanvas.SetActive(false);
                 break;
         }
     }
@@ -96,17 +109,21 @@ public class LevelManager : MonoBehaviour
     {
         questionText.SetActive(true);
         question.text = "START TRAINING?";
+        training = true;
+        battle = false;
     }
 
     public void StartBattle()
     {
         questionText.SetActive(true);
-        question.text = "START TRAINING?";
+        question.text = "START BATTLE?";
+        training = false;
+        battle = true;
     }
 
     public void Yes()
     {
-
+        StartCoroutine(Countdown());
     }
 
     public void No()
@@ -136,6 +153,28 @@ public class LevelManager : MonoBehaviour
 
         yield return new WaitForSeconds(1);
 
+        if (training)
+        {
+            state = State.Training;
+            StartCoroutine(BlackScreen());
+            player.position = trainingSpawn;
 
+        }
+        else if (battle)
+        {
+            state = State.Battle;
+            SpawnEnemies();
+        }
+
+        questionText.SetActive(false);
+    }
+
+    IEnumerator BlackScreen()
+    {
+        blackscreen.SetActive(true);
+
+        yield return new WaitForSeconds(3);
+
+        blackscreen.SetActive(false);
     }
 }

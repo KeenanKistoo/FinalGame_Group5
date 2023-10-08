@@ -31,5 +31,10 @@ public class bullet : MonoBehaviour
         {
             level.StartTraining();
         }
+
+        if (other.CompareTag("Battle"))
+        {
+            level.StartBattle();
+        }
     }
 }
