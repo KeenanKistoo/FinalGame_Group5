@@ -27,6 +27,8 @@ public class Shooting : MonoBehaviour
 
     //Animations
     public Animator animator;
+    public PlayerMovement playerMovement;
+    public bool isADS = false;
 
     private void Awake()
     {
@@ -43,6 +45,24 @@ public class Shooting : MonoBehaviour
         {
             ammunitionDisplay.SetText(bulletsLeft / bulletsperTap + " / " + magazineSize / bulletsperTap);
         }
+
+        if (playerMovement.x == 1f || playerMovement.x == -1f || playerMovement.z == 1f || playerMovement.z == -1f)
+        {
+            animator.SetBool("isWalking", true);
+            
+        }
+        else
+        {
+            animator.SetBool("isWalking", false);
+        }
+
+        if (playerMovement.isSprinting == true)
+        {
+            animator.SetBool("sprinting", true);
+        } else if (playerMovement.isSprinting == false)
+        {
+            animator.SetBool("sprinting", false);
+        }
     }
 
     private void MyInput()
@@ -51,7 +71,7 @@ public class Shooting : MonoBehaviour
         else shooting = Input.GetKeyDown(KeyCode.Mouse0);
 
         //reloading
-        if (Input.GetKeyDown(KeyCode.R) && bulletsLeft < magazineSize && !reloading)
+        if (Input.GetKeyDown(KeyCode.R) && bulletsLeft < magazineSize && !reloading && playerMovement.isSprinting == false)
         {
             animator.SetBool("Reloading", true);
             Reload();
@@ -71,12 +91,32 @@ public class Shooting : MonoBehaviour
 
             Shoot();
         }
+
+        if(Input.GetKey(KeyCode.Mouse1) && !reloading)
+        {
+            animator.SetBool("ADS", true);
+            isADS = true;
+        }
+        else
+        {
+            animator.SetBool("ADS", false);
+            isADS = false;
+        }
     }
 
     private void Shoot()
     {
-        animator.SetBool("Shooting", true);
-        animator.Play("Shoot", -1, 0f);
+        if (!isADS)
+        {
+            animator.SetBool("Shooting", true);
+            animator.Play("Shoot", -1, 0f);
+
+        } else if (isADS)
+        {
+            animator.SetBool("ADSShooting", true);
+            animator.Play("ADSShoot", -1, 0f);
+        }
+        
         readyToShoot = false;
         
 
@@ -133,6 +173,7 @@ public class Shooting : MonoBehaviour
         readyToShoot = true;
         allowInvoke = true;
         animator.SetBool("Shooting", false);
+        animator.SetBool("ADSShooting", false);
     }
 
     private void Reload()

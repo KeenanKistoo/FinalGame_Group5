@@ -6,11 +6,11 @@ public class PlayerMovement : MonoBehaviour
 {
     public CharacterController controller;
 
-    public float speed = 12f;
+    public float speed = 6f;
     public float jumpHeight = 3f;
 
     //Keenan Added this:
-    public float normSpeed = 12f;
+    public float normSpeed = 6f;
 
     Vector3 velocity;
 
@@ -21,6 +21,11 @@ public class PlayerMovement : MonoBehaviour
     public LayerMask groundMask;
 
     bool isGrounded;
+
+    public float x;
+    public float z;
+
+    public bool isSprinting;
 
     // Update is called once per frame
     void Update()
@@ -33,8 +38,23 @@ public class PlayerMovement : MonoBehaviour
             velocity.y = -2f;
         }
 
-        float x = Input.GetAxisRaw("Horizontal");
-        float z = Input.GetAxisRaw("Vertical");
+        x = Input.GetAxisRaw("Horizontal");
+        z = Input.GetAxisRaw("Vertical");
+
+        if (z == 1f && Input.GetKeyDown(KeyCode.LeftShift))
+        {
+            speed = 10f;
+            normSpeed = 10f;
+            Debug.Log("Sprinting!");
+            isSprinting = true;
+        }
+        else if (Input.GetKeyUp(KeyCode.LeftShift))
+        {
+            speed = 6f;
+            normSpeed = 6f;
+            isSprinting = false;
+        }
+        
 
         Vector3 move = (transform.right * x + transform.forward * z).normalized;
 
