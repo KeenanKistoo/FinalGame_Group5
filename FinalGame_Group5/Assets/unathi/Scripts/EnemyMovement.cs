@@ -5,7 +5,7 @@ using UnityEngine.AI;
 
 public class EnemyMovement : MonoBehaviour
 {
-    public Transform player;
+    Transform player;
     public GameObject bulletPrefab;
     public Transform spawnPoint;
     public Transform nearestHidingSpot;
@@ -39,6 +39,10 @@ public class EnemyMovement : MonoBehaviour
 
     // Use constants for clarity
     private const float ShootingDuration = 6f;
+
+    [SerializeField]
+    private LayerMask obstacleLayer;
+
 
     private void Start()
     {
@@ -83,6 +87,18 @@ public class EnemyMovement : MonoBehaviour
 
     private void Shoot()
     {
+        // Calculate the direction to the player
+        Vector3 directionToPlayer = player.position - transform.position;
+
+        // Perform a raycast to check for obstacles
+        RaycastHit hit;
+        if (Physics.Raycast(transform.position + Vector3.up, directionToPlayer, out hit, attackRange, obstacleLayer))
+        {
+            // There is an obstacle between the enemy and the player, don't shoot
+            return;
+        }
+
+        // If there is no obstacle, proceed to shoot
         transform.LookAt(player.position);
 
         if (!alreadyAttacked)
@@ -106,6 +122,7 @@ public class EnemyMovement : MonoBehaviour
         }
     }
 
+
     private void ResetAttack()
     {
         alreadyAttacked = false;
@@ -126,6 +143,11 @@ public class EnemyMovement : MonoBehaviour
         float nearestDistance = Mathf.Infinity;
         foreach (Transform target in levelManager.hidingSpots)
         {
+            if(levelManager.hidingSpots == null)
+            {
+                Debug.Log("Fuck");
+            }
+
             float distance = Vector3.Distance(transform.position, target.position);
             if (distance < nearestDistance)
             {

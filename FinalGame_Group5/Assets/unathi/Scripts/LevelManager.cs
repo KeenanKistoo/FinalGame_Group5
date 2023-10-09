@@ -39,8 +39,8 @@ public class LevelManager : MonoBehaviour
 
     public GameObject buttons;
 
-    bool training = false;
-    bool battle = false;
+    [SerializeField]bool training = false;
+    [SerializeField] bool battle = false;
 
     // Start is called before the first frame update
     private void Start()
@@ -79,6 +79,8 @@ public class LevelManager : MonoBehaviour
 
     IEnumerator SpawnEnemies()
     {
+        Debug.Log("Fuck");
+
         while (spawnIndex < spawnPoints.Length)
         {
             Transform spawnPoint = spawnPoints[spawnIndex];
@@ -163,7 +165,7 @@ public class LevelManager : MonoBehaviour
         else if (battle)
         {
             state = State.Battle;
-            SpawnEnemies();
+            StartCoroutine(SpawnEnemies());
         }
 
         questionText.SetActive(false);
