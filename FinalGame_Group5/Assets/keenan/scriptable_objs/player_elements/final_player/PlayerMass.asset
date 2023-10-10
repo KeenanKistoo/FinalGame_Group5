@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentClass: 0
   bodyMass: 0
-  exWeight: 0
+  exWeight: 15

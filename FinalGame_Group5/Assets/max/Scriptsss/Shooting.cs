@@ -34,6 +34,8 @@ public class Shooting : MonoBehaviour
     {
         bulletsLeft = magazineSize;
         readyToShoot = true;
+        playerMovement = GameObject.Find("FirstPersonPlayer").GetComponent<PlayerMovement>();
+        fpsCam = GameObject.Find("MainCamera").GetComponent<Camera>();
     }
 
     void Update()
