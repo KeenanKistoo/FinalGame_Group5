@@ -13,7 +13,7 @@ public class PlayerInventory : ScriptableObject
     [Header("Armour Elements:")]
     public int armourLevel;
     [Range(2, 6)]
-    public int pouchCount;
+    public int armourCount;
 
     [Header("Gear Elements:")]
     public bool primary;
