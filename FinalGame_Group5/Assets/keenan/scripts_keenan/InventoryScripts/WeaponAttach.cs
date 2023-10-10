@@ -40,6 +40,7 @@ public class WeaponAttach : MonoBehaviour
 
     [Header("Weapon Purchase Panel:")]
     public GameObject weaponPanel;
+    public Button[] weaponBtns;
     
     private void Start()
     {
@@ -54,6 +55,7 @@ public class WeaponAttach : MonoBehaviour
     private void Update()
     {
         _weaponCount = _weaponHolster.transform.childCount;    
+        print(_weaponCount);
     }
     IEnumerator WeightCheck()
     {
@@ -70,16 +72,24 @@ public class WeaponAttach : MonoBehaviour
             weapon.transform.SetParent(_weaponHolster.transform, false);
             _weaponController.weapons[_weaponCount - 1] = weapon;
             _playerGear.currWeight -= _weaponInfo.weight;
+            this.gameObject.GetComponent<Button>().interactable = false;
             StartCoroutine(WeightCheck());
         }
     }
 
-    public void ClearWeapon(int num)
+    public void ClearWeapon()
     {
-        weaponImgs[num].sprite = null;
-        weaponImgs[num].color = new Color32(0, 0, 0, 0);
-        _weaponController.weapons[num].transform.SetParent(_storage.transform, false);
-        _weaponController.weapons[num] = null;
-    
+        for (int i = 0;i < _weaponController.weapons.Length;i++)
+        {
+            _weaponController.weapons[i].transform.SetParent(_storage.transform, false);
+            _playerGear.currWeight += _weaponController.weapons[i].GetComponent<WeaponInfo>().weight;
+            for (int j = 0; j < weaponBtns.Length;j++)
+            {
+                weaponBtns[j].interactable = true;
+            }
+            StartCoroutine(WeightCheck());
+            weaponImgs[i].sprite = null;
+            weaponImgs[i].color = new Color32(0,0,0,0);
+        }
     }
 }
