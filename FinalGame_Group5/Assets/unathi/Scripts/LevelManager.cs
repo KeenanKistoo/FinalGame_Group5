@@ -75,6 +75,11 @@ public class LevelManager : MonoBehaviour
                 levelCanvas.SetActive(false);
                 break;
         }
+
+        if (enemyCount == 10)
+        {
+            state = State.Neutral;
+        }
     }
 
     IEnumerator SpawnEnemies()
