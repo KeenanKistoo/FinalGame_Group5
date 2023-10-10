@@ -12,6 +12,7 @@ TagManager:
   - armour
   - leg
   - storage
+  - holster
   layers:
   - Default
   - TransparentFX

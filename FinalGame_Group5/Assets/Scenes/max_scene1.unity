@@ -1092,6 +1092,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: AK47
       objectReference: {fileID: 0}
+    - target: {fileID: 2350515811822518757, guid: c72ea4d5e0329f348a9272b0f09512cb, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8322076276652653009, guid: c72ea4d5e0329f348a9272b0f09512cb, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.082801

@@ -33,12 +33,12 @@ public class PlayerWeightController : MonoBehaviour
             }
             else if (playerWeight.currentClass == PlayerWeight.WeightClasses.middleweight)
             {
-                playerMovement.speed = playerMovement.normSpeed * 0.9f;
+                playerMovement.speed = playerMovement.normSpeed * 0.8f;
                 playerWeight.exWeight = 20;
             }
             else if (playerWeight.currentClass == PlayerWeight.WeightClasses.heavyweight)
             {
-                playerMovement.speed = playerMovement.normSpeed * 0.8f;
+                playerMovement.speed = playerMovement.normSpeed * 0.65f;
                 playerWeight.exWeight = 30;
             }
         }

@@ -9,35 +9,52 @@ public class WeaponAttach : MonoBehaviour
     [Header("Player Gear Script:")]
     [SerializeField]
     private PlayerGear _playerGear;
-    
+
+    [Header("Weapon Controller:")]
+    [SerializeField]
+    private WeaponController _weaponController;
+    [SerializeField]
+    private GameObject[] _weapons;
+    [SerializeField]
+    private GameObject _storage;
 
     [Header("UI Elements:")]
     public Text weightText;
 
-    [Header("Weapon Holster Elements:")]
+    [Header("Weapon Holster Elements CORRECT:")]
     [SerializeField]
-    private GameObject _primary;
+    private GameObject _weaponHolster;
     [SerializeField]
-    private GameObject _secondary;
+    private int _weaponCount;
 
     [Header("Weapon UI Elements:")]
     public Image primaryImg;
     public Image secondaryImg;
+    public Image[] weaponImgs;
 
     [Header("Weapon Prefabs:")]
     public GameObject weapon;
     [SerializeField]
     public WeaponInfo _weaponInfo;
     
+
+    [Header("Weapon Purchase Panel:")]
+    public GameObject weaponPanel;
+    
     private void Start()
     {
         _playerGear = GameObject.FindGameObjectWithTag("inventory").GetComponent<PlayerGear>();
-        _primary = GameObject.FindGameObjectWithTag("primary");
-        _secondary = GameObject.FindGameObjectWithTag("secondary");
         _weaponInfo = weapon.GetComponent<WeaponInfo>();
+        _weaponHolster = GameObject.FindGameObjectWithTag("holster");
+        _weaponCount = _weaponHolster.transform.childCount;
+        _storage = GameObject.FindGameObjectWithTag("storage");
+        print(_weaponCount);
         StartCoroutine(WeightCheck());
     }
-
+    private void Update()
+    {
+        _weaponCount = _weaponHolster.transform.childCount;    
+    }
     IEnumerator WeightCheck()
     {
         yield return new WaitForEndOfFrame();
@@ -46,21 +63,23 @@ public class WeaponAttach : MonoBehaviour
 
     public void SetWeapon(Sprite weaponImg)
     {
-        if(_primary.transform.childCount == 0)
+        if (_weaponCount < 3 && _playerGear.currWeight >= _weaponInfo.weight)
         {
-            primaryImg.sprite = weaponImg;
-            primaryImg.color = Color.white;
-            weapon.transform.SetParent(_primary.transform, false);
-            _playerGear.currWeight -= _weaponInfo.weight;
-            StartCoroutine(WeightCheck());
-        }else if(_primary.transform.childCount > 0 && _secondary.transform.childCount == 0)
-        {
-            secondaryImg.sprite = weaponImg;
-            secondaryImg.color = Color.white;
-            weapon.transform.SetParent(_secondary.transform, false);
+            weaponImgs[_weaponCount - 1].sprite = weaponImg;
+            weaponImgs[_weaponCount - 1].color = Color.white;
+            weapon.transform.SetParent(_weaponHolster.transform, false);
+            _weaponController.weapons[_weaponCount - 1] = weapon;
             _playerGear.currWeight -= _weaponInfo.weight;
             StartCoroutine(WeightCheck());
         }
+    }
 
+    public void ClearWeapon(int num)
+    {
+        weaponImgs[num].sprite = null;
+        weaponImgs[num].color = new Color32(0, 0, 0, 0);
+        _weaponController.weapons[num].transform.SetParent(_storage.transform, false);
+        _weaponController.weapons[num] = null;
+    
     }
 }

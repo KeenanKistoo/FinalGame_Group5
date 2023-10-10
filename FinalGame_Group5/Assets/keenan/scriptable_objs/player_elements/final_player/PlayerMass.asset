@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f485121c7821f5840ac57884a8b8ca02, type: 3}
   m_Name: PlayerMass
   m_EditorClassIdentifier: 
-  currentClass: 1
+  currentClass: 0
   bodyMass: 0
-  exWeight: 20
+  exWeight: 15
