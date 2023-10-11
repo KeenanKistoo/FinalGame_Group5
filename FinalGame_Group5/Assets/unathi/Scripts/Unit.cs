@@ -39,7 +39,7 @@ public class Unit : MonoBehaviour
         {
             if (gameObject.CompareTag("Enemy"))
             {
-                if (levelManager.enemyCount < 10)
+                if (levelManager.enemyCount < 10 && levelManager.state == State.Battle)
                 {
                     levelManager.SpawnEnemy();
                     levelManager.enemyCount++;

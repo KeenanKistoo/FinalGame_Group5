@@ -46,7 +46,7 @@ public class EnemyMovement : MonoBehaviour
 
     private void Start()
     {
-        player = GameObject.Find("Player").transform;
+        player = GameObject.Find("FirstPersonPlayer").transform;
         levelManager = GameObject.Find("LevelManager").GetComponent<LevelManager>();
         agent = GetComponent<NavMeshAgent>();
         Hide();

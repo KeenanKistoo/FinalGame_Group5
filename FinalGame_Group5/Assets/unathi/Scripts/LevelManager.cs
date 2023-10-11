@@ -42,10 +42,12 @@ public class LevelManager : MonoBehaviour
     [SerializeField]bool training = false;
     [SerializeField] bool battle = false;
 
+    [SerializeField] GameObject inventoryUI;
+
     // Start is called before the first frame update
     private void Start()
     {
-        trainingSpawn = new Vector3(71, 1.69f, 46f);
+        trainingSpawn = new Vector3(84.19f, 1.95f, 61);
         state = State.Neutral;
     }
 
@@ -77,6 +79,23 @@ public class LevelManager : MonoBehaviour
         }
 
         if (enemyCount == 10)
+        {
+            state = State.Neutral;
+        }
+
+        if (Input.GetKeyDown(KeyCode.B))
+        {
+            if (inventoryUI.activeInHierarchy)
+            {
+                inventoryUI.SetActive(false);
+            }
+            else
+            {
+                inventoryUI.SetActive(true);
+            }
+        }
+
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
             state = State.Neutral;
         }
