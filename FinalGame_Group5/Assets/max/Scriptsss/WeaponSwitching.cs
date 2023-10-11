@@ -1,11 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class WeaponSwitching : MonoBehaviour
 {
 
     public int selectedWeapon = 0;
+
+    public Text weaponName;
 
     // Start is called before the first frame update
     void Start()
@@ -23,6 +26,7 @@ public class WeaponSwitching : MonoBehaviour
         {
             if (selectedWeapon >= transform.childCount - 1)
                 selectedWeapon = 0;
+                
             else
             selectedWeapon++;
         }
@@ -63,10 +67,27 @@ public class WeaponSwitching : MonoBehaviour
         foreach(Transform weapon in transform)
         {
             if (i == selectedWeapon)
+            {
                 weapon.gameObject.SetActive(true);
+                weaponName.text = weapon.name;
+            }
             else
+            {
                 weapon.gameObject.SetActive(false);
+            }
+
             i++;
         }
     }
+
 }
+
+/*  foreach(Transform weapon in transform)
+        {
+            if (i == selectedWeapon)
+                weapon.gameObject.SetActive(true);
+                weaponName.text = weapon.name;
+            else
+                weapon.gameObject.SetActive(false);
+            i++;
+        }*/
