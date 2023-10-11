@@ -25,6 +25,11 @@ public class PlayerGear : MonoBehaviour
     public List<string> gearNameL;
     public List<GameObject> gearLegGO;
 
+    [Header("Variables:")]
+    public int helmetCount;
+    public int armourCount;
+    public int legCount;
+
     private void Start()
     {
         currWeight = maxWeight;
