@@ -13,6 +13,8 @@ public class MouseLook : MonoBehaviour
 
     public bool lockMouse;
 
+    string mouse = "None";
+
 
     // Start is called before the first frame update
     void Start()
@@ -35,14 +37,14 @@ public class MouseLook : MonoBehaviour
     }
 
     public void MouseLock()
-    {
-        if (lockMouse)
-        {
-            Cursor.lockState = CursorLockMode.Locked;
-        }
-        else
-        {
+   {
+       if (lockMouse)
+       {
             Cursor.lockState = CursorLockMode.None;
-        }
-    }
+       }
+       else
+       {
+            Cursor.lockState = CursorLockMode.None;
+       }
+   }
 }
