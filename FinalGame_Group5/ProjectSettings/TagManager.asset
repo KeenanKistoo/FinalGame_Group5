@@ -13,6 +13,10 @@ TagManager:
   - leg
   - storage
   - holster
+  - Battle
+  - Training
+  - Enemy
+  - Target
   layers:
   - Default
   - TransparentFX
@@ -21,7 +25,7 @@ TagManager:
   - Water
   - UI
   - Ground
-  - 
+  - Player
   - 
   - 
   - 

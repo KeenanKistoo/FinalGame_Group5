@@ -5,133 +5,158 @@ using UnityEngine.AI;
 
 public class EnemyMovement : MonoBehaviour
 {
-    public Transform[] hidingSpots;
-    public Transform player;
-    public Transform spawnPoint;
-    public NavMeshAgent agent;
-    public LayerMask whatIsPlayer;
-
-    public float retreatRange;
-    public float attackRange;
-    public float stopDistance = 1f;
-    public float hideTime = 3f; // Adjust the time the enemy hides
-
-    [SerializeField] private float shootingTimer = 0f;
-    [SerializeField] private bool isShooting = false;
-    [SerializeField] private bool retreating = false;
-    [SerializeField] private bool hidden = false;
-    [SerializeField] private Transform nearestHidingSpot;
-
+    Transform player;
     public GameObject bulletPrefab;
+    public Transform spawnPoint;
+    public Transform nearestHidingSpot;
+    
+    public LayerMask whatIsPlayer;
+    public LayerMask whatIsGround;
+    public bool hidden = false;
+    public bool isShooting = false;
+    public bool retreating = false;
+    LevelManager levelManager;
+    NavMeshAgent agent;
+    Animator anim;
+
+    //Hiding
+    public Vector3 hideSpot;
+    bool hidePointSet;
+    public float stopDistance = 1f;
+
+    //Attacking
+    public float timeBetweenAttacks;
+    bool alreadyAttacked;
+
+    float minAngle;
+    float maxAngle;
+
+    //States
+    public float attackRange = 30f;
+    public float retreatRange = 10f;
+    public bool playerInAttackRange;
+    public bool playerInRetreatRange;
+
+    // Use constants for clarity
+    private const float ShootingDuration = 6f;
+
+    [SerializeField]
+    private LayerMask obstacleLayer;
+
 
     private void Start()
     {
-        player = GameObject.Find("Player").transform;
+        player = GameObject.Find("FirstPersonPlayer").transform;
+        levelManager = GameObject.Find("LevelManager").GetComponent<LevelManager>();
         agent = GetComponent<NavMeshAgent>();
-
         Hide();
-        isShooting = false;
+    }
+
+    private void Awake()
+    {
+        anim = GetComponentInChildren<Animator>();
     }
 
     private void Update()
     {
-        bool playerInRetreatRange = Physics.CheckSphere(transform.position, retreatRange, whatIsPlayer);
-        bool playerInAttackRange = Physics.CheckSphere(transform.position, attackRange, whatIsPlayer);
+        playerInRetreatRange = Physics.CheckSphere(transform.position, retreatRange, whatIsPlayer);
+        playerInAttackRange = Physics.CheckSphere(transform.position, attackRange, whatIsPlayer);
 
-        Debug.Log(playerInAttackRange);
+        float distanceToTarget = Vector3.Distance(gameObject.transform.position, nearestHidingSpot.position);
 
-        if (playerInAttackRange)
+        if(distanceToTarget <= stopDistance)
         {
-            if (hidden && shootingTimer==0)
-            {
-                shootingTimer = 0;
-                isShooting = true;
-            }
+            hidePointSet = true;
         }
 
-            if (isShooting)
-            {
-                shootingTimer += Time.deltaTime;
-
-                if (shootingTimer <= 6f)
-                {
-                Shoot();
-                }
-                else if (shootingTimer > 6f && shootingTimer <= 6f + hideTime)
-                {
-                    Hide();
-            }
-                else
-                {
-                    shootingTimer = 0f;
-                    isShooting = false;
-                }
-            }
-       
-
-        float distanceToSpot = Vector3.Distance(transform.position, nearestHidingSpot.position);
-
-        // Checks if enemy should hide or not
-        if (distanceToSpot <= stopDistance && !isShooting || shootingTimer > 6f && shootingTimer <= 6f + hideTime)
+        if (!playerInAttackRange && !playerInRetreatRange)
         {
-            hidden = true;
-        } else
-        {
-            hidden = false;
+            Hide();
         }
 
-        //Checks if enemy is hidden
-       if (hidden)
+        if (playerInAttackRange && !playerInRetreatRange)
         {
-            transform.localScale = new Vector3(1, 0.5f, 1);
-        } else
+            Shoot();
+        }
+
+        if (playerInRetreatRange)
         {
-            transform.localScale = new Vector3(1, 1f, 1);
+            Retreat();
         }
     }
 
     private void Shoot()
     {
-        // Check if the player is in attack range (just to be safe)
-        if (Physics.CheckSphere(transform.position, attackRange, whatIsPlayer))
+        // Calculate the direction to the player
+        Vector3 directionToPlayer = player.position - transform.position;
+
+        // Perform a raycast to check for obstacles
+        RaycastHit hit;
+        if (Physics.Raycast(transform.position + Vector3.up, directionToPlayer, out hit, attackRange, obstacleLayer))
         {
-            // Rotate to face the player
-            transform.LookAt(player.position);
-
-            // Instantiate a bullet prefab and set its position and rotation
-            GameObject bullet = Instantiate(bulletPrefab, spawnPoint.position, spawnPoint.rotation);
-
-            // Access the Bullet script attached to the bullet GameObject
-            EnemyBullet bulletScript = bullet.GetComponent<EnemyBullet>();
-
-            // Destroy the bullet after a certain time (in case it doesn't hit anything)
-            Destroy(bullet, bulletScript.lifespan);
+            // There is an obstacle between the enemy and the player, don't shoot
+            return;
         }
+
+        // If there is no obstacle, proceed to shoot
+        transform.LookAt(player.position);
+
+        if (!alreadyAttacked)
+        {
+            // Create a spread angle (in degrees)
+            float spreadAngle = Random.Range(-1.5f, 1.5f);
+
+            // Apply the spread to the bullet's rotation
+            Quaternion spreadRotation = Quaternion.Euler(0f, spreadAngle, 0f);
+
+            // Calculate the rotated direction
+            Vector3 bulletDirection = spreadRotation * transform.forward;
+
+            GameObject bullet = Instantiate(bulletPrefab, spawnPoint.position, Quaternion.LookRotation(bulletDirection));
+            EnemyBullet bulletScript = bullet.GetComponent<EnemyBullet>();
+            Destroy(bullet, bulletScript.lifespan);
+
+            alreadyAttacked = true;
+            timeBetweenAttacks = Random.Range(0f, 0.5f);
+            Invoke(nameof(ResetAttack), timeBetweenAttacks);
+        }
+    }
+
+
+    private void ResetAttack()
+    {
+        alreadyAttacked = false;
     }
 
     private void Hide()
     {
-        if (!hidden)
+        if (!hidden && !hidePointSet)
         {
             FindNearestTarget();
             agent.SetDestination(nearestHidingSpot.position);
+            nearestHidingSpot.gameObject.GetComponent<NodeScript>().active = false;
         }
     }
 
     private void FindNearestTarget()
     {
         float nearestDistance = Mathf.Infinity;
-
-        foreach (Transform target in hidingSpots)
+        foreach (Transform target in levelManager.hidingSpots)
         {
-            float distance = Vector3.Distance(transform.position, target.position);
+            if(levelManager.hidingSpots == null)
+            {
+                Debug.Log("Fuck");
+            }
 
+            float distance = Vector3.Distance(transform.position, target.position);
             if (distance < nearestDistance)
             {
                 nearestDistance = distance;
                 nearestHidingSpot = target;
+                Debug.Log(nearestHidingSpot);
             }
         }
+        hidePointSet = true;
     }
 
     void Retreat()
@@ -142,15 +167,15 @@ public class EnemyMovement : MonoBehaviour
             agent.SetDestination(furthestSpot.position);
             retreating = true;
         }
-       
     }
+
 
     private Transform GetFurthestHidingSpot()
     {
         Transform furthestSpot = null;
         float furthestDistance = 0f;
 
-        foreach (Transform hidingSpot in hidingSpots)
+        foreach (Transform hidingSpot in levelManager.hidingSpots)
         {
             float distance = Vector3.Distance(transform.position, hidingSpot.position);
 

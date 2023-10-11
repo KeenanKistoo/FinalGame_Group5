@@ -30,16 +30,12 @@ public class EnemyBullet : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        // Check if the bullet collided with an object that has a "Health" component
-        Unit unit = other.GetComponent<Unit>();
-
-        if (unit != null)
+       if (other.CompareTag("Player"))
         {
-            // Inflict damage on the object if it has health
+            Unit unit = other.GetComponent<Unit>();
             unit.TakeDamage(5);
+            Debug.Log("Fuck!");
+            Destroy(gameObject);
         }
-
-        // Destroy the bullet on collision with any object
-        Destroy(gameObject);
     }
 }
