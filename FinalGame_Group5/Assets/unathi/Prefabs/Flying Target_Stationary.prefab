@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5715465186854044557}
   - component: {fileID: 4154924643824444201}
   - component: {fileID: 5527746376642030433}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Flying Target_Stationary
   m_TagString: Target
   m_Icon: {fileID: 0}
@@ -51,6 +51,7 @@ MonoBehaviour:
   damage: 0
   bulletsFired: 0
   targetParticle: {fileID: 2988050591074237611, guid: 37c7908fc17bfc044bf15d9484e88935, type: 3}
+  playerSlider: {fileID: 0}
 --- !u!65 &5527746376642030433
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -142,11 +143,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 1b85f0ed70fb0124498ae933d6d609af, type: 3}
       propertyPath: m_Layer
-      value: 8
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 1b85f0ed70fb0124498ae933d6d609af, type: 3}
       propertyPath: m_TagString
-      value: Enemy
+      value: Target
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

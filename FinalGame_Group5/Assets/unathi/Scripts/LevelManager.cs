@@ -47,7 +47,7 @@ public class LevelManager : MonoBehaviour
     // Start is called before the first frame update
     private void Start()
     {
-        trainingSpawn = new Vector3(86f, 1.95f, 52f);
+        trainingSpawn = new Vector3(83.5f, 1.95000005f, 47.5f);
         state = State.Neutral;
     }
 
