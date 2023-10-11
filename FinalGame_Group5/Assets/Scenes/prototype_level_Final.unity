@@ -233,7 +233,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponName: AK47
-  weight: 2
+  weight: 4
   clip: 0
   ammoType: 
 --- !u!1 &99085215
@@ -5678,14 +5678,6 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 947658637}
     - target: {fileID: 3147208988506191123, guid: 792900fe5d4e31241b95a4ba9377f45f, type: 3}
-      propertyPath: weaponBtns.Array.size
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 3147208988506191123, guid: 792900fe5d4e31241b95a4ba9377f45f, type: 3}
-      propertyPath: weaponBtns.Array.data[0]
-      value: 
-      objectReference: {fileID: 134320506}
-    - target: {fileID: 3147208988506191123, guid: 792900fe5d4e31241b95a4ba9377f45f, type: 3}
       propertyPath: weaponBtns.Array.data[1]
       value: 
       objectReference: {fileID: 1886106655}
@@ -5705,6 +5697,10 @@ PrefabInstance:
       propertyPath: weaponImgs.Array.data[1]
       value: 
       objectReference: {fileID: 1394126328}
+    - target: {fileID: 5650611917462317306, guid: 792900fe5d4e31241b95a4ba9377f45f, type: 3}
+      propertyPath: m_Text
+      value: 4KG
+      objectReference: {fileID: 0}
     - target: {fileID: 6290451314487064184, guid: 792900fe5d4e31241b95a4ba9377f45f, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -8438,7 +8434,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponName: VSK
-  weight: 2
+  weight: 3
   clip: 0
   ammoType: 
 --- !u!1 &937679094
@@ -11742,6 +11738,10 @@ PrefabInstance:
       propertyPath: weaponImgs.Array.data[1]
       value: 
       objectReference: {fileID: 1394126328}
+    - target: {fileID: 5650611917462317306, guid: 792900fe5d4e31241b95a4ba9377f45f, type: 3}
+      propertyPath: m_Text
+      value: 2KG
+      objectReference: {fileID: 0}
     - target: {fileID: 6290451314487064184, guid: 792900fe5d4e31241b95a4ba9377f45f, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -12742,6 +12742,10 @@ PrefabInstance:
       propertyPath: weaponImgs.Array.data[1]
       value: 
       objectReference: {fileID: 1394126328}
+    - target: {fileID: 5650611917462317306, guid: 792900fe5d4e31241b95a4ba9377f45f, type: 3}
+      propertyPath: m_Text
+      value: 4KG
+      objectReference: {fileID: 0}
     - target: {fileID: 6290451314487064184, guid: 792900fe5d4e31241b95a4ba9377f45f, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -13983,6 +13987,10 @@ PrefabInstance:
       propertyPath: weaponImgs.Array.data[1]
       value: 
       objectReference: {fileID: 1394126328}
+    - target: {fileID: 5650611917462317306, guid: 792900fe5d4e31241b95a4ba9377f45f, type: 3}
+      propertyPath: m_Text
+      value: 3KG
+      objectReference: {fileID: 0}
     - target: {fileID: 6290451314487064184, guid: 792900fe5d4e31241b95a4ba9377f45f, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -15507,6 +15515,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _gear: {fileID: 0}
   _player: {fileID: 0}
+  attach: {fileID: 134320507}
 --- !u!1 &1808465780
 GameObject:
   m_ObjectHideFlags: 0
