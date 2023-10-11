@@ -88,10 +88,17 @@ public class LevelManager : MonoBehaviour
             if (inventoryUI.activeInHierarchy)
             {
                 inventoryUI.SetActive(false);
+                Camera cam = Camera.main;
+                cam.GetComponent<MouseLook>().lockMouse = true;
+                cam.GetComponent<MouseLook>().MouseLock();
+
             }
             else
             {
                 inventoryUI.SetActive(true);
+                Camera cam = Camera.main;
+                cam.GetComponent<MouseLook>().lockMouse = false;
+                cam.GetComponent<MouseLook>().MouseLock();
             }
         }
 

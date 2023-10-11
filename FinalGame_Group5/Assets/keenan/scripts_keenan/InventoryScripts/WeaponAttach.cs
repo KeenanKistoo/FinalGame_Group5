@@ -69,6 +69,7 @@ public class WeaponAttach : MonoBehaviour
         {
             weaponImgs[_weaponCount - 1].sprite = weaponImg;
             weaponImgs[_weaponCount - 1].color = Color.white;
+            weapon.SetActive(true);
             weapon.transform.SetParent(_weaponHolster.transform, false);
             _weaponController.weapons[_weaponCount - 1] = weapon;
             _playerGear.currWeight -= _weaponInfo.weight;

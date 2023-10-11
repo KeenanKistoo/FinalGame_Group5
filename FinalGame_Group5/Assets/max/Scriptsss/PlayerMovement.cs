@@ -43,15 +43,15 @@ public class PlayerMovement : MonoBehaviour
 
         if (z == 1f && Input.GetKeyDown(KeyCode.LeftShift))
         {
-            speed = 10f;
-            normSpeed = 10f;
+            //speed = 10f;
+            normSpeed = 20f;
             Debug.Log("Sprinting!");
             isSprinting = true;
         }
         else if (Input.GetKeyUp(KeyCode.LeftShift))
         {
-            speed = 6f;
-            normSpeed = 6f;
+            //speed = 15f;
+            normSpeed = 15f;
             isSprinting = false;
         }
         

@@ -5,16 +5,19 @@ using UnityEngine;
 public class MouseLook : MonoBehaviour
 {
 
-    public float mouseSens = 100f;
+    public float mouseSens = 250f;
 
     public Transform playerBody;
 
     private float xRotation = 0;
 
+    public bool lockMouse;
+
 
     // Start is called before the first frame update
     void Start()
     {
+        lockMouse = false;
         //Cursor.lockState = CursorLockMode.Locked;
     }
 
@@ -29,5 +32,17 @@ public class MouseLook : MonoBehaviour
 
         transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
         playerBody.Rotate(Vector3.up * mouseX);
+    }
+
+    public void MouseLock()
+    {
+        if (lockMouse)
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+        }
+        else
+        {
+            Cursor.lockState = CursorLockMode.None;
+        }
     }
 }
