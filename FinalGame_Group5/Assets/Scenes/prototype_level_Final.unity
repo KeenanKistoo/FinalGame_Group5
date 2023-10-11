@@ -3222,6 +3222,9 @@ MonoBehaviour:
   indexL: 0
   gearNameL: []
   gearLegGO: []
+  helmetCount: 0
+  armourCount: 0
+  legCount: 0
 --- !u!1 &589508987
 GameObject:
   m_ObjectHideFlags: 0
@@ -4888,7 +4891,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &706768141
 RectTransform:
   m_ObjectHideFlags: 0
@@ -12938,7 +12941,7 @@ MonoBehaviour:
   controller: {fileID: 1630808641}
   speed: 6
   jumpHeight: 1
-  normSpeed: 6
+  normSpeed: 15
   gravity: -29.43
   groundCheck: {fileID: 1249537266}
   groundDistance: 0.4
