@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Unit : MonoBehaviour
 {
@@ -14,16 +15,25 @@ public class Unit : MonoBehaviour
 
     public GameObject targetParticle;
 
+    public Slider playerSlider;
+
     // Start is called before the first frame update
     void Start()
     {
         levelManager = GameObject.Find("LevelManager").GetComponent<LevelManager>();
+        if (gameObject.name == "FirstPersonPlayer")
+        {
+            playerSlider.maxValue = maxHP;
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if (gameObject.name == "FirstPersonPlayer")
+        {
+            playerSlider.value = currentHP;
+        }
     }
     public void TakeDamage(int dmg)
     {

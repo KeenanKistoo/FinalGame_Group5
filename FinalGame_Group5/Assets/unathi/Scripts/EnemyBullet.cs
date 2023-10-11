@@ -33,7 +33,7 @@ public class EnemyBullet : MonoBehaviour
        if (other.CompareTag("Player"))
         {
             Unit unit = other.GetComponent<Unit>();
-            unit.TakeDamage(5);
+            unit.TakeDamage(1);
             Debug.Log("Fuck!");
             Destroy(gameObject);
         }

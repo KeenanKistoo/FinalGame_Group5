@@ -65,11 +65,13 @@ public class LevelManager : MonoBehaviour
                 hidingSpotsParent.SetActive(false);
                 targets.SetActive(false);
                 levelCanvas.SetActive(true);
+                walls.SetActive(false);
                 break;
             case State.Training:
                 targets.SetActive(true);
                 hidingSpotsParent.SetActive(false);
                 levelCanvas.SetActive(false);
+                walls.SetActive(false);
                 break;
             case State.Battle:
                 hidingSpotsParent.SetActive(true);
