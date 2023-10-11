@@ -138,6 +138,7 @@ MonoBehaviour:
   damage: 5
   bulletsFired: 0
   targetParticle: {fileID: 0}
+  playerSlider: {fileID: 0}
 --- !u!136 &4857651248335227883
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -157,10 +158,10 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 3.8
-  m_Height: 8.4
+  m_Radius: 4.9706407
+  m_Height: 9.941282
   m_Direction: 1
-  m_Center: {x: 0, y: 4.12, z: 0}
+  m_Center: {x: 0, y: 4.12, z: 1.1706405}
 --- !u!1 &1165057299167204781
 GameObject:
   m_ObjectHideFlags: 0

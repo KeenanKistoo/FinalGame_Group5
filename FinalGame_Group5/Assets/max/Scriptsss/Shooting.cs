@@ -30,6 +30,8 @@ public class Shooting : MonoBehaviour
     public PlayerMovement playerMovement;
     public bool isADS = false;
 
+    public float shootingRange = 300f;
+
     private void Awake()
     {
         bulletsLeft = magazineSize;
@@ -90,7 +92,7 @@ public class Shooting : MonoBehaviour
         if (readyToShoot && shooting && !reloading && bulletsLeft > 0)
         {
             bulletsShot = 0;
-
+            RayShoot();
             Shoot();
         }
 
@@ -167,6 +169,26 @@ public class Shooting : MonoBehaviour
             Invoke("ResetShot", timeBetweenShooting);
             allowInvoke = false;
             
+        }
+    }
+
+    void RayShoot()
+    {
+        Ray ray = fpsCam.ScreenPointToRay(new Vector3(fpsCam.pixelWidth / 2, fpsCam.pixelHeight / 2, 0));
+        RaycastHit hit;
+
+        if (Physics.Raycast(ray, out hit, shootingRange))
+        {
+            if (hit.collider.CompareTag("Enemy")) // Check if the ray hits an enemy.
+            {
+                Unit unit = hit.collider.GetComponent<Unit>();
+                if (unit != null)
+                {
+                    unit.TakeDamage(5);
+                    Debug.Log("Ouch");
+                }
+            }
+            Debug.DrawRay(ray.origin, ray.direction * shootingRange, Color.red, 0.1f);
         }
     }
 

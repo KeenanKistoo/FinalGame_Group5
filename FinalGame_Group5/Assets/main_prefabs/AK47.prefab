@@ -978,7 +978,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a6029ca1abdfd324bbd7ea2942e6931a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bullet: {fileID: 3688560244746023080, guid: 3305b24f9e8f89848a28c8c230132238, type: 3}
+  bullet: {fileID: 5119305153846690744, guid: 094fd397e1861c04ab133df52945c322, type: 3}
   shootForce: 600
   upwardForce: 0
   timeBetweenShooting: 0.1

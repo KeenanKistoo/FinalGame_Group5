@@ -145,7 +145,7 @@ public class EnemyMovement : MonoBehaviour
         {
             if(levelManager.hidingSpots == null)
             {
-                Debug.Log("Fuck");
+                //Debug.Log("Fuck");
             }
 
             float distance = Vector3.Distance(transform.position, target.position);
@@ -153,7 +153,7 @@ public class EnemyMovement : MonoBehaviour
             {
                 nearestDistance = distance;
                 nearestHidingSpot = target;
-                Debug.Log(nearestHidingSpot);
+                //Debug.Log(nearestHidingSpot);
             }
         }
         hidePointSet = true;

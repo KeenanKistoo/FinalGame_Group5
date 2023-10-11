@@ -680,7 +680,7 @@ Transform:
   m_GameObject: {fileID: 2704915373182913717}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.032, y: 0.203, z: 0.839}
+  m_LocalPosition: {x: 0.032, y: 0.203, z: 0.9028}
   m_LocalScale: {x: 0.008240915, y: 0.008240915, z: 0.008240915}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1473,11 +1473,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a6029ca1abdfd324bbd7ea2942e6931a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bullet: {fileID: 3688560244746023080, guid: 3305b24f9e8f89848a28c8c230132238, type: 3}
+  bullet: {fileID: 5119305153846690744, guid: 094fd397e1861c04ab133df52945c322, type: 3}
   shootForce: 600
   upwardForce: 0
   timeBetweenShooting: 0.1
-  spread: 0.5
+  spread: 0.1
   reloadTime: 3.1
   timeBetweenShots: 0
   magazineSize: 30

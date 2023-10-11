@@ -49,13 +49,13 @@ public class WeaponAttach : MonoBehaviour
         _weaponHolster = GameObject.FindGameObjectWithTag("holster");
         _weaponCount = _weaponHolster.transform.childCount;
         _storage = GameObject.FindGameObjectWithTag("storage");
-        print(_weaponCount);
+        //print(_weaponCount);
         StartCoroutine(WeightCheck());
     }
     private void Update()
     {
         _weaponCount = _weaponHolster.transform.childCount;    
-        print(_weaponCount);
+        //print(_weaponCount);
     }
     IEnumerator WeightCheck()
     {
