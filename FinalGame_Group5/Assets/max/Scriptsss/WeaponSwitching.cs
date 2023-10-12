@@ -10,10 +10,13 @@ public class WeaponSwitching : MonoBehaviour
 
     public Text weaponName;
 
+    public WeaponAttach weaponAttach;
+
     // Start is called before the first frame update
     void Start()
     {
         SelectWeapon();
+        weaponAttach = GameObject.Find("M4A1_purchase_btn").GetComponent<WeaponAttach>();
     }
 
     // Update is called once per frame
@@ -60,7 +63,7 @@ public class WeaponSwitching : MonoBehaviour
         }
     }
 
-    void SelectWeapon()
+    public void SelectWeapon()
     {
         int i = 0;
 
@@ -70,6 +73,7 @@ public class WeaponSwitching : MonoBehaviour
             {
                 weapon.gameObject.SetActive(true);
                 weaponName.text = weapon.name;
+                
             }
             else
             {
@@ -78,6 +82,8 @@ public class WeaponSwitching : MonoBehaviour
 
             i++;
         }
+
+
     }
 
 }
