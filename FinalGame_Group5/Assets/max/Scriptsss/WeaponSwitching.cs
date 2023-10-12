@@ -1,37 +1,33 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class WeaponSwitching : MonoBehaviour
 {
-
     public int selectedWeapon = 0;
-
     public Text weaponName;
-
     public WeaponAttach weaponAttach;
 
-    // Start is called before the first frame update
+    private Animator previousWeaponAnimator; // Store the previous weapon's animator
+    private Animator currentWeaponAnimator; // Store the current weapon's animator
+    public float weaponSwitchDelay = 0f;
+
     void Start()
     {
         SelectWeapon();
         weaponAttach = GameObject.Find("M4A1_purchase_btn").GetComponent<WeaponAttach>();
     }
 
-    // Update is called once per frame
     void Update()
     {
-
         int previousSelectedWeapon = selectedWeapon;
 
         if (Input.GetAxis("Mouse ScrollWheel") > 0f)
         {
             if (selectedWeapon >= transform.childCount - 1)
                 selectedWeapon = 0;
-                
             else
-            selectedWeapon++;
+                selectedWeapon++;
         }
 
         if (Input.GetAxis("Mouse ScrollWheel") < 0f)
@@ -63,37 +59,34 @@ public class WeaponSwitching : MonoBehaviour
         }
     }
 
+    
+
     public void SelectWeapon()
     {
         int i = 0;
 
-        foreach(Transform weapon in transform)
+        foreach (Transform child in transform)
         {
+            Transform weapon = child; // Access the child transform.
+
             if (i == selectedWeapon)
             {
+                // Activate the selected weapon.
                 weapon.gameObject.SetActive(true);
                 weaponName.text = weapon.name;
-                
+
+                // Reset animation state to idle.
+                // You can trigger the idle animation here.
+                currentWeaponAnimator = weapon.GetComponent<Animator>();
+                currentWeaponAnimator.Play("TakeOut");
             }
             else
             {
                 weapon.gameObject.SetActive(false);
+                previousWeaponAnimator = currentWeaponAnimator; // Store the previous weapon's animator.
             }
 
             i++;
         }
-
-
     }
-
 }
-
-/*  foreach(Transform weapon in transform)
-        {
-            if (i == selectedWeapon)
-                weapon.gameObject.SetActive(true);
-                weaponName.text = weapon.name;
-            else
-                weapon.gameObject.SetActive(false);
-            i++;
-        }*/
