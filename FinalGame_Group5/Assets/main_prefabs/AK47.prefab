@@ -996,6 +996,7 @@ MonoBehaviour:
   animator: {fileID: 7106602873454822146}
   playerMovement: {fileID: 0}
   isADS: 0
+  shootingRange: 300
 --- !u!95 &7106602873454822146
 Animator:
   serializedVersion: 5
@@ -2466,7 +2467,7 @@ Transform:
   m_GameObject: {fileID: 7307034064768284156}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.0261, y: 0.1184, z: 0.9949}
+  m_LocalPosition: {x: 0.0261, y: 0.1184, z: 1.0525}
   m_LocalScale: {x: 0.013443444, y: 0.013443444, z: 0.013443444}
   m_ConstrainProportionsScale: 0
   m_Children: []

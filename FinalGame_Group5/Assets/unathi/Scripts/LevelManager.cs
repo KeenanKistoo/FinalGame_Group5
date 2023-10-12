@@ -91,6 +91,7 @@ public class LevelManager : MonoBehaviour
             {
                 inventoryUI.SetActive(false);
                 Camera cam = Camera.main;
+                
                 cam.GetComponent<MouseLook>().lockMouse = true;
                 cam.GetComponent<MouseLook>().MouseLock();
 
@@ -99,6 +100,7 @@ public class LevelManager : MonoBehaviour
             {
                 inventoryUI.SetActive(true);
                 Camera cam = Camera.main;
+                
                 cam.GetComponent<MouseLook>().lockMouse = false;
                 cam.GetComponent<MouseLook>().MouseLock();
             }
@@ -154,6 +156,7 @@ public class LevelManager : MonoBehaviour
         question.text = "START BATTLE?";
         training = false;
         battle = true;
+        StartCoroutine(Countdown()); //Max added this for testing purposes
     }
 
     public void Yes()
