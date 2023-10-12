@@ -92,7 +92,7 @@ public class Shooting : MonoBehaviour
         if (readyToShoot && shooting && !reloading && bulletsLeft > 0)
         {
             bulletsShot = 0;
-            RayShoot();
+            
             Shoot();
         }
 
@@ -127,11 +127,15 @@ public class Shooting : MonoBehaviour
         Ray ray = fpsCam.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
         RaycastHit hit;
 
+        RayShoot();
+
         Vector3 targetPoint;
         if (Physics.Raycast(ray, out hit))
             targetPoint = hit.point;
         else
             targetPoint = ray.GetPoint(75);
+
+        
 
         //direction
         Vector3 directionWithoutSpread = targetPoint - attackpoint.position;
@@ -185,7 +189,7 @@ public class Shooting : MonoBehaviour
                 if (unit != null)
                 {
                     unit.TakeDamage(5);
-                    Debug.Log("Ouch");
+                    Debug.Log(hit.collider.name);
                 }
             }
             Debug.DrawRay(ray.origin, ray.direction * shootingRange, Color.red, 0.1f);

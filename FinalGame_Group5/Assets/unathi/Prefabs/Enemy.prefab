@@ -50,7 +50,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2aaddf2f06c915d40b2e3ddec5ecff2b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletPrefab: {fileID: 8649792448137583940, guid: 23e75f13659b78f45baf1209644be7f0, type: 3}
+  bulletPrefab: {fileID: 0}
   spawnPoint: {fileID: 6676376005660552832}
   nearestHidingSpot: {fileID: 0}
   whatIsPlayer:
