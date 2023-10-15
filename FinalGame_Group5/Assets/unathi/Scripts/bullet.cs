@@ -36,5 +36,10 @@ public class bullet : MonoBehaviour
         {
             level.StartBattle();
         }
+
+        if (other.CompareTag("Rescue"))
+        {
+            level.StartRescue();
+        }
     }
 }

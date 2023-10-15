@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,15 +9,19 @@ public enum State
 {
     Neutral,
     Battle,
-    Training
+   Training,
+   Hostage
 }
 
 public class LevelManager : MonoBehaviour
 {
     public List<Transform> hidingSpots;
+    public List<Transform> targetSpawns;
+
+    public GameObject targetPrefab;
+    public GameObject targets;
 
     public GameObject hidingSpotsParent;
-    public GameObject targets;
     public GameObject walls;
 
     public GameObject blackscreen;
@@ -24,11 +29,14 @@ public class LevelManager : MonoBehaviour
 
     public Transform[] spawnPoints;
     public Transform player;
+    public Vector3 hostageStartPoint;
     public Vector3 trainingSpawn;
 
     public GameObject enemyPrefab;
 
     int spawnIndex = 0;
+
+    int numberOfTargets = 0;
 
     public State state;
 
@@ -41,6 +49,7 @@ public class LevelManager : MonoBehaviour
 
     [SerializeField]bool training = false;
     [SerializeField] bool battle = false;
+    [SerializeField] bool hostage = false;
 
     [SerializeField] GameObject inventoryUI;
 
@@ -68,7 +77,12 @@ public class LevelManager : MonoBehaviour
                 walls.SetActive(false);
                 break;
             case State.Training:
-                targets.SetActive(true);
+                if (numberOfTargets < 13)
+                {
+                    int rand = Random.Range(0, 12);
+                    Instantiate(targetPrefab, targetSpawns[rand].position, Quaternion.identity);
+                    numberOfTargets++;
+                }
                 hidingSpotsParent.SetActive(false);
                 levelCanvas.SetActive(false);
                 walls.SetActive(false);
@@ -146,6 +160,7 @@ public class LevelManager : MonoBehaviour
         question.text = "START TRAINING?";
         training = true;
         battle = false;
+        hostage = false;
     }
 
     public void StartBattle()
@@ -154,6 +169,16 @@ public class LevelManager : MonoBehaviour
         question.text = "START BATTLE?";
         training = false;
         battle = true;
+        hostage = false;
+    }
+
+    public void StartRescue()
+    {
+        questionText.SetActive(true);
+        question.text = "START RESCUE?";
+        training = false; ;
+        battle = false;
+        hostage = true;
     }
 
     public void Yes()
@@ -199,6 +224,11 @@ public class LevelManager : MonoBehaviour
         {
             state = State.Battle;
             StartCoroutine(SpawnEnemies());
+        } else if(hostage)
+        {
+            state = State.Hostage;
+            StartCoroutine(BlackScreen());
+            player.position = hostageStartPoint;
         }
 
         questionText.SetActive(false);

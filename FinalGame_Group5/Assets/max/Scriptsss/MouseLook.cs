@@ -13,8 +13,6 @@ public class MouseLook : MonoBehaviour
 
     public bool lockMouse;
 
-    string mouse = "None";
-
 
     // Start is called before the first frame update
     void Start()

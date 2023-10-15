@@ -17,6 +17,8 @@ TagManager:
   - Training
   - Enemy
   - Target
+  - FxTemporaire
+  - Rescue
   layers:
   - Default
   - TransparentFX
