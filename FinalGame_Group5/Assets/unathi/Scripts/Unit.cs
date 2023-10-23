@@ -39,11 +39,17 @@ public class Unit : MonoBehaviour
     {
         //Debug.Log(gameObject.name);
 
-        if (gameObject.CompareTag("Player") || gameObject.CompareTag("Enemy") || gameObject.CompareTag("Target") || bulletsFired >= 4)
+        if (gameObject.CompareTag("Player") || gameObject.CompareTag("Enemy") || bulletsFired >= 4)
         {
             currentHP -= dmg;
             //Debug.Log("Ouch!");
             bulletsFired = 0;
+        }
+
+        if (gameObject.CompareTag("Target"))
+        {
+            currentHP -= dmg;
+            levelManager.numberOfTargets--;
         }
 
         if (currentHP <= 0)

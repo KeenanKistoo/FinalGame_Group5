@@ -18,10 +18,10 @@ public class LevelManager : MonoBehaviour
 {
     public List<Transform> hidingSpots;
     public List<Transform> targetSpawns;
+    public List<GameObject> targetsList;
 
     public GameObject targetPrefab;
     public GameObject targets;
-    public GameObject uICam;
 
     public GameObject hidingSpotsParent;
     public GameObject walls;
@@ -38,7 +38,8 @@ public class LevelManager : MonoBehaviour
 
     int spawnIndex = 0;
 
-    int numberOfTargets = 0;
+    public int numberOfTargets = 0;
+    int spawn = 0;
 
     public State state;
 
@@ -80,17 +81,11 @@ public class LevelManager : MonoBehaviour
                 walls.SetActive(false);
                 break;
             case State.Training1:
-                if (numberOfTargets < 13)
-                {
-                    int rand = Random.Range(0, 12);
-                    Instantiate(targetPrefab, targetSpawns[rand].position, Quaternion.identity);
-                    numberOfTargets++;
-                }
                 hidingSpotsParent.SetActive(false);
                 levelCanvas.SetActive(false);
                 walls.SetActive(false);
                 break;
-            case State.Battle:
+            case State.Training2:
                 hidingSpotsParent.SetActive(true);
                 walls.SetActive(true);
                 levelCanvas.SetActive(false);
@@ -106,15 +101,13 @@ public class LevelManager : MonoBehaviour
         {
             if (inventoryUI.activeInHierarchy)
             {
-                uICam.SetActive(false);
                 inventoryUI.SetActive(false);
                 Camera cam = Camera.main;
-                cam.GetComponent<MouseLook>().lockMouse = true;
+                cam.GetComponent<MouseLook>().lockMouse = false;
                 cam.GetComponent<MouseLook>().MouseLock();
             }
             else
             {
-                uICam.SetActive(true);
                 inventoryUI.SetActive(true);
                 Camera cam = Camera.main;
                 cam.GetComponent<MouseLook>().lockMouse = false;
@@ -124,26 +117,10 @@ public class LevelManager : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Escape))
         {
+            if(state == State.Training1)
+                DestroyAllTargets();
+
             state = State.Neutral;
-        }
-    }
-
-    IEnumerator SpawnEnemies()
-    {
-        Debug.Log("Fuck");
-
-        while (spawnIndex < spawnPoints.Length)
-        {
-            Transform spawnPoint = spawnPoints[spawnIndex];
-
-            // Instantiate the enemy at the current spawn point
-            Instantiate(enemyPrefab, spawnPoint.position, spawnPoint.rotation);
-
-            // Wait for the specified spawnDelay
-            yield return new WaitForSeconds(5);
-
-            // Move to the next spawn point
-            spawnIndex++;
         }
     }
 
@@ -160,7 +137,6 @@ public class LevelManager : MonoBehaviour
 
     public void StartTraining()
     {
-        uICam.SetActive(true);
         questionText.SetActive(true);
         question.text = "CHOOSE TRAINING TYPE";
         battle = false;
@@ -169,7 +145,6 @@ public class LevelManager : MonoBehaviour
 
     public void StartBattle()
     {
-        uICam.SetActive(true);
         questionText.SetActive(true);
         question.text = "START BATTLE?";
         training1 = false;
@@ -180,7 +155,6 @@ public class LevelManager : MonoBehaviour
 
     public void StartRescue()
     {
-        uICam.SetActive(true);
         questionText.SetActive(true);
         question.text = "START RESCUE?";
         training1 = false;
@@ -203,7 +177,6 @@ public class LevelManager : MonoBehaviour
 
     public void No()
     {
-        uICam.SetActive(false);
         questionText.SetActive(false);
     }
 
@@ -234,7 +207,7 @@ public class LevelManager : MonoBehaviour
             state = State.Training1;
             StartCoroutine(BlackScreen());
             player.position = trainingSpawn;
-
+            SpawnTargets();
         }
         else if (battle)
         {
@@ -261,5 +234,46 @@ public class LevelManager : MonoBehaviour
         yield return new WaitForSeconds(3);
 
         blackscreen.SetActive(false);
+    }
+
+    void SpawnTargets()
+    {
+        // Loop through each spawn point in the array.
+        foreach (Transform spawnPoint in targetSpawns)
+        {
+            // Instantiate the prefab at the current spawn point's position and rotation.
+            GameObject tar = Instantiate(targetPrefab, spawnPoint.position, spawnPoint.rotation);
+            targetsList.Add(tar);
+        }
+    }
+
+    void DestroyAllTargets()
+    {
+        foreach (GameObject obj in targetsList)
+        {
+            Destroy(obj);
+        }
+
+        // Clear the list to remove references to the destroyed objects
+        targetsList.Clear();
+    }
+
+    IEnumerator SpawnEnemies()
+    {
+        Debug.Log("Fuck");
+
+        while (spawnIndex < spawnPoints.Length)
+        {
+            Transform spawnPoint = spawnPoints[spawnIndex];
+
+            // Instantiate the enemy at the current spawn point
+            Instantiate(enemyPrefab, spawnPoint.position, spawnPoint.rotation);
+
+            // Wait for the specified spawnDelay
+            yield return new WaitForSeconds(5);
+
+            // Move to the next spawn point
+            spawnIndex++;
+        }
     }
 }
