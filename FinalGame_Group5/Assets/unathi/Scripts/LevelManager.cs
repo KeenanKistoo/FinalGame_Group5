@@ -160,6 +160,7 @@ public class LevelManager : MonoBehaviour
 
     public void StartTraining()
     {
+        uICam.SetActive(true);
         questionText.SetActive(true);
         question.text = "CHOOSE TRAINING TYPE";
         battle = false;
@@ -168,6 +169,7 @@ public class LevelManager : MonoBehaviour
 
     public void StartBattle()
     {
+        uICam.SetActive(true);
         questionText.SetActive(true);
         question.text = "START BATTLE?";
         training1 = false;
@@ -178,6 +180,7 @@ public class LevelManager : MonoBehaviour
 
     public void StartRescue()
     {
+        uICam.SetActive(true);
         questionText.SetActive(true);
         question.text = "START RESCUE?";
         training1 = false;
@@ -200,6 +203,7 @@ public class LevelManager : MonoBehaviour
 
     public void No()
     {
+        uICam.SetActive(false);
         questionText.SetActive(false);
     }
 
