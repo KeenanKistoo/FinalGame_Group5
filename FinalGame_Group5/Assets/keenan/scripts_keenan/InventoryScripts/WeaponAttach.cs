@@ -25,7 +25,7 @@ public class WeaponAttach : MonoBehaviour
     [SerializeField]
     private GameObject _weaponHolster;
     [SerializeField]
-    private int _weaponCount;
+    public int _weaponCount;
 
     [Header("Weapon UI Elements:")]
     public Image primaryImg;
@@ -41,6 +41,8 @@ public class WeaponAttach : MonoBehaviour
     [Header("Weapon Purchase Panel:")]
     public GameObject weaponPanel;
     public Button[] weaponBtns;
+
+    private WeaponSwitching weaponSwitching;
     
     private void Start()
     {
@@ -49,13 +51,15 @@ public class WeaponAttach : MonoBehaviour
         _weaponHolster = GameObject.FindGameObjectWithTag("holster");
         _weaponCount = _weaponHolster.transform.childCount;
         _storage = GameObject.FindGameObjectWithTag("storage");
-        print(_weaponCount);
+        //print(_weaponCount);
         StartCoroutine(WeightCheck());
+
+        weaponSwitching = GameObject.Find("WeaponHolder").GetComponent<WeaponSwitching>();
     }
     private void Update()
     {
         _weaponCount = _weaponHolster.transform.childCount;    
-        print(_weaponCount);
+        //print(_weaponCount);
     }
     IEnumerator WeightCheck()
     {
@@ -69,7 +73,7 @@ public class WeaponAttach : MonoBehaviour
         {
             weaponImgs[_weaponCount - 1].sprite = weaponImg;
             weaponImgs[_weaponCount - 1].color = Color.white;
-            weapon.SetActive(true);
+            weapon.SetActive(false);
             weapon.transform.SetParent(_weaponHolster.transform, false);
             _weaponController.weapons[_weaponCount - 1] = weapon;
             _playerGear.currWeight -= _weaponInfo.weight;
@@ -82,7 +86,10 @@ public class WeaponAttach : MonoBehaviour
     {
         for (int i = 0;i < _weaponController.weapons.Length;i++)
         {
+
             _weaponController.weapons[i].transform.SetParent(_storage.transform, false);
+            _weaponController.weapons[i].SetActive(false);
+            //_weaponHolster.GetComponentInChild<GameObject>().SetActive(true);
             _playerGear.currWeight += _weaponController.weapons[i].GetComponent<WeaponInfo>().weight;
             for (int j = 0; j < weaponBtns.Length;j++)
             {
@@ -92,5 +99,8 @@ public class WeaponAttach : MonoBehaviour
             weaponImgs[i].sprite = null;
             weaponImgs[i].color = new Color32(0,0,0,0);
         }
+
+        weaponSwitching.selectedWeapon = 0;
+        weaponSwitching.SelectWeapon();
     }
 }

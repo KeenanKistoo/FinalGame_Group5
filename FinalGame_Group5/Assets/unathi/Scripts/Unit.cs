@@ -37,11 +37,12 @@ public class Unit : MonoBehaviour
     }
     public void TakeDamage(int dmg)
     {
-        Debug.Log(gameObject.name);
+        //Debug.Log(gameObject.name);
 
         if (gameObject.CompareTag("Player") || gameObject.CompareTag("Enemy") || gameObject.CompareTag("Target") || bulletsFired >= 4)
         {
             currentHP -= dmg;
+            //Debug.Log("Ouch!");
             bulletsFired = 0;
         }
 
