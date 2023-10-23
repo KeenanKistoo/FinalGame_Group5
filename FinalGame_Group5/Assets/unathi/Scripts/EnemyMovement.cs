@@ -49,6 +49,7 @@ public class EnemyMovement : MonoBehaviour
         player = GameObject.Find("FirstPersonPlayer").transform;
         levelManager = GameObject.Find("LevelManager").GetComponent<LevelManager>();
         agent = GetComponent<NavMeshAgent>();
+        anim = GetComponentInChildren<Animator>();
         Hide();
     }
 
@@ -82,6 +83,15 @@ public class EnemyMovement : MonoBehaviour
         if (playerInRetreatRange)
         {
             Retreat();
+        }
+
+        if (distanceToTarget > stopDistance)
+        {
+            anim.SetBool("isWalking", true);
+        }
+        else
+        {
+            anim.SetBool("isWalking", false);
         }
     }
 

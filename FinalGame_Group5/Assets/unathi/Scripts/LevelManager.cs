@@ -46,11 +46,12 @@ public class LevelManager : MonoBehaviour
     public int enemyCount = 0;
 
     public Text question;
-    public GameObject questionText;
+    public GameObject trainingQuestionText;
+    public GameObject battleQuestionText;
 
     public GameObject buttons;
 
-    [SerializeField]bool training1 = false;
+    [SerializeField] bool training1 = false;
     [SerializeField] bool training2 = false;
     [SerializeField] bool battle = false;
     [SerializeField] bool hostage = false;
@@ -68,7 +69,7 @@ public class LevelManager : MonoBehaviour
     {
         hidingSpots = new List<Transform>();
     }
-    
+
     // Update is called once per frame
     void Update()
     {
@@ -117,7 +118,7 @@ public class LevelManager : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if(state == State.Training1)
+            if (state == State.Training1)
                 DestroyAllTargets();
 
             state = State.Neutral;
@@ -137,7 +138,7 @@ public class LevelManager : MonoBehaviour
 
     public void StartTraining()
     {
-        questionText.SetActive(true);
+        trainingQuestionText.SetActive(true);
         question.text = "CHOOSE TRAINING TYPE";
         battle = false;
         hostage = false;
@@ -145,7 +146,7 @@ public class LevelManager : MonoBehaviour
 
     public void StartBattle()
     {
-        questionText.SetActive(true);
+        battleQuestionText.SetActive(true);
         question.text = "START BATTLE?";
         training1 = false;
         training2 = false;
@@ -155,7 +156,7 @@ public class LevelManager : MonoBehaviour
 
     public void StartRescue()
     {
-        questionText.SetActive(true);
+        trainingQuestionText.SetActive(true);
         question.text = "START RESCUE?";
         training1 = false;
         training2 = false;
@@ -176,8 +177,11 @@ public class LevelManager : MonoBehaviour
     }
 
     public void No()
-    {
-        questionText.SetActive(false);
+    { 
+        if(battle)
+        battleQuestionText.SetActive(false);
+    else
+        trainingQuestionText.SetActive(false);
     }
 
     IEnumerator Countdown()
@@ -224,7 +228,7 @@ public class LevelManager : MonoBehaviour
             StartCoroutine(SpawnEnemies());
         }
 
-        questionText.SetActive(false);
+        trainingQuestionText.SetActive(false);
     }
 
     IEnumerator BlackScreen()
