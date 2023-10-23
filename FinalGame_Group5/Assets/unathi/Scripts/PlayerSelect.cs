@@ -7,6 +7,7 @@ public class PlayerSelect : MonoBehaviour
     [SerializeField] bool weightSelected;
 
     public GameObject playerSelectPanel;
+    public GameObject uICam;
 
     public PlayerWeightController weight;
 
@@ -27,6 +28,7 @@ public class PlayerSelect : MonoBehaviour
         if (weightSelected)
         {
             playerSelectPanel.SetActive(false);
+            uICam.SetActive(false);
         }
     }
 

@@ -9,7 +9,8 @@ public enum State
 {
     Neutral,
     Battle,
-   Training,
+   Training1,
+   Training2,
    Hostage
 }
 
@@ -20,6 +21,7 @@ public class LevelManager : MonoBehaviour
 
     public GameObject targetPrefab;
     public GameObject targets;
+    public GameObject uICam;
 
     public GameObject hidingSpotsParent;
     public GameObject walls;
@@ -47,7 +49,8 @@ public class LevelManager : MonoBehaviour
 
     public GameObject buttons;
 
-    [SerializeField]bool training = false;
+    [SerializeField]bool training1 = false;
+    [SerializeField] bool training2 = false;
     [SerializeField] bool battle = false;
     [SerializeField] bool hostage = false;
 
@@ -76,7 +79,7 @@ public class LevelManager : MonoBehaviour
                 levelCanvas.SetActive(true);
                 walls.SetActive(false);
                 break;
-            case State.Training:
+            case State.Training1:
                 if (numberOfTargets < 13)
                 {
                     int rand = Random.Range(0, 12);
@@ -103,14 +106,15 @@ public class LevelManager : MonoBehaviour
         {
             if (inventoryUI.activeInHierarchy)
             {
+                uICam.SetActive(false);
                 inventoryUI.SetActive(false);
                 Camera cam = Camera.main;
                 cam.GetComponent<MouseLook>().lockMouse = true;
                 cam.GetComponent<MouseLook>().MouseLock();
-
             }
             else
             {
+                uICam.SetActive(true);
                 inventoryUI.SetActive(true);
                 Camera cam = Camera.main;
                 cam.GetComponent<MouseLook>().lockMouse = false;
@@ -157,8 +161,7 @@ public class LevelManager : MonoBehaviour
     public void StartTraining()
     {
         questionText.SetActive(true);
-        question.text = "START TRAINING?";
-        training = true;
+        question.text = "CHOOSE TRAINING TYPE";
         battle = false;
         hostage = false;
     }
@@ -167,7 +170,8 @@ public class LevelManager : MonoBehaviour
     {
         questionText.SetActive(true);
         question.text = "START BATTLE?";
-        training = false;
+        training1 = false;
+        training2 = false;
         battle = true;
         hostage = false;
     }
@@ -176,13 +180,21 @@ public class LevelManager : MonoBehaviour
     {
         questionText.SetActive(true);
         question.text = "START RESCUE?";
-        training = false; ;
+        training1 = false;
+        training2 = false;
         battle = false;
         hostage = true;
     }
 
-    public void Yes()
+    public void TargetsYes()
     {
+        training1 = true;
+        StartCoroutine(Countdown());
+    }
+
+    public void BotsYes()
+    {
+        training2 = true;
         StartCoroutine(Countdown());
     }
 
@@ -213,9 +225,9 @@ public class LevelManager : MonoBehaviour
 
         yield return new WaitForSeconds(1);
 
-        if (training)
+        if (training1)
         {
-            state = State.Training;
+            state = State.Training1;
             StartCoroutine(BlackScreen());
             player.position = trainingSpawn;
 
@@ -223,12 +235,16 @@ public class LevelManager : MonoBehaviour
         else if (battle)
         {
             state = State.Battle;
-            StartCoroutine(SpawnEnemies());
+         //spawn battle bots
         } else if(hostage)
         {
             state = State.Hostage;
             StartCoroutine(BlackScreen());
             player.position = hostageStartPoint;
+        } else if (training2)
+        {
+            state = State.Training2;
+            StartCoroutine(SpawnEnemies());
         }
 
         questionText.SetActive(false);
