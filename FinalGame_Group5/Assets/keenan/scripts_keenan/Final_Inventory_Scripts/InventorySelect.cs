@@ -15,7 +15,7 @@ public class InventorySelect : MonoBehaviour
     [Header("Button Elements:")]
     public Text nameTxt;
     public Text weightTxt;
-    public Image btnImg;
+    public GameObject btnImg;
 
     [Header("Parent Objs:")]
     public GameObject equipParent;
@@ -25,6 +25,9 @@ public class InventorySelect : MonoBehaviour
     [SerializeField]
     private Button invBtn;
     public bool load;
+
+    [Header("Equipped Elements:")]
+    public GameObject equippedImg;
 
     private void Start()
     {
@@ -43,8 +46,9 @@ public class InventorySelect : MonoBehaviour
         inventoryProfile = inventoryObj.GetComponent<InventoryProfile>();
         nameTxt.text = inventoryProfile.objName;
         weightTxt.text = inventoryProfile.weight.ToString() + "KG";
-        //btnImg = inventoryProfile.img;
+        btnImg.GetComponent<Image>().sprite = inventoryProfile.img;
         load = true;
+        SlotCheck();
     }
 
     public void AffordCheck()
@@ -66,9 +70,35 @@ public class InventorySelect : MonoBehaviour
     {
         inventoryObj.transform.SetParent(equipParent.transform, false);
         inventoryPM.currWeight -= inventoryProfile.weight;
+        equippedImg.GetComponent<Image>().sprite = inventoryProfile.img;
         load = false;
         invBtn.interactable = false;
         inventoryPM.GearCheck();
+        SlotCheck();
+    }
+
+    public void SlotCheck()
+    {
+        if(equippedImg.GetComponent<Image>().sprite != null)
+        {
+            equippedImg.GetComponentInChildren<Button>().interactable = true;
+        }
+        else
+        {
+            equippedImg.GetComponentInChildren<Button>().interactable = false;
+
+        }
+    }
+
+    public void Unequip()
+    {
+        inventoryObj.transform.SetParent(storage.transform, false);
+        inventoryPM.currWeight += inventoryProfile.weight;
+        equippedImg.GetComponent<Image>().sprite = null;
+        load = true;
+        invBtn.interactable = true;
+        inventoryPM.GearCheck();
+        SlotCheck();
     }
 
 }

@@ -10,5 +10,5 @@ public class InventoryProfile : MonoBehaviour
     public float timeToUse;
     public string desc;
     public int multi;
-    public Image img;
+    public Sprite img;
 }
