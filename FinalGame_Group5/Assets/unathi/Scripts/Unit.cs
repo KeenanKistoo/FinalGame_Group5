@@ -9,6 +9,8 @@ public class Unit : MonoBehaviour
     public int currentHP;
     public int damage;
 
+    public GameObject key;
+
     public int bulletsFired = 0;
 
     LevelManager levelManager;
@@ -56,18 +58,30 @@ public class Unit : MonoBehaviour
         {
             if (gameObject.CompareTag("Enemy"))
             {
-                if (levelManager.enemyCount < 10 && levelManager.state == State.Battle)
+                if (levelManager.enemyCount < 10 && levelManager.state == State.Training2)
                 {
                     levelManager.SpawnEnemy();
                     levelManager.enemyCount++;
                 }
-                
-                Destroy(gameObject);
                 EnemyMovement enemy = GetComponent<EnemyMovement>();
                 enemy.nearestHidingSpot.gameObject.GetComponent<NodeScript>().active = true;
-                
+                Destroy(gameObject);
             }
-               
+
+            //Hostage situation enemy type
+            if (gameObject.CompareTag("Enemy_h"))
+            {
+                if (levelManager.enemyCount_h < 10 && levelManager.state == State.Hostage)
+                {
+                    levelManager.SpawnEnemy_H();
+                    levelManager.enemyCount_h++;
+                }
+
+                //If player has obtained key to hostages
+                if (levelManager.enemyCount_h == 10)
+                    Instantiate(key, gameObject.transform.position, Quaternion.identity);
+            }
+
 
             if (gameObject.CompareTag("Player"))
             {

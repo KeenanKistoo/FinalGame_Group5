@@ -35,6 +35,11 @@ public class Bullet : MonoBehaviour
             level.StartTraining();
         }
 
+        if (collision.gameObject.tag == "Rescue")
+        {
+            level.StartRescue();
+        }
+
         if (collision.gameObject.tag == "Battle")
         {
             level.StartBattle();

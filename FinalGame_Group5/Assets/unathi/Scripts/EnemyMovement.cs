@@ -1,3 +1,4 @@
+using System.CodeDom;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -85,13 +86,25 @@ public class EnemyMovement : MonoBehaviour
             Retreat();
         }
 
-        if (distanceToTarget > stopDistance)
+        if (distanceToTarget > stopDistance || retreating)
         {
             anim.SetBool("isWalking", true);
+            anim.SetBool("isIdle", false);
         }
         else
         {
             anim.SetBool("isWalking", false);
+            anim.SetBool("isIdle", true);
+        }
+
+        if(isShooting)
+        {
+            anim.SetBool("isShooting", true);
+        }
+        else
+        {
+            anim.SetBool("isShooting", false);
+            anim.SetBool("isIdle", true);
         }
     }
 

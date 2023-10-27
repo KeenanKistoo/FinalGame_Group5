@@ -1,6 +1,6 @@
+
 using System.Collections;
 using System.Collections.Generic;
-using System.Collections.Specialized;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -30,24 +30,29 @@ public class LevelManager : MonoBehaviour
     public GameObject levelCanvas;
 
     public Transform[] spawnPoints;
+    public Transform[] spawnPoints_h;
+
     public Transform player;
-    public Vector3 hostageStartPoint;
     public Vector3 trainingSpawn;
 
     public GameObject enemyPrefab;
+    public GameObject enemyPrefab_h;
 
     int spawnIndex = 0;
+    int spawnIndex_h = 0;
 
     public int numberOfTargets = 0;
-    int spawn = 0;
 
     public State state;
 
     public int enemyCount = 0;
+    public int enemyCount_h = 0;
 
     public Text question;
-    public GameObject trainingQuestionText;
-    public GameObject battleQuestionText;
+    public GameObject questionText;
+    public GameObject trainingUI;
+    public GameObject battleUI;
+    public GameObject hostageUI;
 
     public GameObject buttons;
 
@@ -80,6 +85,8 @@ public class LevelManager : MonoBehaviour
                 targets.SetActive(false);
                 levelCanvas.SetActive(true);
                 walls.SetActive(false);
+                enemyCount = 0;
+                enemyCount_h = 0;
                 break;
             case State.Training1:
                 hidingSpotsParent.SetActive(false);
@@ -133,12 +140,31 @@ public class LevelManager : MonoBehaviour
         Instantiate(enemyPrefab, spawnPoints[randSpawnPoint].position, Quaternion.identity);
 
         // Move to the next spawn point
+
+        if (spawnIndex == 13)
+            spawnIndex = 0;
+        else
         spawnIndex++;
+    }
+
+    public void SpawnEnemy_H()
+    {
+        int randSpawnPoint = Random.Range(0, spawnPoints.Length);
+
+        // Instantiate the enemy at the current spawn point
+        Instantiate(enemyPrefab, spawnPoints[randSpawnPoint].position, Quaternion.identity);
+
+        // Move to the next spawn point
+        if (spawnIndex_h == 4)
+            spawnIndex = 0;
+        else
+            spawnIndex_h++;
     }
 
     public void StartTraining()
     {
-        trainingQuestionText.SetActive(true);
+        questionText.SetActive(true);
+        trainingUI.SetActive(true);
         question.text = "CHOOSE TRAINING TYPE";
         battle = false;
         hostage = false;
@@ -146,7 +172,8 @@ public class LevelManager : MonoBehaviour
 
     public void StartBattle()
     {
-        battleQuestionText.SetActive(true);
+        questionText.SetActive(true);
+        battleUI.SetActive(true);
         question.text = "START BATTLE?";
         training1 = false;
         training2 = false;
@@ -156,8 +183,9 @@ public class LevelManager : MonoBehaviour
 
     public void StartRescue()
     {
-        trainingQuestionText.SetActive(true);
+        questionText.SetActive(true);
         question.text = "START RESCUE?";
+        hostageUI.SetActive(true);
         training1 = false;
         training2 = false;
         battle = false;
@@ -176,12 +204,18 @@ public class LevelManager : MonoBehaviour
         StartCoroutine(Countdown());
     }
 
+    public void HostageYes()
+    {
+        hostage = true;
+        StartCoroutine(Countdown());
+    }
+
     public void No()
     { 
         if(battle)
-        battleQuestionText.SetActive(false);
+        battleUI.SetActive(false);
     else
-        trainingQuestionText.SetActive(false);
+        questionText.SetActive(false);
     }
 
     IEnumerator Countdown()
@@ -220,15 +254,19 @@ public class LevelManager : MonoBehaviour
         } else if(hostage)
         {
             state = State.Hostage;
-            StartCoroutine(BlackScreen());
-            player.position = hostageStartPoint;
+            StartCoroutine(SpawnEnemies_H());
+
         } else if (training2)
         {
             state = State.Training2;
             StartCoroutine(SpawnEnemies());
+            enemyCount = 4;
         }
 
-        trainingQuestionText.SetActive(false);
+        questionText.SetActive(false);
+        trainingUI.SetActive(false );
+        battleUI.SetActive(false);
+        hostageUI.SetActive(false);
     }
 
     IEnumerator BlackScreen()
@@ -278,6 +316,25 @@ public class LevelManager : MonoBehaviour
 
             // Move to the next spawn point
             spawnIndex++;
+        }
+    }
+
+    IEnumerator SpawnEnemies_H()
+    {
+        Debug.Log("Fuck");
+
+        while (spawnIndex_h < spawnPoints_h.Length)
+        {
+            Transform spawnPoint = spawnPoints_h[spawnIndex_h];
+
+            // Instantiate the enemy at the current spawn point
+            Instantiate(enemyPrefab_h, spawnPoint.position, spawnPoint.rotation);
+
+            // Wait for the specified spawnDelay
+            yield return new WaitForSeconds(5);
+
+            // Move to the next spawn point
+            spawnIndex_h++;
         }
     }
 }
