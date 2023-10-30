@@ -136,7 +136,7 @@ MonoBehaviour:
   maxHP: 20
   currentHP: 20
   damage: 5
-  key: {fileID: 0}
+  key: {fileID: 6846773900501186792, guid: c9584b5259e4d5c469c69db59a00b909, type: 3}
   bulletsFired: 0
   targetParticle: {fileID: 0}
   playerSlider: {fileID: 0}

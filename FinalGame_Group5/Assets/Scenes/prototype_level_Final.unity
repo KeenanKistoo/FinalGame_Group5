@@ -4932,7 +4932,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.01886791, g: 0.010573149, b: 0.010573149, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -6324,6 +6324,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 603175593}
   m_CullTransparentMesh: 1
+--- !u!1 &604878164
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 604878165}
+  m_Layer: 0
+  m_Name: --------------
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &604878165
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 604878164}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1041711186}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &611601477
 GameObject:
   m_ObjectHideFlags: 0
@@ -8497,7 +8528,11 @@ MonoBehaviour:
   - {fileID: 943837865}
   - {fileID: 46164605}
   - {fileID: 592471116}
-  spawnPoints_h: []
+  spawnPoints_h:
+  - {fileID: 412411531}
+  - {fileID: 72445641}
+  - {fileID: 464915919}
+  - {fileID: 929191414}
   player: {fileID: 1630808642}
   trainingSpawn: {x: -2493, y: 2.01, z: 5440}
   enemyPrefab: {fileID: 117004213155658188, guid: 1077147bde43a6a478a9ce79d619fb7b, type: 3}
@@ -8517,6 +8552,9 @@ MonoBehaviour:
   battle: 0
   hostage: 0
   inventoryUI: {fileID: 1203683715}
+  key: 0
+  doorMesh1_h: {fileID: 2001360545}
+  doorMesh2_h: {fileID: 1268133228}
 --- !u!4 &772211989
 Transform:
   m_ObjectHideFlags: 0
@@ -12307,6 +12345,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1035272087}
   m_CullTransparentMesh: 1
+--- !u!4 &1041711186 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -2832868155665539703, guid: 51031e7f0f4c51f44af2455569e485b4, type: 3}
+  m_PrefabInstance: {fileID: 1080605687}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1053355028 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -7174488222143703153, guid: 51031e7f0f4c51f44af2455569e485b4, type: 3}
@@ -12534,6 +12577,12 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 51031e7f0f4c51f44af2455569e485b4, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1718822887}
+    - targetCorrespondingSourceObject: {fileID: -2832868155665539703, guid: 51031e7f0f4c51f44af2455569e485b4, type: 3}
+      insertIndex: 1
+      addedObject: {fileID: 604878165}
+    - targetCorrespondingSourceObject: {fileID: -2832868155665539703, guid: 51031e7f0f4c51f44af2455569e485b4, type: 3}
+      insertIndex: 7
+      addedObject: {fileID: 1387912919}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: -6604268022309418443, guid: 51031e7f0f4c51f44af2455569e485b4, type: 3}
       insertIndex: -1
@@ -14492,6 +14541,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 90604062}
   m_LocalEulerAnglesHint: {x: 0, y: -26.7, z: 0}
+--- !u!1 &1387912918
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1387912919}
+  m_Layer: 0
+  m_Name: ---------------
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1387912919
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1387912918}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1041711186}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1394126327
 GameObject:
   m_ObjectHideFlags: 0
@@ -21137,7 +21217,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1

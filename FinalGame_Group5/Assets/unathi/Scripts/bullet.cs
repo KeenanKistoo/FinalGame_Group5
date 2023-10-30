@@ -22,7 +22,7 @@ public class Bullet : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-    if (collision.gameObject.tag == "Enemy" || collision.gameObject.tag == "Target")
+    if (collision.gameObject.tag == "Enemy" || collision.gameObject.tag == "Target" || collision.gameObject.tag == "Enemy_h")
         {
             Debug.Log("Owi");
             Unit unit = collision.gameObject.GetComponent<Unit>();

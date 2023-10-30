@@ -80,6 +80,8 @@ public class Unit : MonoBehaviour
                 //If player has obtained key to hostages
                 if (levelManager.enemyCount_h == 10)
                     Instantiate(key, gameObject.transform.position, Quaternion.identity);
+
+                Destroy(gameObject);
             }
 
 

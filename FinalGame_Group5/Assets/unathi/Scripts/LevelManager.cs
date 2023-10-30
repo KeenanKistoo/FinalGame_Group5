@@ -63,6 +63,11 @@ public class LevelManager : MonoBehaviour
 
     [SerializeField] GameObject inventoryUI;
 
+    //To unlock door for release of hostages
+    public bool key;
+    public MeshCollider doorMesh1_h;
+    public MeshCollider doorMesh2_h;
+
     // Start is called before the first frame update
     private void Start()
     {
@@ -129,6 +134,16 @@ public class LevelManager : MonoBehaviour
                 DestroyAllTargets();
 
             state = State.Neutral;
+        }
+
+        if (key)
+        {
+            doorMesh1_h.enabled = false;
+            doorMesh2_h.enabled = false;
+        } else
+        {
+            doorMesh1_h.enabled = true;
+            doorMesh2_h.enabled = true;
         }
     }
 
@@ -216,6 +231,7 @@ public class LevelManager : MonoBehaviour
         battleUI.SetActive(false);
     else
         questionText.SetActive(false);
+        trainingUI.SetActive(false);
     }
 
     IEnumerator Countdown()

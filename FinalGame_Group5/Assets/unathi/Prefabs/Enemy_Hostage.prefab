@@ -46,7 +46,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 117004213155658188}
   serializedVersion: 4
-  m_Mass: 1000
+  m_Mass: 1500
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -141,8 +141,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85e4d096f6236e94eae4ec4c51e7b04f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackRange: 3
-  chaseRange: 10
+  attackRange: 15
+  chaseRange: 30
+  bulletPrefab: {fileID: 8649792448137583940, guid: 23e75f13659b78f45baf1209644be7f0, type: 3}
+  timeBetweenAttacks: 0.2
+  spawnPoint: {fileID: 6676376005660552832}
 --- !u!1 &1165057299167204781
 GameObject:
   m_ObjectHideFlags: 0
@@ -168,7 +171,7 @@ Transform:
   m_GameObject: {fileID: 1165057299167204781}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 3.31, z: 1.98}
+  m_LocalPosition: {x: 0, y: 5.88, z: 3.83}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
