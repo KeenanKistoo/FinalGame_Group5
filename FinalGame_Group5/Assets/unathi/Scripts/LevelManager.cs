@@ -48,6 +48,8 @@ public class LevelManager : MonoBehaviour
     public int enemyCount = 0;
     public int enemyCount_h = 0;
 
+    public Text enemyCountText;
+    public GameObject _enemyCountText;
     public Text question;
     public GameObject questionText;
     public GameObject trainingUI;
@@ -92,6 +94,8 @@ public class LevelManager : MonoBehaviour
                 walls.SetActive(false);
                 enemyCount = 0;
                 enemyCount_h = 0;
+                _enemyCountText.SetActive(false);
+                key = false;
                 break;
             case State.Training1:
                 hidingSpotsParent.SetActive(false);
@@ -102,6 +106,10 @@ public class LevelManager : MonoBehaviour
                 hidingSpotsParent.SetActive(true);
                 walls.SetActive(true);
                 levelCanvas.SetActive(false);
+                break;
+            case State.Hostage:
+                _enemyCountText.SetActive(true);
+                enemyCountText.text = "ENEMIES: " + enemyCount_h.ToString();
                 break;
         }
 
@@ -164,14 +172,12 @@ public class LevelManager : MonoBehaviour
 
     public void SpawnEnemy_H()
     {
-        int randSpawnPoint = Random.Range(0, spawnPoints.Length);
-
         // Instantiate the enemy at the current spawn point
-        Instantiate(enemyPrefab, spawnPoints[randSpawnPoint].position, Quaternion.identity);
+        Instantiate(enemyPrefab_h, spawnPoints_h[1].position, Quaternion.identity);
 
         // Move to the next spawn point
         if (spawnIndex_h == 4)
-            spawnIndex = 0;
+            spawnIndex_h = 0;
         else
             spawnIndex_h++;
     }
@@ -222,6 +228,11 @@ public class LevelManager : MonoBehaviour
     public void HostageYes()
     {
         hostage = true;
+        StartCoroutine(Countdown());
+    }
+
+    public void BattleYes()
+    {
         StartCoroutine(Countdown());
     }
 

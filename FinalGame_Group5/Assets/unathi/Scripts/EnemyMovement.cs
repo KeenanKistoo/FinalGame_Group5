@@ -12,7 +12,6 @@ public class EnemyMovement : MonoBehaviour
     public Transform nearestHidingSpot;
     
     public LayerMask whatIsPlayer;
-    public LayerMask whatIsGround;
     public bool hidden = false;
     public bool isShooting = false;
     public bool retreating = false;

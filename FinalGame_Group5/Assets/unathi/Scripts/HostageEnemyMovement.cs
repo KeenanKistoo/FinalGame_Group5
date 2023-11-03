@@ -6,62 +6,92 @@ using UnityEngine.AI;
 
 public class HostageEnemyMovement : MonoBehaviour
 {
-    public float attackRange = 3.0f;   // Maximum distance for attacking the player
-    public float chaseRange = 10.0f;   // Maximum distance for chasing the player
-
-    private Transform player;           // Reference to the player's transform
-    private UnityEngine.AI.NavMeshAgent navMeshAgent;  // Reference to the NavMeshAgent component
-
+    Transform player;
     public GameObject bulletPrefab;
-
-    bool alreadyAttacked;
-    public float timeBetweenAttacks;
-
     public Transform spawnPoint;
+
+    public LayerMask whatIsPlayer;
+    public bool isShooting = false;
+    LevelManager levelManager;
+    NavMeshAgent agent;
+    Animator anim;
+
+    //Attacking
+    public float timeBetweenAttacks;
+    bool alreadyAttacked;
+
+    float minAngle;
+    float maxAngle;
+
+    //States
+    public float attackRange = 30f;
+    public float chaseRange = 50;
+    public bool playerInAttackRange;
+    public bool playerInChaseRange;
+
+    // Use constants for clarity
+    private const float ShootingDuration = 6f;
+
 
     private void Start()
     {
         player = GameObject.Find("FirstPersonPlayer").transform;
-        navMeshAgent = GetComponent<UnityEngine.AI.NavMeshAgent>();
+        levelManager = GameObject.Find("LevelManager").GetComponent<LevelManager>();
+        agent = GetComponent<NavMeshAgent>();
+        anim = GetComponentInChildren<Animator>();
+    }
+
+    private void Awake()
+    {
+        anim = GetComponentInChildren<Animator>();
     }
 
     private void Update()
     {
-        // Calculate the distance between the enemy and the player
-        float distanceToPlayer = Vector3.Distance(transform.position, player.position);
+        playerInChaseRange = Physics.CheckSphere(transform.position, chaseRange, whatIsPlayer);
+        playerInAttackRange = Physics.CheckSphere(transform.position, attackRange, whatIsPlayer);
 
-        // Check if the player is within the attack range
-        if (distanceToPlayer <= attackRange)
+        if (playerInAttackRange)
         {
-            AttackPlayer();
-        }
-
-        // Check if the player is within the chase range
-        else if (distanceToPlayer <= chaseRange && distanceToPlayer > attackRange)
-        {
-            ChasePlayer();
+            Shoot();
+            StopChasing();
+            isShooting = true;
         }
         else
         {
+            isShooting = false;
+        }
+
+        if (playerInChaseRange)
+        {
+            Chase();
+        } else 
+        {
             StopChasing();
         }
-    }
 
-    private void AttackPlayer()
-    {
-        Shoot();
-    }
+        if (playerInChaseRange && !playerInAttackRange)
+        {
+            anim.SetBool("isWalking", true);
+            anim.SetBool("isIdle", false);
+        }
+        else
+        {
+            anim.SetBool("isWalking", false);
+            anim.SetBool("isIdle", true);
+        }
 
-    private void ChasePlayer()
-    {
-        // Set the NavMeshAgent's destination to the player's position for chasing
-        navMeshAgent.SetDestination(player.position);
-    }
-
-    private void StopChasing()
-    {
-        // Stop the NavMeshAgent to remain in the current position
-        navMeshAgent.ResetPath();
+        if (isShooting)
+        {
+            anim.SetBool("isShooting", true);
+            anim.SetBool("isWalking", false);
+            anim.SetBool("isIdle", false);
+        }
+        else
+        {
+            anim.SetBool("isShooting", false);
+            anim.SetBool("isIdle", true);
+        }
     }
 
     private void Shoot()
@@ -99,4 +129,18 @@ public class HostageEnemyMovement : MonoBehaviour
         alreadyAttacked = false;
     }
 
+    private void Chase()
+    {
+        // Set the NavMeshAgent's destination to the player's position for chasing
+        agent.SetDestination(player.position);
+    }
+
+    private void StopChasing()
+    {
+        // Stop the NavMeshAgent to remain in the current position
+        agent.ResetPath();
+
+        // Set the NavMeshAgent's velocity to zero
+        agent.velocity = Vector3.zero;
+    }
 }

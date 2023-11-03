@@ -20,7 +20,11 @@ public class KeyScript : MonoBehaviour
 
     private void OnTriggerEnter(Collider col)
     {
-        level.key = true;
-        Destroy(gameObject);
+        if (col.CompareTag("Player"))
+        {
+            level.key = true;
+            Destroy(gameObject);
+        }
+        
     }
 }
