@@ -34,7 +34,7 @@ public class EnemyBullet : MonoBehaviour
         {
             Unit unit = other.GetComponent<Unit>();
             unit.TakeDamage(1);
-            Debug.Log("Fuck!");
+            //Debug.Log("Fuck!");
             Destroy(gameObject);
         }
     }

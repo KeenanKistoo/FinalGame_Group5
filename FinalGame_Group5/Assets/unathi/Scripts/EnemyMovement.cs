@@ -1,3 +1,4 @@
+using System.CodeDom;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,7 +12,6 @@ public class EnemyMovement : MonoBehaviour
     public Transform nearestHidingSpot;
     
     public LayerMask whatIsPlayer;
-    public LayerMask whatIsGround;
     public bool hidden = false;
     public bool isShooting = false;
     public bool retreating = false;
@@ -49,6 +49,7 @@ public class EnemyMovement : MonoBehaviour
         player = GameObject.Find("FirstPersonPlayer").transform;
         levelManager = GameObject.Find("LevelManager").GetComponent<LevelManager>();
         agent = GetComponent<NavMeshAgent>();
+        anim = GetComponentInChildren<Animator>();
         Hide();
     }
 
@@ -82,6 +83,27 @@ public class EnemyMovement : MonoBehaviour
         if (playerInRetreatRange)
         {
             Retreat();
+        }
+
+        if (distanceToTarget > stopDistance || retreating)
+        {
+            anim.SetBool("isWalking", true);
+            anim.SetBool("isIdle", false);
+        }
+        else
+        {
+            anim.SetBool("isWalking", false);
+            anim.SetBool("isIdle", true);
+        }
+
+        if(isShooting)
+        {
+            anim.SetBool("isShooting", true);
+        }
+        else
+        {
+            anim.SetBool("isShooting", false);
+            anim.SetBool("isIdle", true);
         }
     }
 
@@ -145,7 +167,7 @@ public class EnemyMovement : MonoBehaviour
         {
             if(levelManager.hidingSpots == null)
             {
-                Debug.Log("Fuck");
+                //Debug.Log("Fuck");
             }
 
             float distance = Vector3.Distance(transform.position, target.position);
@@ -153,7 +175,7 @@ public class EnemyMovement : MonoBehaviour
             {
                 nearestDistance = distance;
                 nearestHidingSpot = target;
-                Debug.Log(nearestHidingSpot);
+                //Debug.Log(nearestHidingSpot);
             }
         }
         hidePointSet = true;

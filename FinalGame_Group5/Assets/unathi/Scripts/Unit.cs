@@ -9,6 +9,8 @@ public class Unit : MonoBehaviour
     public int currentHP;
     public int damage;
 
+    public GameObject key;
+
     public int bulletsFired = 0;
 
     LevelManager levelManager;
@@ -37,30 +39,51 @@ public class Unit : MonoBehaviour
     }
     public void TakeDamage(int dmg)
     {
-        Debug.Log(gameObject.name);
+        //Debug.Log(gameObject.name);
 
-        if (gameObject.CompareTag("Player") || gameObject.CompareTag("Enemy") || gameObject.CompareTag("Target") || bulletsFired >= 4)
+        if (gameObject.CompareTag("Player") || gameObject.CompareTag("Enemy") || bulletsFired >= 4)
         {
             currentHP -= dmg;
+            //Debug.Log("Ouch!");
             bulletsFired = 0;
+        }
+
+        if (gameObject.CompareTag("Target"))
+        {
+            currentHP -= dmg;
+            levelManager.numberOfTargets--;
         }
 
         if (currentHP <= 0)
         {
             if (gameObject.CompareTag("Enemy"))
             {
-                if (levelManager.enemyCount < 10 && levelManager.state == State.Battle)
+                if (levelManager.enemyCount < 10 && levelManager.state == State.Training2)
                 {
                     levelManager.SpawnEnemy();
                     levelManager.enemyCount++;
                 }
-                
-                Destroy(gameObject);
                 EnemyMovement enemy = GetComponent<EnemyMovement>();
                 enemy.nearestHidingSpot.gameObject.GetComponent<NodeScript>().active = true;
-                
+                Destroy(gameObject);
             }
-               
+
+            //Hostage situation enemy type
+            if (gameObject.CompareTag("Enemy_h"))
+            {
+                if (levelManager.enemyCount_h < 10 && levelManager.state == State.Hostage)
+                {
+                    levelManager.SpawnEnemy_H();
+                    levelManager.enemyCount_h++;
+                }
+
+                //If player has obtained key to hostages
+                if (levelManager.enemyCount_h == 10)
+                    Instantiate(key, gameObject.transform.position, Quaternion.identity);
+
+                Destroy(gameObject);
+            }
+
 
             if (gameObject.CompareTag("Player"))
             {

@@ -19,6 +19,7 @@ TagManager:
   - Target
   - FxTemporaire
   - Rescue
+  - Enemy_h
   layers:
   - Default
   - TransparentFX
@@ -28,7 +29,7 @@ TagManager:
   - UI
   - Ground
   - Player
-  - 
+  - Walls
   - 
   - 
   - 
