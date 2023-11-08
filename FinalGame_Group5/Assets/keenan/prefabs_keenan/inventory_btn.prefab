@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 814059345535800362}
   - component: {fileID: 4691493664291067617}
   m_Layer: 5
-  m_Name: weight_txt
+  m_Name: name_txt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -34,7 +34,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 21.271, y: 16.657}
+  m_AnchoredPosition: {x: 0, y: 45}
   m_SizeDelta: {x: 110.026, y: 39.131}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &814059345535800362
@@ -167,6 +167,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5298457360212841476}
+  - component: {fileID: 1803970154791271520}
   m_Layer: 5
   m_Name: inventory_btn
   m_TagString: Untagged
@@ -197,6 +198,21 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1803970154791271520
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3699435464765412178}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7bcc02a5700489947839d18a222dcfee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  btnImg: {fileID: 8675817024631603602}
+  weightTxt: {fileID: 35949534301539184}
+  nameTxt: {fileID: 4691493664291067617}
 --- !u!1 &3978642935449268200
 GameObject:
   m_ObjectHideFlags: 0
@@ -233,7 +249,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 18.539, y: -29.424}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 79.123, y: 70.222}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &872646424531795646
@@ -352,7 +368,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 18.571, y: -29.689}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 81.714, y: 113.685}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3463094782096176212
@@ -405,7 +421,7 @@ GameObject:
   - component: {fileID: 7623143603546537929}
   - component: {fileID: 35949534301539184}
   m_Layer: 5
-  m_Name: counter_txt
+  m_Name: weight_txt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -427,7 +443,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 18.571, y: -74.344}
+  m_AnchoredPosition: {x: 0, y: -44}
   m_SizeDelta: {x: 110.026, y: 39.131}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7623143603546537929

@@ -32,39 +32,42 @@ namespace keenan.scripts_keenan.Inventory_Final_Scripts
         public GearState currInvState;
 /*------------------------------------------------Functions Begin-----------------------------------------------------*/
 
-private void Start()
-{
-    currInvState = GearState.inactive;
-    SetUp();
-    GearStateCheck();
-}
-
-private void SetUp()
-{
-    _inventoryManager = GameObject.FindWithTag("inventory").
-        GetComponent<MainInventoryManager>();
-    _inventoryManager.SetUp();
-    _gearWeight = this.gameObject.GetComponent<GearWeight>();
-}
-
-public void GearStateCheck()
-{
-    GameObject obj = this.gameObject;
-            switch (currInvState)
-            {
-                case GearState.active:
-                    obj.transform.SetParent(_activeParent.transform, false);
-                    _inventoryManager.inactiveGear.Remove(obj);
-                    _inventoryManager.activeGear.Add(obj);
-                    
-                    break;
-                case GearState.inactive:
-                    obj.transform.SetParent(_storageParent.transform, false);
-                    _inventoryManager.inactiveGear.Add(obj);
-                    _inventoryManager.activeGear.Remove(obj);
-                    break;
-            }
-        }
-
+    private void Start()
+    {
+        currInvState = GearState.inactive;
+        SetUp();
+        GearStateCheck();
     }
+
+    private void SetUp()
+    {
+        _gearWeight = this.gameObject.GetComponent<GearWeight>();
+        _inventoryManager = GameObject.FindWithTag("inventory").
+        GetComponent<MainInventoryManager>();
+        //_inventoryManager.SetUp();
+    
+    }
+
+    public void GearStateCheck()
+    {
+        GameObject obj = this.gameObject;
+        switch (currInvState)
+        {
+            case GearState.active:
+                obj.transform.SetParent(_activeParent.transform, false);
+                _inventoryManager.inactiveGear.Remove(obj);
+                _inventoryManager.activeGear.Add(obj);
+                break;
+            case GearState.inactive:
+                obj.transform.SetParent(_storageParent.transform, false);
+                _inventoryManager.inactiveGear.Add(obj);
+                //_inventoryManager.activeGear.Remove(obj);
+                print("added");
+                break;
+        }
+        
+        _inventoryManager.GearCount();
+    }
+    }
+    
 }
