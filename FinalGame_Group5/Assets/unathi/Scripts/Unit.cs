@@ -1,115 +1,116 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Unit : MonoBehaviour
+namespace unathi.Scripts
 {
-    public int maxHP;
-    public int currentHP;
-    public int damage;
-
-    public GameObject key;
-
-    public int bulletsFired = 0;
-
-    LevelManager levelManager;
-
-    public GameObject targetParticle;
-
-    public Slider playerSlider;
-
-    // Start is called before the first frame update
-    void Start()
+    public class Unit : MonoBehaviour
     {
-        levelManager = GameObject.Find("LevelManager").GetComponent<LevelManager>();
-        if (gameObject.name == "FirstPersonPlayer")
-        {
-            playerSlider.maxValue = maxHP;
-        }
-    }
+        public int maxHP;
+        public int currentHP;
+        public int damage;
 
-    // Update is called once per frame
-    void Update()
-    {
-        if (gameObject.name == "FirstPersonPlayer")
-        {
-            playerSlider.value = currentHP;
-        }
-    }
-    public void TakeDamage(int dmg)
-    {
-        //Debug.Log(gameObject.name);
+        public GameObject key;
 
-        if (gameObject.CompareTag("Player") || gameObject.CompareTag("Enemy") || bulletsFired >= 4)
-        {
-            currentHP -= dmg;
-            //Debug.Log("Ouch!");
-            bulletsFired = 0;
-        }
+        public int bulletsFired = 0;
 
-        if (gameObject.CompareTag("Target"))
-        {
-            currentHP -= dmg;
-            levelManager.numberOfTargets--;
-        }
+        LevelManager levelManager;
 
-        if (currentHP <= 0)
+        public GameObject targetParticle;
+
+        public Slider playerSlider;
+
+        // Start is called before the first frame update
+        void Start()
         {
-            if (gameObject.CompareTag("Enemy"))
+            levelManager = GameObject.Find("LevelManager").GetComponent<LevelManager>();
+            if (gameObject.name == "FirstPersonPlayer")
             {
-                if (levelManager.enemyCount < 10 && levelManager.state == State.Training2)
-                {
-                    levelManager.SpawnEnemy();
-                    levelManager.enemyCount++;
-                }
-                EnemyMovement enemy = GetComponent<EnemyMovement>();
-                enemy.nearestHidingSpot.gameObject.GetComponent<NodeScript>().active = true;
-                Destroy(gameObject);
+                playerSlider.maxValue = maxHP;
             }
+        }
 
-            //Hostage situation enemy type
-            if (gameObject.CompareTag("Enemy_h"))
+        // Update is called once per frame
+        void Update()
+        {
+            if (gameObject.name == "FirstPersonPlayer")
             {
-                if (levelManager.enemyCount_h < 10 && levelManager.state == State.Hostage)
-                {
-                    levelManager.SpawnEnemy_H();
-                    levelManager.enemyCount_h++;
-                }
-
-                //If player has obtained key to hostages
-                if (levelManager.enemyCount_h == 10)
-                    Instantiate(key, gameObject.transform.position, Quaternion.identity);
-
-                Destroy(gameObject);
+                playerSlider.value = currentHP;
             }
+        }
+        public void TakeDamage(int dmg)
+        {
+            //Debug.Log(gameObject.name);
 
-
-            if (gameObject.CompareTag("Player"))
+            if (gameObject.CompareTag("Player") || gameObject.CompareTag("Enemy") || bulletsFired >= 4)
             {
-                //StartCoroutine(Die());
+                currentHP -= dmg;
+                //Debug.Log("Ouch!");
+                bulletsFired = 0;
             }
 
             if (gameObject.CompareTag("Target"))
             {
-                TargetDestroy();
+                currentHP -= dmg;
+                levelManager.numberOfTargets--;
             }
+
+            if (currentHP <= 0)
+            {
+                if (gameObject.CompareTag("Enemy"))
+                {
+                    if (levelManager.enemyCount < 10 && levelManager.state == State.Training2)
+                    {
+                        levelManager.SpawnEnemy();
+                        levelManager.enemyCount++;
+                    }
+                    EnemyMovement enemy = GetComponent<EnemyMovement>();
+                    enemy.nearestHidingSpot.gameObject.GetComponent<NodeScript>().active = true;
+                    Destroy(gameObject);
+                }
+
+                //Hostage situation enemy type
+                if (gameObject.CompareTag("Enemy_h"))
+                {
+                    if (levelManager.enemyCount_h < 10 && levelManager.state == State.Hostage)
+                    {
+                        levelManager.SpawnEnemy_H();
+                        levelManager.enemyCount_h++;
+                    }
+
+                    //If player has obtained key to hostages
+                    if (levelManager.enemyCount_h == 10)
+                        Instantiate(key, gameObject.transform.position, Quaternion.identity);
+
+                    Destroy(gameObject);
+                }
+
+
+                if (gameObject.CompareTag("Player"))
+                {
+                    //StartCoroutine(Die());
+                }
+
+                if (gameObject.CompareTag("Target"))
+                {
+                    TargetDestroy();
+                }
+            }
+
+
+            if (bulletsFired < 4)
+                bulletsFired++;
         }
 
+        void Die()
+        {
+            // What happens when the player dies
+        }
 
-        if (bulletsFired < 4)
-            bulletsFired++;
-    }
+        void TargetDestroy()
+        {
+            GameObject particle = Instantiate(targetParticle, gameObject.transform.position, Quaternion.identity);
 
-    void Die()
-    {
-        // What happens when the player dies
-    }
-
-    void TargetDestroy()
-    {
-        GameObject particle = Instantiate(targetParticle, gameObject.transform.position, Quaternion.identity);
-
-        Destroy(gameObject);
+            Destroy(gameObject);
+        }
     }
 }

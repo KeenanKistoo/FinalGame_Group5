@@ -1,158 +1,159 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using TMPro;
+using unathi.Scripts;
+using UnityEngine;
 
-public class Shooting : MonoBehaviour
+namespace max.Scriptsss
 {
-    public GameObject bullet;
-
-    public float shootForce, upwardForce;
-
-    public float timeBetweenShooting, spread, reloadTime, timeBetweenShots;
-    public int magazineSize, bulletsperTap;
-    public bool allowButtonHold;
-    int bulletsLeft, bulletsShot;
-
-    bool shooting, readyToShoot, reloading;
-
-    public Camera fpsCam;
-    public Transform attackpoint;
-
-    public bool allowInvoke = true;
-
-    //Graphics
-    public GameObject muzzleFlash;
-    public TextMeshProUGUI ammunitionDisplay;
-
-    //Animations
-    public Animator animator;
-    public PlayerMovement playerMovement;
-    public bool isADS = false;
-
-    public float shootingRange = 300f;
-
-    private void Awake()
+    public class Shooting : MonoBehaviour
     {
-        bulletsLeft = magazineSize;
-        readyToShoot = true;
-        playerMovement = GameObject.Find("FirstPersonPlayer").GetComponent<PlayerMovement>();
-        fpsCam = GameObject.Find("MainCamera").GetComponent<Camera>();
-    }
+        public GameObject bullet;
 
-    void Update()
-    {
-        MyInput();
+        public float shootForce, upwardForce;
 
-        //Set ammo display
-        if (ammunitionDisplay != null)
+        public float timeBetweenShooting, spread, reloadTime, timeBetweenShots;
+        public int magazineSize, bulletsperTap;
+        public bool allowButtonHold;
+        int bulletsLeft, bulletsShot;
+
+        bool shooting, readyToShoot, reloading;
+
+        public Camera fpsCam;
+        public Transform attackpoint;
+
+        public bool allowInvoke = true;
+
+        //Graphics
+        public GameObject muzzleFlash;
+        public TextMeshProUGUI ammunitionDisplay;
+
+        //Animations
+        public Animator animator;
+        public PlayerMovement playerMovement;
+        public bool isADS = false;
+
+        public float shootingRange = 300f;
+
+        private void Awake()
         {
-            ammunitionDisplay.SetText(bulletsLeft / bulletsperTap + " / " + magazineSize / bulletsperTap);
+            bulletsLeft = magazineSize;
+            readyToShoot = true;
+            playerMovement = GameObject.Find("FirstPersonPlayer").GetComponent<PlayerMovement>();
+            fpsCam = GameObject.Find("MainCamera").GetComponent<Camera>();
         }
 
-        if (playerMovement.x == 1f || playerMovement.x == -1f || playerMovement.z == 1f || playerMovement.z == -1f)
+        void Update()
         {
-            animator.SetBool("isWalking", true);
+            MyInput();
+
+            //Set ammo display
+            if (ammunitionDisplay != null)
+            {
+                ammunitionDisplay.SetText(bulletsLeft / bulletsperTap + " / " + magazineSize / bulletsperTap);
+            }
+
+            if (playerMovement.x == 1f || playerMovement.x == -1f || playerMovement.z == 1f || playerMovement.z == -1f)
+            {
+                animator.SetBool("isWalking", true);
             
-        }
-        else
-        {
-            animator.SetBool("isWalking", false);
+            }
+            else
+            {
+                animator.SetBool("isWalking", false);
+            }
+
+            if (playerMovement.isSprinting == true)
+            {
+                animator.SetBool("sprinting", true);
+            } else if (playerMovement.isSprinting == false)
+            {
+                animator.SetBool("sprinting", false);
+            }
         }
 
-        if (playerMovement.isSprinting == true)
+        private void MyInput()
         {
-            animator.SetBool("sprinting", true);
-        } else if (playerMovement.isSprinting == false)
-        {
-            animator.SetBool("sprinting", false);
-        }
-    }
+            if (allowButtonHold) shooting = Input.GetKey(KeyCode.Mouse0);
+            else shooting = Input.GetKeyDown(KeyCode.Mouse0);
 
-    private void MyInput()
-    {
-        if (allowButtonHold) shooting = Input.GetKey(KeyCode.Mouse0);
-        else shooting = Input.GetKeyDown(KeyCode.Mouse0);
-
-        //reloading
-        if (Input.GetKeyDown(KeyCode.R) && bulletsLeft < magazineSize && !reloading && playerMovement.isSprinting == false)
-        {
-            animator.SetBool("Reloading", true);
-            Reload();
+            //reloading
+            if (Input.GetKeyDown(KeyCode.R) && bulletsLeft < magazineSize && !reloading && playerMovement.isSprinting == false)
+            {
+                animator.SetBool("Reloading", true);
+                Reload();
             
-        }
-        //reload automatically when bulletsLeft is 0
-        if (readyToShoot && shooting && !reloading && bulletsLeft <= 0)
-        {
-            animator.SetBool("Reloading", true);
-            Reload();
+            }
+            //reload automatically when bulletsLeft is 0
+            if (readyToShoot && shooting && !reloading && bulletsLeft <= 0)
+            {
+                animator.SetBool("Reloading", true);
+                Reload();
             
-        }
+            }
 
-        if (readyToShoot && shooting && !reloading && bulletsLeft > 0)
-        {
-            bulletsShot = 0;
+            if (readyToShoot && shooting && !reloading && bulletsLeft > 0)
+            {
+                bulletsShot = 0;
             
-            Shoot();
+                Shoot();
+            }
+
+            if(Input.GetKey(KeyCode.Mouse1) && !reloading)
+            {
+                animator.SetBool("ADS", true);
+                isADS = true;
+            }
+            else
+            {
+                animator.SetBool("ADS", false);
+                isADS = false;
+            }
         }
 
-        if(Input.GetKey(KeyCode.Mouse1) && !reloading)
+        private void Shoot()
         {
-            animator.SetBool("ADS", true);
-            isADS = true;
-        }
-        else
-        {
-            animator.SetBool("ADS", false);
-            isADS = false;
-        }
-    }
+            if (!isADS)
+            {
+                animator.SetBool("Shooting", true);
+                animator.Play("Shoot", -1, 0f);
 
-    private void Shoot()
-    {
-        if (!isADS)
-        {
-            animator.SetBool("Shooting", true);
-            animator.Play("Shoot", -1, 0f);
-
-        } else if (isADS)
-        {
-            animator.SetBool("ADSShooting", true);
-            animator.Play("ADSShoot", -1, 0f);
-        }
+            } else if (isADS)
+            {
+                animator.SetBool("ADSShooting", true);
+                animator.Play("ADSShoot", -1, 0f);
+            }
         
-        readyToShoot = false;
-        
-
-        Ray ray = fpsCam.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
-        RaycastHit hit;
-
-        RayShoot();
-
-        Vector3 targetPoint;
-        if (Physics.Raycast(ray, out hit))
-            targetPoint = hit.point;
-        else
-            targetPoint = ray.GetPoint(75);
-
+            readyToShoot = false;
         
 
-        //direction
-        Vector3 directionWithoutSpread = targetPoint - attackpoint.position;
-        float x = Random.Range(-spread, spread);
-        float y = Random.Range(-spread, spread);
+            Ray ray = fpsCam.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
+            RaycastHit hit;
 
-        Vector3 directionWithSpread = directionWithoutSpread + new Vector3(x, y, 0f);
+            RayShoot();
 
-        //Instantiate bullet
-        GameObject currentBullet = Instantiate(bullet, attackpoint.position, Quaternion.identity);
-        //Rotate Bullet in the correct direction
-        currentBullet.transform.forward = directionWithSpread.normalized;
+            Vector3 targetPoint;
+            if (Physics.Raycast(ray, out hit))
+                targetPoint = hit.point;
+            else
+                targetPoint = ray.GetPoint(75);
 
-        //Add force to bullet
-        currentBullet.GetComponent<Rigidbody>().AddForce(directionWithSpread.normalized * shootForce, ForceMode.Impulse);
+        
 
-        //Instantiate muzzle flash
+            //direction
+            Vector3 directionWithoutSpread = targetPoint - attackpoint.position;
+            float x = Random.Range(-spread, spread);
+            float y = Random.Range(-spread, spread);
+
+            Vector3 directionWithSpread = directionWithoutSpread + new Vector3(x, y, 0f);
+
+            //Instantiate bullet
+            GameObject currentBullet = Instantiate(bullet, attackpoint.position, Quaternion.identity);
+            //Rotate Bullet in the correct direction
+            currentBullet.transform.forward = directionWithSpread.normalized;
+
+            //Add force to bullet
+            currentBullet.GetComponent<Rigidbody>().AddForce(directionWithSpread.normalized * shootForce, ForceMode.Impulse);
+
+            //Instantiate muzzle flash
         
             GameObject muzzleFlashes = Instantiate(muzzleFlash, attackpoint.position,Quaternion.identity);
             muzzleFlashes.transform.parent = attackpoint.transform;
@@ -160,64 +161,65 @@ public class Shooting : MonoBehaviour
             Destroy(muzzleFlashes, 0.2f);
         
 
-        Destroy(currentBullet, 0.5f);
+            Destroy(currentBullet, 0.5f);
         
 
 
-        bulletsLeft--;
-        bulletsShot++;
+            bulletsLeft--;
+            bulletsShot++;
 
-        //Invoke resetShot
-        if (allowInvoke)
-        {
-            Invoke("ResetShot", timeBetweenShooting);
-            allowInvoke = false;
-            
-        }
-    }
-
-    void RayShoot()
-    {
-        Ray ray = fpsCam.ScreenPointToRay(new Vector3(fpsCam.pixelWidth / 2, fpsCam.pixelHeight / 2, 0));
-        RaycastHit hit;
-
-        if (Physics.Raycast(ray, out hit, shootingRange))
-        {
-            if (hit.collider.CompareTag("Enemy")) // Check if the ray hits an enemy.
+            //Invoke resetShot
+            if (allowInvoke)
             {
-                Unit unit = hit.collider.GetComponent<Unit>();
-                if (unit != null)
-                {
-                    unit.TakeDamage(5);
-                    Debug.Log(hit.collider.name);
-                }
+                Invoke("ResetShot", timeBetweenShooting);
+                allowInvoke = false;
+            
             }
-            Debug.DrawRay(ray.origin, ray.direction * shootingRange, Color.red, 0.1f);
         }
-    }
 
-    private void ResetShot()
-    {
-        readyToShoot = true;
-        allowInvoke = true;
-        animator.SetBool("Shooting", false);
-        animator.SetBool("ADSShooting", false);
-    }
+        void RayShoot()
+        {
+            Ray ray = fpsCam.ScreenPointToRay(new Vector3(fpsCam.pixelWidth / 2, fpsCam.pixelHeight / 2, 0));
+            RaycastHit hit;
 
-    private void Reload()
-    {
-        readyToShoot = false;
-        animator.SetBool("Reloading", true);
-        reloading = true;
-        Invoke("ReloadFinished", reloadTime);
+            if (Physics.Raycast(ray, out hit, shootingRange))
+            {
+                if (hit.collider.CompareTag("Enemy")) // Check if the ray hits an enemy.
+                {
+                    Unit unit = hit.collider.GetComponent<Unit>();
+                    if (unit != null)
+                    {
+                        unit.TakeDamage(5);
+                        Debug.Log(hit.collider.name);
+                    }
+                }
+                Debug.DrawRay(ray.origin, ray.direction * shootingRange, Color.red, 0.1f);
+            }
+        }
 
-    }
+        private void ResetShot()
+        {
+            readyToShoot = true;
+            allowInvoke = true;
+            animator.SetBool("Shooting", false);
+            animator.SetBool("ADSShooting", false);
+        }
 
-    private void ReloadFinished()
-    {
-        readyToShoot = true;
-        animator.SetBool("Reloading", false);
-        bulletsLeft = magazineSize;
-        reloading = false;
+        private void Reload()
+        {
+            readyToShoot = false;
+            animator.SetBool("Reloading", true);
+            reloading = true;
+            Invoke("ReloadFinished", reloadTime);
+
+        }
+
+        private void ReloadFinished()
+        {
+            readyToShoot = true;
+            animator.SetBool("Reloading", false);
+            bulletsLeft = magazineSize;
+            reloading = false;
+        }
     }
 }

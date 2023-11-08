@@ -1,28 +1,29 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class WeaponController : MonoBehaviour
+namespace keenan.scripts_keenan.WeaponController
 {
-    [Header("Weapon Holster:")]
-    public GameObject[] weapons;
-
-    [Header("Weapon Panel:")]
-    public GameObject weaponPanel;
-
-    private void Update()
+    public class WeaponController : MonoBehaviour
     {
-        if (Input.GetKeyDown(KeyCode.I))
+        [Header("Weapon Holster:")]
+        public GameObject[] weapons;
+
+        [Header("Weapon Panel:")]
+        public GameObject weaponPanel;
+
+        private void Update()
         {
-            if (weaponPanel.activeInHierarchy) { 
-                weaponPanel.SetActive(false);
-            }
-            else
+            if (Input.GetKeyDown(KeyCode.I))
             {
-                weaponPanel.SetActive(true);
+                if (weaponPanel.activeInHierarchy) { 
+                    weaponPanel.SetActive(false);
+                }
+                else
+                {
+                    weaponPanel.SetActive(true);
+                }
             }
         }
+
+
     }
-
-
 }

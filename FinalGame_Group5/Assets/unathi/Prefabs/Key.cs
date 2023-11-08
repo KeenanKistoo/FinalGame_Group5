@@ -1,30 +1,32 @@
-using System.Collections;
-using System.Collections.Generic;
+using unathi.Scripts;
 using UnityEngine;
 
-public class KeyScript : MonoBehaviour
+namespace unathi.Prefabs
 {
-    LevelManager level;
-
-    // Start is called before the first frame update
-    void Start()
+    public class KeyScript : MonoBehaviour
     {
-        level = GameObject.Find("LevelManager").GetComponent<LevelManager>();
-    }
+        LevelManager level;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    private void OnTriggerEnter(Collider col)
-    {
-        if (col.CompareTag("Player"))
+        // Start is called before the first frame update
+        void Start()
         {
-            level.key = true;
-            Destroy(gameObject);
+            level = GameObject.Find("LevelManager").GetComponent<LevelManager>();
         }
+
+        // Update is called once per frame
+        void Update()
+        {
         
+        }
+
+        private void OnTriggerEnter(Collider col)
+        {
+            if (col.CompareTag("Player"))
+            {
+                level.key = true;
+                Destroy(gameObject);
+            }
+        
+        }
     }
 }

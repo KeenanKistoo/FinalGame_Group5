@@ -20,6 +20,7 @@ TagManager:
   - FxTemporaire
   - Rescue
   - Enemy_h
+  - gear
   layers:
   - Default
   - TransparentFX

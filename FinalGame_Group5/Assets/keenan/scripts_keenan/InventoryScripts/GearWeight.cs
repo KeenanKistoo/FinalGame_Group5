@@ -1,9 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class GearWeight : MonoBehaviour
+namespace keenan.scripts_keenan.InventoryScripts
 {
-    public string gearName;
-    public int weight;
+    public class GearWeight : MonoBehaviour
+    {
+        public string gearName;
+        public int weight;
+    }
 }

@@ -1,16 +1,17 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class TestScript : MonoBehaviour
+namespace keenan.scripts_keenan
 {
-    public PlayerInventory player;
-    public PlayerWeight playerW;
-    // Start is called before the first frame update
-    void Start()
+    public class TestScript : MonoBehaviour
     {
-        player.helmetUnlocked = true;
-    }
+        public PlayerInventory player;
+        public PlayerWeight playerW;
+        // Start is called before the first frame update
+        void Start()
+        {
+            player.helmetUnlocked = true;
+        }
 
    
+    }
 }

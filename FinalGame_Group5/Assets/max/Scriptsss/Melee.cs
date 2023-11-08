@@ -1,27 +1,28 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class Melee : MonoBehaviour
+namespace max.Scriptsss
 {
-
-    public Animator animator;
-    // Start is called before the first frame update
-    void Start()
+    public class Melee : MonoBehaviour
     {
+
+        public Animator animator;
+        // Start is called before the first frame update
+        void Start()
+        {
         
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        if (Input.GetKey(KeyCode.Mouse0))
-        {
-            animator.SetBool("melee", true);
         }
-        else
+
+        // Update is called once per frame
+        void Update()
         {
-            animator.SetBool("melee", false);
+            if (Input.GetKey(KeyCode.Mouse0))
+            {
+                animator.SetBool("melee", true);
+            }
+            else
+            {
+                animator.SetBool("melee", false);
+            }
         }
     }
 }

@@ -1,51 +1,48 @@
-using System.Collections;
-using System.Collections.Generic;
+using keenan.scripts_keenan;
 using UnityEngine;
 
-public class PlayerSelect : MonoBehaviour
+namespace unathi.Scripts
 {
-    [SerializeField] bool weightSelected;
-
-    public GameObject playerSelectPanel;
-
-    public PlayerWeightController weight;
-
-    // Start is called before the first frame update
-    void Start()
+    public class PlayerSelect : MonoBehaviour
     {
-        
-    }
+        [SerializeField] bool weightSelected;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+        public GameObject playerSelectPanel;
 
-    public void LoadNeutralScene()
-    {
-        if (weightSelected)
+        public PlayerWeightController weight;
+
+        // Start is called before the first frame update
+        void Start()
         {
-            playerSelectPanel.SetActive(false);
+        
         }
-    }
+    
 
-    public void LightWeight()
-    {
-        weightSelected = true;
-        weight.ChangeWeightClass("lightweight");
-    }
+        public void LoadNeutralScene()
+        {
+            if (weightSelected)
+            {
+                playerSelectPanel.SetActive(false);
+            }
+        }
 
-    public void MiddleWeight()
-    {
-        weightSelected = true;
-        weight.ChangeWeightClass("middleweight");
-    }
+        public void LightWeight()
+        {
+            weightSelected = true;
+            weight.ChangeWeightClass("lightweight");
+        }
 
-    public void HeavyWeight()
-    {
-        weightSelected = true;
-        weight.ChangeWeightClass("heavyweight");
+        public void MiddleWeight()
+        {
+            weightSelected = true;
+            weight.ChangeWeightClass("middleweight");
+        }
+
+        public void HeavyWeight()
+        {
+            weightSelected = true;
+            weight.ChangeWeightClass("heavyweight");
+        }
     }
 }
 
