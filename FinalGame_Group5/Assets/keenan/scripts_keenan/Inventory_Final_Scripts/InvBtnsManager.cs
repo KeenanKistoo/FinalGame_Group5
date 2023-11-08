@@ -7,5 +7,7 @@ namespace keenan.scripts_keenan.Inventory_Final_Scripts
         public Image btnImg;
         public Text weightTxt;
         public Text nameTxt;
+
+        public int weight;
     }
 }

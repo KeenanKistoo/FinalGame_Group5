@@ -32,10 +32,7 @@ namespace keenan.scripts_keenan.Inventory_Final_Scripts
 
        public void GearCount()
        {
-           activeGearCount = activeGear.Count;
            inactiveGearCount = inactiveGear.Count;
-           
-
            for (int i = 0; i < equipBtns.Length; i++)
            {
                if (i < inactiveGearCount)
@@ -43,13 +40,31 @@ namespace keenan.scripts_keenan.Inventory_Final_Scripts
                    equipBtns[i].SetActive(true);
                    InvBtnsManager _btnManager = equipBtns[i].GetComponent<InvBtnsManager>();
                    GearWeight _gearWeight = inactiveGear[i].GetComponent<GearWeight>();
-
-                   _btnManager.weightTxt.text = _gearWeight.weight.ToString() + "KG";
+                   _btnManager.weight = _gearWeight.weight;
+                   _btnManager.weightTxt.text = _gearWeight.weight + "KG";
                    _btnManager.nameTxt.text = _gearWeight.gearName;
 
                }else if (i >= inactiveGearCount)
                {
                    equipBtns[i].SetActive(false);
+               }
+           }
+       }
+       public void GearActiveCount()
+       {
+           activeGearCount = activeGear.Count;
+           for (int i = 0; i < removeBtns.Length; i++)
+           {
+               if (i < activeGearCount)
+               {
+                  removeBtns[i].SetActive(true);
+                  InvBtnsManager _btnManager = removeBtns[i].GetComponent<InvBtnsManager>();
+                  GearWeight _gearWeight = activeGear[i].GetComponent<GearWeight>();
+                  _btnManager.weightTxt.text = _gearWeight.weight + "KG";
+                  _btnManager.nameTxt.text = _gearWeight.gearName;
+               }else if (i >= activeGearCount)
+               {
+                   removeBtns[i].SetActive(false);
                }
            }
        }

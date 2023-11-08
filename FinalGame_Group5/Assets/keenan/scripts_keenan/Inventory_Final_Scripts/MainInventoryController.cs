@@ -61,12 +61,12 @@ namespace keenan.scripts_keenan.Inventory_Final_Scripts
             case GearState.inactive:
                 obj.transform.SetParent(_storageParent.transform, false);
                 _inventoryManager.inactiveGear.Add(obj);
-                //_inventoryManager.activeGear.Remove(obj);
-                print("added");
+                _inventoryManager.activeGear.Remove(obj);
                 break;
         }
         
         _inventoryManager.GearCount();
+        _inventoryManager.GearActiveCount();
     }
     }
     
