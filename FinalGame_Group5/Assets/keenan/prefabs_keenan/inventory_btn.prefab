@@ -34,8 +34,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -9.5, y: 78.5}
-  m_SizeDelta: {x: 171.567, y: 61.018}
+  m_AnchoredPosition: {x: 21.271, y: 16.657}
+  m_SizeDelta: {x: 110.026, y: 39.131}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &814059345535800362
 CanvasRenderer:
@@ -67,7 +67,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: 997a43b767814dd0a7642ec9b78cba41, type: 3}
-    m_FontSize: 34
+    m_FontSize: 20
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 0
@@ -233,8 +233,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -13.759, y: 6.645}
-  m_SizeDelta: {x: 123.379, y: 109.5}
+  m_AnchoredPosition: {x: 18.539, y: -29.424}
+  m_SizeDelta: {x: 79.123, y: 70.222}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &872646424531795646
 CanvasRenderer:
@@ -352,8 +352,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -13.71, y: 6.232}
-  m_SizeDelta: {x: 127.42, y: 177.273}
+  m_AnchoredPosition: {x: 18.571, y: -29.689}
+  m_SizeDelta: {x: 81.714, y: 113.685}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3463094782096176212
 CanvasRenderer:
@@ -427,8 +427,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -13.71, y: -63.4}
-  m_SizeDelta: {x: 171.567, y: 61.018}
+  m_AnchoredPosition: {x: 18.571, y: -74.344}
+  m_SizeDelta: {x: 110.026, y: 39.131}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7623143603546537929
 CanvasRenderer:
@@ -460,7 +460,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: 997a43b767814dd0a7642ec9b78cba41, type: 3}
-    m_FontSize: 34
+    m_FontSize: 20
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 0

@@ -6,5 +6,7 @@ namespace keenan.scripts_keenan.InventoryScripts
     {
         public string gearName;
         public int weight;
+        public Sprite img;
+        public string desc;
     }
 }

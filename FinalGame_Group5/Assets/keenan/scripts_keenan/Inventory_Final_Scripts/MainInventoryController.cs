@@ -41,11 +41,10 @@ private void Start()
 
 private void SetUp()
 {
-    _inventoryManager = GameObject.FindWithTag(("inventory")).
+    _inventoryManager = GameObject.FindWithTag("inventory").
         GetComponent<MainInventoryManager>();
-    _gearWeight = this.gameObject.GetComponent<GearWeight>();
-    print(_gearWeight.gearName);
     _inventoryManager.SetUp();
+    _gearWeight = this.gameObject.GetComponent<GearWeight>();
 }
 
 public void GearStateCheck()
