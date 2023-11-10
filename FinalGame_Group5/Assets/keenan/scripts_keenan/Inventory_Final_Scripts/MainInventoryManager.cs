@@ -43,6 +43,7 @@ namespace keenan.scripts_keenan.Inventory_Final_Scripts
                    _btnManager.weight = _gearWeight.weight;
                    _btnManager.weightTxt.text = _gearWeight.weight + "KG";
                    _btnManager.nameTxt.text = _gearWeight.gearName;
+                   _btnManager.weightObj = inactiveGear[i];
 
                }else if (i >= inactiveGearCount)
                {
@@ -62,6 +63,7 @@ namespace keenan.scripts_keenan.Inventory_Final_Scripts
                   GearWeight _gearWeight = activeGear[i].GetComponent<GearWeight>();
                   _btnManager.weightTxt.text = _gearWeight.weight + "KG";
                   _btnManager.nameTxt.text = _gearWeight.gearName;
+                  _btnManager.weightObj = activeGear[i];
                }else if (i >= activeGearCount)
                {
                    removeBtns[i].SetActive(false);

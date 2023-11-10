@@ -21,6 +21,7 @@ TagManager:
   - Rescue
   - Enemy_h
   - gear
+  - weightMan
   layers:
   - Default
   - TransparentFX

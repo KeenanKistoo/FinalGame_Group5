@@ -32,27 +32,27 @@ namespace keenan.scripts_keenan.Inventory_Final_Scripts
         public GearState currInvState;
 /*------------------------------------------------Functions Begin-----------------------------------------------------*/
 
-    private void Start()
-    {
+         private void Start()
+        {
         currInvState = GearState.inactive;
         SetUp();
         GearStateCheck();
-    }
+        }
 
-    private void SetUp()
-    {
+        private void SetUp()
+        {
         _gearWeight = this.gameObject.GetComponent<GearWeight>();
         _inventoryManager = GameObject.FindWithTag("inventory").
         GetComponent<MainInventoryManager>();
         //_inventoryManager.SetUp();
     
-    }
+        }
 
-    public void GearStateCheck()
-    {
-        GameObject obj = this.gameObject;
-        switch (currInvState)
+        public void GearStateCheck()
         {
+            GameObject obj = this.gameObject;
+            switch (currInvState)
+            {
             case GearState.active:
                 obj.transform.SetParent(_activeParent.transform, false);
                 _inventoryManager.inactiveGear.Remove(obj);
@@ -63,11 +63,12 @@ namespace keenan.scripts_keenan.Inventory_Final_Scripts
                 _inventoryManager.inactiveGear.Add(obj);
                 _inventoryManager.activeGear.Remove(obj);
                 break;
+            }
+        
+            _inventoryManager.GearCount();
+            _inventoryManager.GearActiveCount();
         }
         
-        _inventoryManager.GearCount();
-        _inventoryManager.GearActiveCount();
-    }
     }
     
 }
