@@ -21,7 +21,7 @@ namespace keenan.scripts_keenan.Inventory_Final_Scripts
 
         private void Start()
         {
-            SetUp();
+            //SetUp();
         }
 
         public void SetUp()
@@ -50,6 +50,7 @@ namespace keenan.scripts_keenan.Inventory_Final_Scripts
                {
                    equipBtns[i].SetActive(false);
                }
+               
            }
        }
        public void GearActiveCount()

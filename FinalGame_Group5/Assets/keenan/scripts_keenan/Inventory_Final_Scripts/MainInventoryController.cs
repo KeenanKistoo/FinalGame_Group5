@@ -42,7 +42,7 @@ namespace keenan.scripts_keenan.Inventory_Final_Scripts
         private void SetUp()
         {
         _gearWeight = this.gameObject.GetComponent<GearWeight>();
-        _inventoryManager = GameObject.FindWithTag("inventory").
+        _inventoryManager = GameObject.FindWithTag("test").
         GetComponent<MainInventoryManager>();
         //_inventoryManager.SetUp();
     
