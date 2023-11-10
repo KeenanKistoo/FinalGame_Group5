@@ -213,6 +213,9 @@ MonoBehaviour:
   btnImg: {fileID: 8675817024631603602}
   weightTxt: {fileID: 35949534301539184}
   nameTxt: {fileID: 4691493664291067617}
+  weight: 0
+  weightObj: {fileID: 0}
+  _mainWeightController: {fileID: 0}
 --- !u!1 &3978642935449268200
 GameObject:
   m_ObjectHideFlags: 0
@@ -333,7 +336,20 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 8675817024631603602}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1803970154791271520}
+        m_TargetAssemblyTypeName: keenan.scripts_keenan.Inventory_Final_Scripts.InvBtnsManager,
+          Assembly-CSharp
+        m_MethodName: Purchase
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &6758229044232817779
 GameObject:
   m_ObjectHideFlags: 0

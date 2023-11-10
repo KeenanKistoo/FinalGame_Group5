@@ -9,7 +9,7 @@ namespace keenan.scripts_keenan.Inventory_Final_Scripts
         public Text weightTxt;
         public Text nameTxt;
 
-        public int weight;
+        public float weight;
         
         public GameObject weightObj;
 
@@ -24,7 +24,7 @@ namespace keenan.scripts_keenan.Inventory_Final_Scripts
 
         public void Purchase()
         {
-            int currWeight = _mainWeightController.currWeight;
+            float currWeight = _mainWeightController.currWeight;
 
             if (weight <= currWeight)
             {
@@ -33,12 +33,19 @@ namespace keenan.scripts_keenan.Inventory_Final_Scripts
                 MainInventoryController _mainInventoryController = weightObj.GetComponent<MainInventoryController>();
                 _mainInventoryController.currInvState = MainInventoryController.GearState.active;
                 _mainInventoryController.GearStateCheck();
-
             }
             else
             {
                 //Insert Communication About Not Enough Weight
             }
+        }
+
+        public void Refund()
+        {
+            _mainWeightController.currWeight += weight;
+            MainInventoryController _mainInventoryController = weightObj.GetComponent<MainInventoryController>();
+            _mainInventoryController.currInvState = MainInventoryController.GearState.inactive;
+            _mainInventoryController.GearStateCheck();
         }
     }
 }

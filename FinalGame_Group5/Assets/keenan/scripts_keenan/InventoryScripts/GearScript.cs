@@ -36,7 +36,7 @@ namespace keenan.scripts_keenan.InventoryScripts
             {
                 if(_gear.currWeight >= gearWeight.weight)
                 {
-                    _gear.currWeight -= gearWeight.weight;
+                    //_gear.currWeight -= gearWeight.weight;
                     gearNames[index] = gearWeight.gearName;
                     //gearGO[index] = gearWeight.prefab;
                     index++;
