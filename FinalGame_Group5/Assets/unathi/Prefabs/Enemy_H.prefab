@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 888794920369439993}
   - component: {fileID: 6455809420887957921}
   - component: {fileID: 1896208426786728495}
-  - component: {fileID: 4857651248335227883}
   - component: {fileID: 295011056509083305}
+  - component: {fileID: 3800699391570060020}
   m_Layer: 0
   m_Name: Enemy_H
   m_TagString: Enemy_h
@@ -106,29 +106,6 @@ MonoBehaviour:
   bulletsFired: 0
   targetParticle: {fileID: 0}
   playerSlider: {fileID: 0}
---- !u!136 &4857651248335227883
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 117004213155658188}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 4.9706407
-  m_Height: 9.941282
-  m_Direction: 1
-  m_Center: {x: 0, y: 5.05, z: 0}
 --- !u!114 &295011056509083305
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -152,6 +129,27 @@ MonoBehaviour:
   chaseRange: 50
   playerInAttackRange: 0
   playerInChaseRange: 0
+--- !u!65 &3800699391570060020
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 117004213155658188}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 5.2412877, y: 4.472762, z: 4.590335}
+  m_Center: {x: 0.63151336, y: 4.5634017, z: 0.3157903}
 --- !u!1 &1165057299167204781
 GameObject:
   m_ObjectHideFlags: 0
