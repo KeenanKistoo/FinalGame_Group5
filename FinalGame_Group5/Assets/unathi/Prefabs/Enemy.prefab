@@ -56,15 +56,12 @@ MonoBehaviour:
   whatIsPlayer:
     serializedVersion: 2
     m_Bits: 128
-  whatIsGround:
-    serializedVersion: 2
-    m_Bits: 0
   hidden: 0
   isShooting: 0
   retreating: 0
   hideSpot: {x: 0, y: 0, z: 0}
   stopDistance: 1
-  timeBetweenAttacks: 0.5
+  timeBetweenAttacks: 1
   attackRange: 70
   retreatRange: 30
   playerInAttackRange: 0

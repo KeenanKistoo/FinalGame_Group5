@@ -1491,6 +1491,7 @@ MonoBehaviour:
   animator: {fileID: 5958528329279156389}
   playerMovement: {fileID: 0}
   isADS: 0
+  shootingRange: 300
 --- !u!95 &5958528329279156389
 Animator:
   serializedVersion: 5
@@ -1510,7 +1511,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
+  m_KeepAnimatorStateOnDisable: 1
   m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &6097036553017430025
 GameObject:

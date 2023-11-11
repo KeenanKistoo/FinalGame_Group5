@@ -20,7 +20,7 @@ namespace unathi.Scripts
         // Update is called once per frame
    
 
-        private void OnCollisionEnter(Collision collision)
+        private void OnTriggerEnter(Collider collision)
         {
             if (collision.gameObject.tag == "Enemy" || collision.gameObject.tag == "Target" || collision.gameObject.tag == "Enemy_h")
             {
