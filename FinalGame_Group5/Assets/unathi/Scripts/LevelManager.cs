@@ -17,21 +17,28 @@ namespace unathi.Scripts
 
     public class LevelManager : MonoBehaviour
     {
+        [Header("Transforms")]
         public List<Transform> hidingSpots;
         public List<Transform> targetSpawns;
         public List<GameObject> targetsList;
+
+        public Transform[] spawnPoints;
+        public Transform[] spawnPoints_h;
 
         public GameObject targetPrefab;
         public GameObject targets;
 
         public GameObject hidingSpotsParent;
         public GameObject walls;
+        public GameObject hud;
 
+        [Header("Player UI")]
         public GameObject blackscreen;
         public GameObject levelCanvas;
+        [SerializeField] GameObject inventPanel;
+        [SerializeField] GameObject inventoryUI;
 
-        public Transform[] spawnPoints;
-        public Transform[] spawnPoints_h;
+        
 
         public Transform player;
         public Vector3 trainingSpawn;
@@ -49,6 +56,8 @@ namespace unathi.Scripts
         public int enemyCount = 0;
         public int enemyCount_h = 0;
 
+
+        [Header("Enemy UI")]
         public Text enemyCountText;
         public GameObject _enemyCountText;
         public Text question;
@@ -59,13 +68,14 @@ namespace unathi.Scripts
 
         public GameObject buttons;
 
+        [Header("Checks")]
         [SerializeField] bool training1 = false;
         [SerializeField] bool training2 = false;
         [SerializeField] bool battle = false;
         [SerializeField] bool hostage = false;
 
-        [SerializeField] GameObject inventoryUI;
 
+        [Header("Hostage Stuff")]
         //To unlock door for release of hostages
         public bool key;
         public MeshCollider doorMesh1_h;
@@ -153,6 +163,19 @@ namespace unathi.Scripts
             {
                 doorMesh1_h.enabled = true;
                 doorMesh2_h.enabled = true;
+            }
+
+            if (inventPanel.activeInHierarchy)
+            {
+                      if (Input.GetKeyDown(KeyCode.Return))
+                {
+                    inventPanel.SetActive(false);
+                }
+
+                hud.SetActive(false);
+            }                       else
+            {
+                hud.SetActive(true);
             }
         }
 
