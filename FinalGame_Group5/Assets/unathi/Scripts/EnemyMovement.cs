@@ -35,6 +35,7 @@ namespace unathi.Scripts
         public float retreatRange = 10f;
         public bool playerInAttackRange;
         public bool playerInRetreatRange;
+        public Unit playerHealth;
 
         // Use constants for clarity
         private const float ShootingDuration = 6f;
@@ -57,6 +58,10 @@ namespace unathi.Scripts
             anim = GetComponentInChildren<Animator>();
         }
 
+        private float shootCooldown = 0f;
+        private bool canShoot = true;
+
+
         private void Update()
         {
             playerInRetreatRange = Physics.CheckSphere(transform.position, retreatRange, whatIsPlayer);
@@ -64,7 +69,7 @@ namespace unathi.Scripts
 
             float distanceToTarget = Vector3.Distance(gameObject.transform.position, nearestHidingSpot.position);
 
-            if(distanceToTarget <= stopDistance)
+            if (distanceToTarget <= stopDistance)
             {
                 hidePointSet = true;
             }
@@ -76,7 +81,10 @@ namespace unathi.Scripts
 
             if (playerInAttackRange && !playerInRetreatRange)
             {
-                Shoot();
+                if (canShoot)
+                {
+                    Shoot();
+                }
             }
 
             if (playerInRetreatRange)
@@ -84,18 +92,9 @@ namespace unathi.Scripts
                 Retreat();
             }
 
-            if (distanceToTarget > stopDistance || retreating)
-            {
-                anim.SetBool("isWalking", true);
-                anim.SetBool("isIdle", false);
-            }
-            else
-            {
-                anim.SetBool("isWalking", false);
-                anim.SetBool("isIdle", true);
-            }
+            // ... (remaining code)
 
-            if(isShooting)
+            if (isShooting)
             {
                 anim.SetBool("isShooting", true);
             }
@@ -104,6 +103,9 @@ namespace unathi.Scripts
                 anim.SetBool("isShooting", false);
                 anim.SetBool("isIdle", true);
             }
+
+            // Update shootCooldown
+            shootCooldown -= Time.deltaTime;
         }
 
         private void Shoot()
@@ -119,28 +121,50 @@ namespace unathi.Scripts
                 return;
             }
 
-            // If there is no obstacle, proceed to shoot
-            transform.LookAt(player.position);
-
-            if (!alreadyAttacked)
+            // If there is no obstacle and the cooldown has elapsed, proceed to shoot
+            if (shootCooldown <= 0f)
             {
-                // Create a spread angle (in degrees)
-                float spreadAngle = Random.Range(-1.5f, 1.5f);
+                // Calculate the direction to the player
+                directionToPlayer = (player.position - transform.position).normalized;
 
-                // Apply the spread to the bullet's rotation
+
+                // Add a random offset to the shooting direction
+                float spreadAngle = Random.Range(-4f, 4f); // Adjust the spread angle as needed
                 Quaternion spreadRotation = Quaternion.Euler(0f, spreadAngle, 0f);
+                Vector3 spreadDirection = spreadRotation * directionToPlayer;
 
-                // Calculate the rotated direction
-                Vector3 bulletDirection = spreadRotation * transform.forward;
+                
 
-                GameObject bullet = Instantiate(bulletPrefab, spawnPoint.position, Quaternion.LookRotation(bulletDirection));
-                EnemyBullet bulletScript = bullet.GetComponent<EnemyBullet>();
-                Destroy(bullet, bulletScript.lifespan);
+                RaycastHit hitt;
 
-                alreadyAttacked = true;
-                timeBetweenAttacks = Random.Range(0f, 0.5f);
-                Invoke(nameof(ResetAttack), timeBetweenAttacks);
+                if (Physics.Raycast(transform.position + Vector3.up, spreadDirection, out hit, Mathf.Infinity))
+                {
+                    Debug.DrawRay(transform.position, spreadDirection * 20f, Color.red);
+                    // Check if the ray hit the player or another target
+                    if (hit.collider.CompareTag("Player"))
+                    {
+                        // Handle the hit on the player (damage, effects, etc.)
+                        Debug.Log("Enemy hit player!");
+                        playerHealth = GameObject.Find("FirstPersonPlayer").GetComponent<Unit>();
+                        playerHealth.currentHP -= 2;
+
+                    }
+                }
+
+                // Set the cooldown before the next shot
+                shootCooldown = timeBetweenAttacks;
+
+                // Set canShoot to false to prevent shooting during cooldown
+                canShoot = false;
+
+                // Invoke ResetCanShoot after the cooldown to allow shooting again
+                Invoke(nameof(ResetCanShoot), timeBetweenAttacks);
             }
+        }
+
+        private void ResetCanShoot()
+        {
+            canShoot = true;
         }
 
 
