@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 namespace keenan.scripts_keenan.Inventory_Final_Scripts
@@ -36,10 +37,19 @@ namespace keenan.scripts_keenan.Inventory_Final_Scripts
             }
             else
             {
-                //Insert Communication About Not Enough Weight
+                StartCoroutine(ColorChange());
             }
         }
 
+        IEnumerator ColorChange()
+        {
+            weightTxt.color = Color.red;
+            _mainWeightController.weightTxt.color = Color.red;
+            yield return new WaitForSeconds(0.5f);
+            weightTxt.color = Color.white;
+            _mainWeightController.weightTxt.color = Color.white;
+
+        }
         public void Refund()
         {
             _mainWeightController.currWeight += weight;

@@ -6,6 +6,6 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/keenan_scenes/Inventory_Scene.unity
-    guid: ef93152ad93022d408700d02f0e2113a
+    path: Assets/Scenes/prototype_level_Final.unity
+    guid: f2a793f47797cc14aa5ee66b44242a9e
   m_configObjects: {}
