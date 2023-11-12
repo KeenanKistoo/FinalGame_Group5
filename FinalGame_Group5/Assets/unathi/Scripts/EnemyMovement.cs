@@ -129,7 +129,7 @@ namespace unathi.Scripts
 
 
                 // Add a random offset to the shooting direction
-                float spreadAngle = Random.Range(-4f, 4f); // Adjust the spread angle as needed
+                float spreadAngle = Random.Range(-2f, 2f); // Adjust the spread angle as needed
                 Quaternion spreadRotation = Quaternion.Euler(0f, spreadAngle, 0f);
                 Vector3 spreadDirection = spreadRotation * directionToPlayer;
 
