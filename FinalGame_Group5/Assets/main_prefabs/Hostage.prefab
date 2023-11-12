@@ -1613,7 +1613,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79b3392bebe0c3041b622b5a41dbc795, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HostageText: {fileID: 0}
+  HostageUI: {fileID: 0}
   animator: {fileID: 0}
   fillImage: {fileID: 0}
   canRescue: 0

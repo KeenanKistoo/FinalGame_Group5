@@ -14,8 +14,8 @@ public class LockPick : MonoBehaviour
     void Start()
     {
         LockPickUI = GameObject.Find("LockPickDoorUI");
-        fillAnimator = GameObject.Find("Fill").GetComponent<Animator>();
-        fillImage = GameObject.Find("Fill").GetComponent<Image>();
+        fillAnimator = GameObject.Find("LockPickFill").GetComponent<Animator>();
+        fillImage = GameObject.Find("LockPickFill").GetComponent<Image>();
 
         LockPickUI.SetActive(false);
         
@@ -25,25 +25,28 @@ public class LockPick : MonoBehaviour
     void Update()
     {
 
-        if (fillImage.fillAmount > 0.95f)
-        {
-           
-            
-            LockPickUI.SetActive(false);
-            doorAnimator.SetBool("Open", true);
-        }
+        
         if (canLockPick)
         {
+
+            if (fillImage.fillAmount > 0.95f)
+            {
+
+
+                LockPickUI.SetActive(false);
+                doorAnimator.SetBool("Open", true);
+            }
+
             if (Input.GetKeyDown(KeyCode.F))
             {
                 fillAnimator.SetBool("Fill", true);
-                if (fillImage.fillAmount > 0.1f)
+               /* if (fillImage.fillAmount > 0.1f)
                 {
                     
                     
                     LockPickUI.SetActive(false);
                     doorAnimator.SetBool("Open", true);
-                }
+                }*/
             }
 
             if (Input.GetKeyUp(KeyCode.F))
