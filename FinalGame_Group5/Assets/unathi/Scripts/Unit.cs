@@ -19,6 +19,8 @@ namespace unathi.Scripts
 
         public Slider playerSlider;
         public Heal heal;
+        public bool hasKevlar;
+        public GameObject KevlarImage;
 
         // Start is called before the first frame update
         void Start()
@@ -28,15 +30,24 @@ namespace unathi.Scripts
             {
                 playerSlider.maxValue = maxHP;
             }
-            
 
+            KevlarImage = GameObject.Find("KevlarImage");
+            KevlarImage.SetActive(false);
         }
 
         // Update is called once per frame
         void Update()
         {
 
-            
+            GameObject Kevlar = GameObject.Find("KevlarVest");
+
+            if (Kevlar != null && !hasKevlar)
+            {
+                maxHP += 25;
+                currentHP += 25;
+                KevlarImage.SetActive(true);
+                hasKevlar = true;
+            }
 
             if (gameObject.name == "FirstPersonPlayer")
             {

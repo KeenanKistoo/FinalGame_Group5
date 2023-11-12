@@ -146,7 +146,7 @@ namespace unathi.Scripts
                         // Handle the hit on the player (damage, effects, etc.)
                         Debug.Log("Enemy hit player!");
                         playerHealth = GameObject.Find("FirstPersonPlayer").GetComponent<Unit>();
-                        playerHealth.currentHP -= 2;
+                        playerHealth.TakeDamage(2);
 
                     }
                 }
