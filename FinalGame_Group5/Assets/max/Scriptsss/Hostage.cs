@@ -5,38 +5,39 @@ using UnityEngine.UI;
 
 public class Hostage : MonoBehaviour
 {
-    public GameObject HostageUI;
-    public Animator animator;
-    public Image fillImage;
+   
     public bool canRescue;
+
+    private HostageManager hostageManager;
     // Start is called before the first frame update
     void Start()
     {
-        HostageUI = GameObject.Find("HostageRescue");
-        animator = GameObject.Find("HostageFill").GetComponent<Animator>();
-        fillImage = GameObject.Find("HostageFill").GetComponent<Image>();
-        
-        HostageUI.SetActive(false);
+        hostageManager = FindObjectOfType<HostageManager>();
+        if (hostageManager == null)
+        {
+            Debug.LogError("HostageManager not found!");
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
+       
 
-        
         if (canRescue)
         {
-            if (fillImage.fillAmount > 0.95f)
+            if (hostageManager.fillImage.fillAmount > 0.95f)
             {
-                Debug.Log(fillImage.fillAmount);
                 
-                HostageUI.SetActive(false);
+                
+                hostageManager.HostageUI.SetActive(false);
+                hostageManager.fillImage.fillAmount = 0;
                 gameObject.SetActive(false);
             }
 
             if (Input.GetKeyDown(KeyCode.F))
             {
-                animator.SetBool("Fill", true);
+                hostageManager.animator.SetBool("Fill", true);
                /* if (fillImage.fillAmount > 0.1f)
                 {
                     Debug.Log(fillImage.fillAmount);
@@ -48,7 +49,7 @@ public class Hostage : MonoBehaviour
 
             if(Input.GetKeyUp(KeyCode.F))
             {
-                animator.SetBool("Fill", false);
+                hostageManager.animator.SetBool("Fill", false);
                 
             }
         }
@@ -59,7 +60,7 @@ public class Hostage : MonoBehaviour
 
         if (collision.gameObject.tag == "Player")
         {
-            HostageUI.SetActive(true);
+            hostageManager.HostageUI.SetActive(true);
             canRescue = true;
         }
         
@@ -70,7 +71,7 @@ public class Hostage : MonoBehaviour
 
         if (collision.gameObject.tag == "Player")
         {
-            HostageUI.SetActive(false);
+            hostageManager.HostageUI.SetActive(false);
             canRescue = false;
         }
         
