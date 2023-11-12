@@ -18,6 +18,7 @@ namespace unathi.Scripts
         public GameObject targetParticle;
 
         public Slider playerSlider;
+        public Heal heal;
 
         // Start is called before the first frame update
         void Start()
@@ -27,15 +28,29 @@ namespace unathi.Scripts
             {
                 playerSlider.maxValue = maxHP;
             }
+            
+
         }
 
         // Update is called once per frame
         void Update()
         {
+
+            
+
             if (gameObject.name == "FirstPersonPlayer")
             {
                 playerSlider.value = currentHP;
             }
+
+            heal = GetComponent<Heal>();
+            if (heal.healMe)
+            {
+                currentHP += 25;
+                heal.healMe = false;
+            }
+
+
         }
         public void TakeDamage(int dmg)
         {
