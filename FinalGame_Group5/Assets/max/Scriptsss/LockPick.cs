@@ -5,20 +5,17 @@ using UnityEngine.UI;
 
 public class LockPick : MonoBehaviour
 {
-    public GameObject LockPickUI;
-    public Animator fillAnimator;
-    public Animator doorAnimator;
-    public Image fillImage;
+    private DoorManager doorManager;
     public bool canLockPick;
     // Start is called before the first frame update
     void Start()
     {
-        LockPickUI = GameObject.Find("LockPickDoorUI");
-        fillAnimator = GameObject.Find("LockPickFill").GetComponent<Animator>();
-        fillImage = GameObject.Find("LockPickFill").GetComponent<Image>();
+        doorManager = FindObjectOfType<DoorManager>();
+        if (doorManager == null)
+        {
+            Debug.LogError("HostageManager not found!");
+        }
 
-        LockPickUI.SetActive(false);
-        
     }
 
     // Update is called once per frame
@@ -29,17 +26,18 @@ public class LockPick : MonoBehaviour
         if (canLockPick)
         {
 
-            if (fillImage.fillAmount > 0.95f)
+            if (doorManager.fillImage.fillAmount > 0.95f)
             {
 
 
-                LockPickUI.SetActive(false);
-                doorAnimator.SetBool("Open", true);
+                doorManager.LockPickUI.SetActive(false);
+                doorManager.doorAnimator.SetBool("Open", true);
+                doorManager.fillImage.fillAmount = 0;
             }
 
             if (Input.GetKeyDown(KeyCode.F))
             {
-                fillAnimator.SetBool("Fill", true);
+                doorManager.fillAnimator.SetBool("Fill", true);
                /* if (fillImage.fillAmount > 0.1f)
                 {
                     
@@ -51,7 +49,7 @@ public class LockPick : MonoBehaviour
 
             if (Input.GetKeyUp(KeyCode.F))
             {
-                fillAnimator.SetBool("Fill", false);
+                doorManager.fillAnimator.SetBool("Fill", false);
 
             }
         }
@@ -63,7 +61,8 @@ public class LockPick : MonoBehaviour
 
         if (collision.gameObject.tag == "Player")
         {
-            LockPickUI.SetActive(true);
+            doorManager.doorAnimator = GetComponentInParent<Animator>();
+            doorManager.LockPickUI.SetActive(true);
             canLockPick = true;
         }
 
@@ -74,7 +73,7 @@ public class LockPick : MonoBehaviour
 
         if (collision.gameObject.tag == "Player")
         {
-            LockPickUI.SetActive(false);
+            doorManager.LockPickUI.SetActive(false);
             canLockPick = false;
         }
 
