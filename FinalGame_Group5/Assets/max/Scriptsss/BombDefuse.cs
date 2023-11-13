@@ -63,6 +63,7 @@ public class BombDefuse : MonoBehaviour
 
         if (collision.gameObject.tag == "Player")
         {
+            
             bombManager.BombUI.SetActive(true);
             canDefuse = true;
         }

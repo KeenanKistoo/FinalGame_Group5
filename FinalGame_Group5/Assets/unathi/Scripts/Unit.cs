@@ -5,8 +5,8 @@ namespace unathi.Scripts
 {
     public class Unit : MonoBehaviour
     {
-        public int maxHP;
-        public int currentHP;
+        public float maxHP;
+        public float currentHP;
         public int damage;
 
         public GameObject key;

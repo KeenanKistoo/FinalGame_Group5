@@ -66,6 +66,7 @@ MonoBehaviour:
   retreatRange: 30
   playerInAttackRange: 0
   playerInRetreatRange: 0
+  playerHealth: {fileID: 0}
   obstacleLayer:
     serializedVersion: 2
     m_Bits: 256
@@ -137,6 +138,9 @@ MonoBehaviour:
   bulletsFired: 0
   targetParticle: {fileID: 0}
   playerSlider: {fileID: 0}
+  heal: {fileID: 0}
+  hasKevlar: 0
+  KevlarImage: {fileID: 0}
 --- !u!136 &4857651248335227883
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -156,8 +160,8 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 4.9706407
-  m_Height: 9.941282
+  m_Radius: 7.53
+  m_Height: 11.98
   m_Direction: 1
   m_Center: {x: 0, y: 5.05, z: 0}
 --- !u!1 &1165057299167204781

@@ -1,7 +1,8 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 
-namespace max.UnityTechnologies.ParticlePack.Shared.Ramps.Runtime
-{
+
     [CreateAssetMenu]
     public class RampAsset : ScriptableObject
     {
@@ -10,4 +11,3 @@ namespace max.UnityTechnologies.ParticlePack.Shared.Ramps.Runtime
         public bool up = false;
         public bool overwriteExisting = true;
     }
-}

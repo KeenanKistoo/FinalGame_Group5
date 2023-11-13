@@ -63,7 +63,12 @@ public class LockPick : MonoBehaviour
         {
             doorManager.doorAnimator = GetComponentInParent<Animator>();
             doorManager.LockPickUI.SetActive(true);
-            canLockPick = true;
+
+            if (GameObject.Find("LockPick") != null)
+            {
+                canLockPick = true;
+            }
+            
         }
 
     }
@@ -74,6 +79,8 @@ public class LockPick : MonoBehaviour
         if (collision.gameObject.tag == "Player")
         {
             doorManager.LockPickUI.SetActive(false);
+
+            
             canLockPick = false;
         }
 

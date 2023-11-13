@@ -137,7 +137,7 @@ namespace unathi.Scripts
 
                 RaycastHit hitt;
 
-                if (Physics.Raycast(transform.position + Vector3.up, spreadDirection, out hit, Mathf.Infinity))
+                /*if (Physics.Raycast(transform.position + Vector3.up, spreadDirection, out hit, Mathf.Infinity))
                 {
                     Debug.DrawRay(transform.position, spreadDirection * 20f, Color.red);
                     // Check if the ray hit the player or another target
@@ -149,7 +149,7 @@ namespace unathi.Scripts
                         playerHealth.TakeDamage(2);
 
                     }
-                }
+                }*/
 
                 // Set the cooldown before the next shot
                 shootCooldown = timeBetweenAttacks;
