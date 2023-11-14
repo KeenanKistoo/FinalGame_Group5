@@ -9,22 +9,20 @@ public class ToxicGas : MonoBehaviour
     //public Unit unit;
     public bool inGas;
     public Unit unit;
-    public GameObject gasUI;
-    public GameObject gasTut;
+    
     public Animator gasAnimator;
     public bool maskOn;
-    public Image gasImage;
+    
+
+    public GasManager gasManager;
    void Start()
     {
         unit = GameObject.Find("FirstPersonPlayer").GetComponent<Unit>();
+        gasManager = GameObject.Find("GasManager").GetComponent<GasManager>();
 
-        gasUI = GameObject.Find("GasImageUI");
-        gasTut = GameObject.Find("GasTutorial");
-        gasImage = GameObject.Find("GasFill").GetComponent<Image>();
         gasAnimator = GameObject.Find("GasFill").GetComponent<Animator>();
 
-        gasTut.SetActive(false);
-        gasUI.SetActive(false);
+        
     }
 
     void Update()
@@ -40,10 +38,10 @@ public class ToxicGas : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.G))
             {
                 Debug.Log("Gas Mask On!");
-                gasUI.SetActive(true);
+                gasManager.gasUI.SetActive(true);
                 maskOn = true;
                 gasAnimator.SetBool("GasMask", true);
-                gasTut.SetActive(false);
+                gasManager.gasTut.SetActive(false);
             }
         }
         else
@@ -51,9 +49,9 @@ public class ToxicGas : MonoBehaviour
             return;
         }
 
-        if (gasImage.fillAmount == 0f)
+        if (gasManager.gasImage.fillAmount == 0f)
         {
-           gasUI.SetActive(false);
+            gasManager.gasUI.SetActive(false);
             GameObject gasMask = GameObject.Find("GasMask");
             maskOn = false;
             gasMask.SetActive(false);
@@ -69,7 +67,7 @@ public class ToxicGas : MonoBehaviour
             inGas = true;
             if (GameObject.Find("GasMask") != null)
             {
-                gasTut.SetActive(true);
+                gasManager.gasTut.SetActive(true);
                 
 
             }
@@ -84,7 +82,7 @@ public class ToxicGas : MonoBehaviour
         if (collision.gameObject.tag == "Player")
         {
             inGas = false;
-            gasTut.SetActive(false);
+            gasManager.gasTut.SetActive(false);
         }
 
     }
