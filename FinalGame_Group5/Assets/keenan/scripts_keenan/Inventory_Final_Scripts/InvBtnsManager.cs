@@ -17,10 +17,16 @@ namespace keenan.scripts_keenan.Inventory_Final_Scripts
         [SerializeField] 
         private MainWeightController _mainWeightController;
 
+        [SerializeField] private GameObject _weightMan;
+        
+        public GameObject cam;
+        
+
         private void Start()
         {
             _mainWeightController = GameObject.FindWithTag("weightMan").GetComponent<MainWeightController>();
-
+            _weightMan = GameObject.FindWithTag("weightMan");
+            
         }
 
         public void Purchase()
@@ -33,6 +39,10 @@ namespace keenan.scripts_keenan.Inventory_Final_Scripts
                 _mainWeightController.currWeight = currWeight;
                 MainInventoryController _mainInventoryController = weightObj.GetComponent<MainInventoryController>();
                 _mainInventoryController.currInvState = MainInventoryController.GearState.active;
+                if (_mainInventoryController.secondaryObj != null)
+                {
+                    _mainInventoryController.secondaryObj.transform.SetParent(cam.transform, false);
+                }
                 _mainInventoryController.GearStateCheck();
             }
             else
@@ -55,6 +65,10 @@ namespace keenan.scripts_keenan.Inventory_Final_Scripts
             _mainWeightController.currWeight += weight;
             MainInventoryController _mainInventoryController = weightObj.GetComponent<MainInventoryController>();
             _mainInventoryController.currInvState = MainInventoryController.GearState.inactive;
+            if (_mainInventoryController.secondaryObj != null)
+            {
+                _mainInventoryController.secondaryObj.transform.SetParent(_weightMan.transform, false);
+            }
             _mainInventoryController.GearStateCheck();
         }
     }
