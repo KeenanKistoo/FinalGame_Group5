@@ -34,6 +34,11 @@ public class RespawnManager : MonoBehaviour
        Transform playerTransform = GameObject.Find("FirstPersonPlayer").GetComponent<Transform>();
         cc = GameObject.Find("FirstPersonPlayer").GetComponent<CharacterController>();
 
+        
+    }
+
+    void Awake()
+    {
         respawnText.SetActive(false);
     }
 
@@ -44,6 +49,8 @@ public class RespawnManager : MonoBehaviour
         if (respawnText == null)
         {
             respawnText = GameObject.Find("RespawnText");
+
+            if(respawnText != null)
             respawnText.SetActive(false);
         }
 
@@ -154,5 +161,14 @@ public class RespawnManager : MonoBehaviour
                 }
             }
         }
+    }
+
+    public IEnumerator CheckPointUpdate()
+    {
+        respawnText.SetActive(true);
+
+        yield return new WaitForSeconds(4);
+
+        respawnText.SetActive(false);
     }
 }

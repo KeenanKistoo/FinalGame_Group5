@@ -26,6 +26,8 @@ TagManager:
   - KevlarVest
   - FlashLight
   - GasMask
+  - Hostage
+  - Level1
   layers:
   - Default
   - TransparentFX

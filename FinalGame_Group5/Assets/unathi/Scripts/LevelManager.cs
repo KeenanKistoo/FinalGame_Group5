@@ -19,6 +19,10 @@ namespace unathi.Scripts
     {
         [Header("Transforms")]
         public List<Transform> hidingSpots;
+        public List<Transform> hidingSpots_b1;
+        public List<Transform> hidingSpots_b2;
+        public List<Transform> hidingSpots_b3;
+
         public List<Transform> targetSpawns;
         public List<GameObject> targetsList;
 
@@ -81,11 +85,14 @@ namespace unathi.Scripts
         public MeshCollider doorMesh1_h;
         public MeshCollider doorMesh2_h;
 
+
+        Battle _battle;
         // Start is called before the first frame update
         private void Start()
         {
             trainingSpawn = new Vector3(83.5f, 1.95000005f, 47.5f);
             state = State.Neutral;
+            _battle = GameObject.Find("BattleManager").GetComponent<Battle> ();
         }
 
         void Awake()
@@ -218,7 +225,6 @@ namespace unathi.Scripts
         public void StartBattle()
         {
             questionText.SetActive(true);
-            battleUI.SetActive(true);
             //question.text = "START BATTLE?";
             training1 = false;
             training2 = false;
@@ -301,7 +307,9 @@ namespace unathi.Scripts
             }
             else if (battle)
             {
+                Debug.Log("I am spawning");
                 state = State.Battle;
+                _battle.Level1();
                 //spawn battle bots
             } else if(hostage)
             {

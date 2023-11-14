@@ -1552,7 +1552,7 @@ GameObject:
   - component: {fileID: 2173030080195556164}
   m_Layer: 0
   m_Name: Hostage
-  m_TagString: Untagged
+  m_TagString: Hostage
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1613,9 +1613,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79b3392bebe0c3041b622b5a41dbc795, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HostageUI: {fileID: 0}
-  animator: {fileID: 0}
-  fillImage: {fileID: 0}
   canRescue: 0
 --- !u!1 &4266125803728386884
 GameObject:

@@ -5,14 +5,27 @@ namespace unathi.Scripts
     public class NodeScript : MonoBehaviour
     {
         LevelManager levelManager;
+        Battle battle;
         public bool active;
         private bool addedToHidingSpots = false; // Flag to track if added to the list
 
         void Start()
         {
             levelManager = GameObject.Find("LevelManager").GetComponent<LevelManager>();
-            levelManager.hidingSpots.Add(gameObject.transform);
-            addedToHidingSpots = true;
+            battle = GameObject.Find("BattleManager").GetComponent<Battle>();
+
+            if(gameObject.tag == "Level1")
+            {
+                levelManager.hidingSpots_b1.Add(gameObject.transform);
+                addedToHidingSpots = true;
+            }
+            else
+            {
+                levelManager.hidingSpots.Add(gameObject.transform);
+                addedToHidingSpots = true;
+            }
+                
+
         }
 
         private void Awake()
@@ -24,13 +37,20 @@ namespace unathi.Scripts
         {
             if (active && !addedToHidingSpots)
             {
-                levelManager.hidingSpots.Add(gameObject.transform);
-                addedToHidingSpots = true; // Set the flag to true once added
+                if (gameObject.tag == "Level1")
+                {
+                    levelManager.hidingSpots_b1.Add(gameObject.transform);
+                    addedToHidingSpots = true; // Set the flag to true once added
+                }
+                
             }
             else if (!active && addedToHidingSpots)
             {
-                levelManager.hidingSpots.Remove(gameObject.transform);
-                addedToHidingSpots = false; // Set the flag to false once removed
+                if (gameObject.tag == "Level1")
+                {
+                    levelManager.hidingSpots_b1.Remove(gameObject.transform);
+                    addedToHidingSpots = false; // Set the flag to true once added
+                }
             }
         }
 
