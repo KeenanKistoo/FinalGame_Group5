@@ -193,6 +193,14 @@ namespace unathi.Scripts
                 }
 
                 hud.SetActive(false);
+            }  else
+            {
+                hud.SetActive(true);
+            }
+
+            if(!inventPanel.activeInHierarchy)
+            {
+                hud.SetActive(true);
             }
         }
 
