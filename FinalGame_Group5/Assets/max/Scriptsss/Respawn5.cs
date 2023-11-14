@@ -28,7 +28,8 @@ public class Respawn5 : MonoBehaviour
         {
             respawnManager.respawnText.SetActive(true);
             respawnManager.cc.enabled = false;
-            respawnManager.playerTransform.transform.position = respawnManager.checkPoint5.transform.position;
+            Transform playerTransform = GameObject.Find("FirstPersonPlayer").GetComponent<Transform>();
+            playerTransform.transform.position = respawnManager.checkPoint5.transform.position;
             respawnManager.cc.enabled = true;
             respawnManager.currentCheckPoint = 5;
         }

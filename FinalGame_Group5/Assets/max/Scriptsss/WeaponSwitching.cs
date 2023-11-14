@@ -8,7 +8,7 @@ namespace max.Scriptsss
     {
         public int selectedWeapon = 0;
         public Text weaponName;
-        public WeaponAttach weaponAttach;
+        //public WeaponAttach weaponAttach;
 
         private Animator previousWeaponAnimator; // Store the previous weapon's animator
         private Animator currentWeaponAnimator; // Store the current weapon's animator
@@ -17,7 +17,7 @@ namespace max.Scriptsss
         void Start()
         {
             SelectWeapon();
-            weaponAttach = GameObject.Find("M4A1_purchase_btn").GetComponent<WeaponAttach>();
+            //weaponAttach = GameObject.Find("M4A1_purchase_btn").GetComponent<WeaponAttach>();
         }
 
         void Update()

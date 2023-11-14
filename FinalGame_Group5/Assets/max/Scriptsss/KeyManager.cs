@@ -9,7 +9,7 @@ public class KeyManager : MonoBehaviour
 
     void Start()
     {
-        pickupUI = GameObject.Find("PickupUI");
+        //pickupUI = GameObject.Find("PickupUI");
         pickupUI.SetActive(false);
     }
 

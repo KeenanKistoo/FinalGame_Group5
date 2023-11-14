@@ -106,6 +106,9 @@ MonoBehaviour:
   bulletsFired: 0
   targetParticle: {fileID: 0}
   playerSlider: {fileID: 0}
+  heal: {fileID: 0}
+  hasKevlar: 0
+  KevlarImage: {fileID: 0}
 --- !u!136 &4857651248335227883
 CapsuleCollider:
   m_ObjectHideFlags: 0

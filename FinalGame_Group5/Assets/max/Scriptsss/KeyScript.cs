@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class KeyScript : MonoBehaviour
 {
-    public GameObject pickupUI;
+    //public GameObject pickupUI;
     public bool canPickup;
     public KeyManager keyManager;
 
@@ -12,8 +12,8 @@ public class KeyScript : MonoBehaviour
     {
         //pickupUI = keyManager.pickupUI;
         keyManager = GameObject.Find("KeyManager").GetComponent<KeyManager>();
-
-        pickupUI.SetActive(false);
+        
+        keyManager.pickupUI.SetActive(false);
     }
 
     void Update()
@@ -23,7 +23,7 @@ public class KeyScript : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.F))
             {
                 keyManager.keys++;
-                pickupUI.SetActive(false);
+                keyManager.pickupUI.SetActive(false);
                 Destroy(gameObject);
             }
         }
@@ -33,9 +33,9 @@ public class KeyScript : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
-            pickupUI = keyManager.pickupUI;
+            keyManager.pickupUI = keyManager.pickupUI;
             canPickup = true;
-            pickupUI.SetActive(true);
+            keyManager.pickupUI.SetActive(true);
         }
     }
 
@@ -44,7 +44,7 @@ public class KeyScript : MonoBehaviour
         if (collision.gameObject.tag == "Player")
         {
             canPickup = false;
-            pickupUI.SetActive(false);
+            keyManager.pickupUI.SetActive(false);
         }
     }
 }
