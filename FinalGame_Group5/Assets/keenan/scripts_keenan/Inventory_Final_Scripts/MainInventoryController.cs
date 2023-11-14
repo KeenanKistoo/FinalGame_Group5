@@ -23,6 +23,10 @@ namespace keenan.scripts_keenan.Inventory_Final_Scripts
         [Header(("Inventory Manager:"))] 
         [SerializeField]
         private MainInventoryManager _inventoryManager;
+
+        [SerializeField] private GameObject _weightMan;
+        
+        public GameObject secondaryObj;
         public enum GearState
         {
             active,
@@ -35,6 +39,7 @@ namespace keenan.scripts_keenan.Inventory_Final_Scripts
          private void Start()
         {
         currInvState = GearState.inactive;
+        _weightMan = GameObject.FindWithTag("weightMan");
         SetUp();
         GearStateCheck();
         }
@@ -62,6 +67,7 @@ namespace keenan.scripts_keenan.Inventory_Final_Scripts
                 obj.transform.SetParent(_storageParent.transform, false);
                 _inventoryManager.inactiveGear.Add(obj);
                 _inventoryManager.activeGear.Remove(obj);
+                secondaryObj.transform.SetParent(_weightMan.transform, false);
                 break;
             }
         

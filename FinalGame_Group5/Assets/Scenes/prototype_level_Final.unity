@@ -5846,6 +5846,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3965029878980074763, guid: 2a05f97d13c34c3458d7f5f869bfd465, type: 3}
+      propertyPath: secondaryObj
+      value: 
+      objectReference: {fileID: 458596982}
+    - target: {fileID: 3965029878980074763, guid: 2a05f97d13c34c3458d7f5f869bfd465, type: 3}
       propertyPath: _activeParent
       value: 
       objectReference: {fileID: 1928052012}
@@ -6601,6 +6605,11 @@ CanvasRenderer:
 Transform:
   m_CorrespondingSourceObject: {fileID: 4025463140916289199, guid: 2a05f97d13c34c3458d7f5f869bfd465, type: 3}
   m_PrefabInstance: {fileID: 255453052}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &322186413 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8492778977048564129, guid: e32b670b7ef02fa49b203be5e3353473, type: 3}
+  m_PrefabInstance: {fileID: 4342606036456941615}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &322523294
 GameObject:
@@ -7420,6 +7429,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3965029878980074763, guid: 2a05f97d13c34c3458d7f5f869bfd465, type: 3}
+      propertyPath: secondaryObj
+      value: 
+      objectReference: {fileID: 322186413}
     - target: {fileID: 3965029878980074763, guid: 2a05f97d13c34c3458d7f5f869bfd465, type: 3}
       propertyPath: _activeParent
       value: 
@@ -9445,6 +9458,11 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 453588807}
   m_Mesh: {fileID: -5114918518997579048, guid: 3ba14bde2b499014dacb56d64897c23b, type: 3}
+--- !u!1 &454748001 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6510287533065124953, guid: c2554f76b3ac6a444b7d86fee1ec175a, type: 3}
+  m_PrefabInstance: {fileID: 6201989484074335021}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &455021719
 GameObject:
   m_ObjectHideFlags: 0
@@ -9508,6 +9526,11 @@ Transform:
   - {fileID: 1821110196}
   m_Father: {fileID: 1168783427}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &458596982 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1353536132950683621, guid: 4744fa466ec4b1e47a519d77b94079d8, type: 3}
+  m_PrefabInstance: {fileID: 5545735049921430329}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &460031953
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -20085,6 +20108,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3965029878980074763, guid: 2a05f97d13c34c3458d7f5f869bfd465, type: 3}
+      propertyPath: secondaryObj
+      value: 
+      objectReference: {fileID: 454748001}
+    - target: {fileID: 3965029878980074763, guid: 2a05f97d13c34c3458d7f5f869bfd465, type: 3}
       propertyPath: _activeParent
       value: 
       objectReference: {fileID: 1928052012}
@@ -24516,6 +24543,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1194605223}
   m_CullTransparentMesh: 1
+--- !u!1 &1198524766 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7462240266156379655, guid: be2b740aa0dbc4d4f87532c253632b3f, type: 3}
+  m_PrefabInstance: {fileID: 5911613190823323271}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1203683715
 GameObject:
   m_ObjectHideFlags: 0
@@ -40384,6 +40416,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3965029878980074763, guid: 2a05f97d13c34c3458d7f5f869bfd465, type: 3}
+      propertyPath: secondaryObj
+      value: 
+      objectReference: {fileID: 1198524766}
+    - target: {fileID: 3965029878980074763, guid: 2a05f97d13c34c3458d7f5f869bfd465, type: 3}
       propertyPath: _activeParent
       value: 
       objectReference: {fileID: 1928052012}
@@ -43624,6 +43660,10 @@ PrefabInstance:
     - target: {fileID: 8492778977048564129, guid: e32b670b7ef02fa49b203be5e3353473, type: 3}
       propertyPath: m_Name
       value: GasMask
+      objectReference: {fileID: 0}
+    - target: {fileID: 8492778977048564129, guid: e32b670b7ef02fa49b203be5e3353473, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
