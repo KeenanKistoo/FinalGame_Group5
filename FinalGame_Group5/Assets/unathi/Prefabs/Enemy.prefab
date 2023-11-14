@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 888794920369439993}
   - component: {fileID: 6455809420887957921}
   - component: {fileID: 1896208426786728495}
-  - component: {fileID: 4422880828607379504}
+  - component: {fileID: 4857651248335227883}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Enemy
@@ -138,8 +138,11 @@ MonoBehaviour:
   bulletsFired: 0
   targetParticle: {fileID: 0}
   playerSlider: {fileID: 0}
---- !u!65 &4422880828607379504
-BoxCollider:
+  heal: {fileID: 0}
+  hasKevlar: 0
+  KevlarImage: {fileID: 0}
+--- !u!136 &4857651248335227883
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -156,9 +159,11 @@ BoxCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 3.8846855, y: 3.1833744, z: 5.1031356}
-  m_Center: {x: -0.09264183, y: 4.819027, z: 0.7481691}
+  serializedVersion: 2
+  m_Radius: 7.53
+  m_Height: 11.98
+  m_Direction: 1
+  m_Center: {x: 0, y: 5.05, z: 0}
 --- !u!1 &1165057299167204781
 GameObject:
   m_ObjectHideFlags: 0

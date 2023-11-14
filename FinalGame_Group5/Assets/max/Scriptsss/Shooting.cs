@@ -33,6 +33,9 @@ namespace max.Scriptsss
 
         public float shootingRange = 300f;
 
+        public AudioSource source;
+        public AudioClip hitSound;
+
         private void Awake()
         {
             bulletsLeft = magazineSize;
@@ -189,6 +192,7 @@ namespace max.Scriptsss
                     Unit unit = hit.collider.GetComponent<Unit>();
                     if (unit != null)
                     {
+                        source.PlayOneShot(hitSound);
                         unit.TakeDamage(5);
                         Debug.Log(hit.collider.name);
                     }

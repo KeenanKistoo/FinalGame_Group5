@@ -5,7 +5,6 @@ using UnityEditor;
 using System;
 using System.IO;
 using System.Reflection;
-using max.UnityTechnologies.ParticlePack.TutorialInfo.Scripts;
 
 [CustomEditor(typeof(Readme))]
 [InitializeOnLoad]

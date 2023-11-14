@@ -219,11 +219,12 @@ namespace unathi.Scripts
         {
             questionText.SetActive(true);
             battleUI.SetActive(true);
-            question.text = "START BATTLE?";
+            //question.text = "START BATTLE?";
             training1 = false;
             training2 = false;
             battle = true;
             hostage = false;
+            StartCoroutine(Countdown());
         }
 
         public void StartRescue()

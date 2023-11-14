@@ -1,54 +1,53 @@
-﻿using TMPro;
-using UnityEngine;
+﻿using UnityEngine;
+using System.Collections;
+using TMPro;
 
-namespace max.UnityTechnologies.ParticlePack.Shared.Scripts
+
+public class AdjustTimeScale : MonoBehaviour
 {
-    public class AdjustTimeScale : MonoBehaviour
+    TextMeshProUGUI textMesh;
+
+    private void Start()
     {
-        TextMeshProUGUI textMesh;
+        textMesh = GetComponent<TextMeshProUGUI>();
+    }
 
-        private void Start()
+    void Update()
+    {
+        if (Input.GetAxis("Mouse ScrollWheel") > 0f)
         {
-            textMesh = GetComponent<TextMeshProUGUI>();
-        }
-
-        void Update()
-        {
-            if (Input.GetAxis("Mouse ScrollWheel") > 0f)
+            if (Time.timeScale < 1.0F)
             {
-                if (Time.timeScale < 1.0F)
-                {
-                    Time.timeScale += 0.1f;
-                }
+                Time.timeScale += 0.1f;
+            }
                
-                Time.fixedDeltaTime = 0.02F * Time.timeScale;
+            Time.fixedDeltaTime = 0.02F * Time.timeScale;
 
-                if (textMesh != null)
-                {
-                    textMesh.text = "Time Scale : " + System.Math.Round(Time.timeScale, 2);
-                }
-          
-            }
-            else if (Input.GetAxis("Mouse ScrollWheel") < 0f)
+            if (textMesh != null)
             {
-                if (Time.timeScale >= 0.2F)
-                {
-                    Time.timeScale -= 0.1f;
-                }
+                textMesh.text = "Time Scale : " + System.Math.Round(Time.timeScale, 2);
+            }
+          
+        }
+        else if (Input.GetAxis("Mouse ScrollWheel") < 0f)
+        {
+            if (Time.timeScale >= 0.2F)
+            {
+                Time.timeScale -= 0.1f;
+            }
                 
-                Time.fixedDeltaTime = 0.02F * Time.timeScale;
+            Time.fixedDeltaTime = 0.02F * Time.timeScale;
 
-                if (textMesh != null)
-                {
-                    textMesh.text = "Time Scale : " + System.Math.Round(Time.timeScale, 2);
-                }
+            if (textMesh != null)
+            {
+                textMesh.text = "Time Scale : " + System.Math.Round(Time.timeScale, 2);
             }
         }
+    }
 
-        void OnApplicationQuit()
-        {
-            Time.timeScale = 1.0F;
-            Time.fixedDeltaTime = 0.02F;
-        }
+    void OnApplicationQuit()
+    {
+        Time.timeScale = 1.0F;
+        Time.fixedDeltaTime = 0.02F;
     }
 }

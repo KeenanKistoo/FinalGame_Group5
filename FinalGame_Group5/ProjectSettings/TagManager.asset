@@ -23,6 +23,9 @@ TagManager:
   - gear
   - weightMan
   - test
+  - KevlarVest
+  - FlashLight
+  - GasMask
   layers:
   - Default
   - TransparentFX
