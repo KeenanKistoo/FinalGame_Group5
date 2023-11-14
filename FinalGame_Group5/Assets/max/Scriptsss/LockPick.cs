@@ -7,10 +7,12 @@ public class LockPick : MonoBehaviour
 {
     private DoorManager doorManager;
     public bool canLockPick;
+    public KeyManager keyManager;
     // Start is called before the first frame update
     void Start()
     {
         doorManager = FindObjectOfType<DoorManager>();
+        keyManager = GameObject.Find("KeyManager").GetComponent<KeyManager>();
         if (doorManager == null)
         {
             Debug.LogError("HostageManager not found!");
@@ -37,6 +39,7 @@ public class LockPick : MonoBehaviour
 
             if (Input.GetKeyDown(KeyCode.F))
             {
+                keyManager.keys--;
                 doorManager.fillAnimator.SetBool("Fill", true);
                /* if (fillImage.fillAmount > 0.1f)
                 {
@@ -62,11 +65,20 @@ public class LockPick : MonoBehaviour
         if (collision.gameObject.tag == "Player")
         {
             doorManager.doorAnimator = GetComponentInParent<Animator>();
-            doorManager.LockPickUI.SetActive(true);
+            
 
             if (GameObject.Find("LockPick") != null)
             {
                 canLockPick = true;
+                doorManager.LockPickUI.SetActive(true);
+            } else if (keyManager.keys > 0)
+            {
+                canLockPick = true;
+                doorManager.LockPickUI.SetActive(true);
+            }
+            else
+            {
+                return;
             }
             
         }
