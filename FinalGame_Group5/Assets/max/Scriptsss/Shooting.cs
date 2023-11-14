@@ -34,7 +34,9 @@ namespace max.Scriptsss
         public float shootingRange = 300f;
 
         public AudioSource source;
+        public AudioSource source1;
         public AudioClip hitSound;
+        public AudioClip gunShotSound;
 
         private void Awake()
         {
@@ -117,11 +119,13 @@ namespace max.Scriptsss
             if (!isADS)
             {
                 animator.SetBool("Shooting", true);
+                source1.PlayOneShot(gunShotSound);
                 animator.Play("Shoot", -1, 0f);
 
             } else if (isADS)
             {
                 animator.SetBool("ADSShooting", true);
+                source1.PlayOneShot(gunShotSound);
                 animator.Play("ADSShoot", -1, 0f);
             }
         
