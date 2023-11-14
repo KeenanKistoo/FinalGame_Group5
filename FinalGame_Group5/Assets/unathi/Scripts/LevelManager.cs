@@ -184,6 +184,16 @@ namespace unathi.Scripts
             {
                 hud.SetActive(true);
             }
+
+            if (!inventPanel.activeInHierarchy)
+            {
+                if (Input.GetKeyDown(KeyCode.E))
+                {
+                    inventPanel.SetActive(true);
+                }
+
+                hud.SetActive(false);
+            }
         }
 
         public void SpawnEnemy()

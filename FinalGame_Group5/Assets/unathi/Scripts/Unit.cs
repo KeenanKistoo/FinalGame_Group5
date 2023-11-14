@@ -77,6 +77,7 @@ namespace unathi.Scripts
         public void TakeDamage(int dmg)
         {
             //Debug.Log(gameObject.name);
+            int rand = Random.Range(0, 2);
 
             if (gameObject.CompareTag("Player") || gameObject.CompareTag("Enemy") || bulletsFired >= 4)
             {
@@ -115,7 +116,7 @@ namespace unathi.Scripts
                     }
 
                     //If player has obtained key to hostages
-                    if (levelManager.enemyCount_h == 10)
+                    if (rand == 1)
                         Instantiate(key, gameObject.transform.position, Quaternion.identity);
 
                     Destroy(gameObject);
