@@ -16,7 +16,7 @@ public class RespawnManager : MonoBehaviour
     public GameObject respawnText;
 
     public Unit unit;
-    public Transform playerTransform;
+    //public Transform playerTransform;
     public CharacterController cc;
     // Start is called before the first frame update
     void Start()
@@ -31,7 +31,7 @@ public class RespawnManager : MonoBehaviour
 
         unit = GameObject.Find("FirstPersonPlayer").GetComponent<Unit>();
 
-       playerTransform = GameObject.Find("Player").GetComponent<Transform>();
+       Transform playerTransform = GameObject.Find("FirstPersonPlayer").GetComponent<Transform>();
         cc = GameObject.Find("FirstPersonPlayer").GetComponent<CharacterController>();
 
         respawnText.SetActive(false);
@@ -40,17 +40,17 @@ public class RespawnManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        
         if (respawnText == null)
         {
             respawnText = GameObject.Find("RespawnText");
             respawnText.SetActive(false);
         }
 
-        if(playerTransform == null)
+        /*if(playerTransform == null)
         {
-            playerTransform = GameObject.Find("FirstPersonPlayer").GetComponent<Transform>();
-        }
+            Transform playerTransform = GameObject.Find("FirstPersonPlayer").GetComponent<Transform>();
+        }*/
 
         if (cc == null)
         {
@@ -64,6 +64,7 @@ public class RespawnManager : MonoBehaviour
             if (currentCheckPoint == 1)
             {
                 cc.enabled = false;
+                Transform playerTransform = GameObject.Find("FirstPersonPlayer").GetComponent<Transform>();
                 playerTransform.transform.position = checkPoint1.transform.position;
                 Debug.Log("Respawning");
                 Debug.Log("CheckPoint: " + checkPoint1.transform.position);
@@ -82,6 +83,7 @@ public class RespawnManager : MonoBehaviour
             }else if(currentCheckPoint == 2)
             {
                 cc.enabled = false;
+                Transform playerTransform = GameObject.Find("FirstPersonPlayer").GetComponent<Transform>();
                 playerTransform.transform.position = checkPoint2.transform.position;
                 Debug.Log("Respawning");
                 Debug.Log("CheckPoint: " + checkPoint1.transform.position);
@@ -99,6 +101,7 @@ public class RespawnManager : MonoBehaviour
             } else if(currentCheckPoint == 3)
             {
                 cc.enabled = false;
+                Transform playerTransform = GameObject.Find("FirstPersonPlayer").GetComponent<Transform>();
                 playerTransform.transform.position = checkPoint3.transform.position;
                 Debug.Log("Respawning");
                 Debug.Log("CheckPoint: " + checkPoint1.transform.position);
@@ -116,6 +119,7 @@ public class RespawnManager : MonoBehaviour
             } else if(currentCheckPoint == 4)
             {
                 cc.enabled = false;
+                Transform playerTransform = GameObject.Find("FirstPersonPlayer").GetComponent<Transform>();
                 playerTransform.transform.position = checkPoint4.transform.position;
                 Debug.Log("Respawning");
                 Debug.Log("CheckPoint: " + checkPoint1.transform.position);
@@ -133,6 +137,7 @@ public class RespawnManager : MonoBehaviour
             } else if(currentCheckPoint == 5)
             {
                 cc.enabled = false;
+                Transform playerTransform = GameObject.Find("FirstPersonPlayer").GetComponent<Transform>();
                 playerTransform.transform.position = checkPoint5.transform.position;
                 Debug.Log("Respawning");
                 Debug.Log("CheckPoint: " + checkPoint1.transform.position);

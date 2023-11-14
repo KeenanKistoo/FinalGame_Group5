@@ -20,7 +20,7 @@ namespace unathi.Scripts
         public Slider playerSlider;
         public Heal heal;
         public bool hasKevlar;
-        public GameObject KevlarImage;
+        //public GameObject KevlarImage;
 
         // Start is called before the first frame update
         void Start()
@@ -30,9 +30,12 @@ namespace unathi.Scripts
             {
                 playerSlider.maxValue = maxHP;
             }
-
-            KevlarImage = GameObject.Find("KevlarImage");
-            KevlarImage.SetActive(false);
+            if (gameObject.name == ("FirstPersonPlayer"))
+            {
+                Image KevlarImage = GameObject.Find("KevlarImage").GetComponent<Image>();
+                KevlarImage.enabled = false;
+            }
+            
         }
 
         // Update is called once per frame
@@ -40,26 +43,34 @@ namespace unathi.Scripts
         {
 
             GameObject Kevlar = GameObject.Find("KevlarVest");
-
+            
             if (Kevlar != null && !hasKevlar)
             {
                 maxHP += 25;
                 currentHP += 25;
-                KevlarImage.SetActive(true);
-                hasKevlar = true;
+                if(gameObject.name == "FirstPersonPlayer")
+                {
+                    Image KevlarImage = GameObject.Find("KevlarImage").GetComponent<Image>();
+                    KevlarImage.enabled = true;
+                    hasKevlar = true;
+                }
+                
             }
 
             if (gameObject.name == "FirstPersonPlayer")
             {
                 playerSlider.value = currentHP;
             }
-
-            heal = GetComponent<Heal>();
-            if (heal.healMe)
+            if (gameObject.name == "FirstPersonPlayer")
             {
-                currentHP += 25;
-                heal.healMe = false;
+                heal = GetComponent<Heal>();
+                if (heal.healMe)
+                {
+                    currentHP += 25;
+                    heal.healMe = false;
+                }
             }
+            
 
 
         }
